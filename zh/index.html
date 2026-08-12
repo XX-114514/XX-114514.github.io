@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>熊鑫 | 计算肿瘤学科研作品集</title>
+  <meta name="description" content="熊鑫的计算肿瘤学、功能基因组学与合成生物学科研项目、成果和经历。>
+  <meta name="theme-color" content="#07110f">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+</head>
+<body class="landing-body">
+  <div class="opening-sequence" data-opening>
+    <div class="opening-mark" aria-hidden="true"></div>
+    <p class="opening-word opening-word-one">观察。</p>
+    <p class="opening-word opening-word-two">理解。</p>
+    <p class="opening-word opening-word-three">减轻。</p>
+    <p class="opening-signature">熊鑫 · 科学探索</p>
+    <button class="opening-skip" type="button" data-opening-skip>跳过</button>
+  </div>
+
+  <div class="scroll-progress" aria-hidden="true"></div>
+  <header class="landing-header">
+    <a class="landing-brand" href="./index.html" aria-label="熊鑫，首页"><span>XX</span><small>科学与人文</small></a>
+    <nav class="landing-nav" aria-label="主导航">
+      <a href="#work">项目</a><a href="#proof">成果</a><a href="#experience">经历</a>
+      <a href="https://blog.xiongxin.online">笔记</a>
+      <a class="nav-cv" href="./cv.html">学术履历 <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <main class="landing-main">
+    <section class="landing-hero" aria-labelledby="landing-title">
+      <canvas id="cell-field" aria-hidden="true"></canvas>
+      <div class="hero-noise" aria-hidden="true"></div>
+      <div class="landing-hero-inner">
+        <div class="hero-coordinate"><span>成都 / 四川大学</span><span>生物技术 · 2026</span></div>
+        <div class="landing-hero-copy">
+          <p class="landing-kicker"><span></span> 计算肿瘤学 · 功能基因组学 · 合成生物学</p>
+          <h1 id="landing-title">熊鑫<span>用计算理解生命，</span><span class="hero-accent">实验验证想法。</span></h1>
+          <p class="landing-intro">我追踪细胞如何交流，再把最值得验证的假设带回实验系统。</p>
+          <div class="landing-actions">
+            <a class="landing-btn landing-btn-primary" href="#work">查看代表项目 <span aria-hidden="true">↓</span></a>
+            <a class="landing-btn" href="./cv.html">查看学术履历 <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        <div class="hero-data" aria-label="研究规模">
+          <div><strong data-count="2" data-suffix="M+">2M+</strong><span>整合单细胞</span></div>
+          <div><strong data-count="10" data-suffix="+">10+</strong><span>覆盖癌种</span></div>
+          <div><strong data-count="2" data-suffix="×">2×</strong><span>国家奖学金</span></div>
+          <div><strong data-count="3.89" data-decimals="2">3.89</strong><span>GPA / 4.0</span></div>
+        </div>
+        <div class="hero-observation" aria-hidden="true"><span class="observation-dot"></span><p>欢迎科研交流 · 2026</p></div>
+      </div>
+      <a class="hero-scroll" href="#work" aria-label="滚动到代表项目"><span></span>查看项目</a>
+    </section>
+
+    <div class="impact-marquee" aria-label="科研亮点">
+      <div class="impact-marquee-track">
+        <span>2M+ 单细胞</span><i></i><span>10+ 癌种</span><i></i><span>泛癌信号图谱</span><i></i><span>TP53RK 扰动</span><i></i><span>PDAC 可塑性</span><i></i><span>TasAnchor / iGEM</span><i></i>
+        <span aria-hidden="true">2M+ 单细胞</span><i aria-hidden="true"></i><span aria-hidden="true">10+ 癌种</span><i aria-hidden="true"></i><span aria-hidden="true">泛癌信号图谱</span><i aria-hidden="true"></i><span aria-hidden="true">TP53RK 扰动</span><i aria-hidden="true"></i><span aria-hidden="true">PDAC 可塑性</span><i aria-hidden="true"></i><span aria-hidden="true">TasAnchor / iGEM</span><i aria-hidden="true"></i>
+      </div>
+    </div>
+
+    <section class="research-section" id="work">
+      <div class="landing-section-head reveal">
+        <div><p class="section-code">SELECTED WORK / 01</p><h2>先看项目，<br>再谈愿景。</h2></div>
+        <p>五个代表项目，覆盖计算分析与湿实验。每个项目都可继续查看问题、方法与当前证据。</p>
+      </div>
+      <div class="research-grid">
+        <article class="research-feature reveal">
+          <div class="research-visual umap-mini">
+            <div class="atlas-preview" data-atlas-preview role="img" aria-label="泛癌单细胞图谱动态预览">
+              <canvas aria-hidden="true"></canvas>
+              <div class="atlas-label atlas-label-a">T / NK</div>
+              <div class="atlas-label atlas-label-b">Myeloid</div>
+              <div class="atlas-label atlas-label-c">Tumor</div>
+              <div class="atlas-label atlas-label-d">Stromal</div>
+            </div>
+            <div class="visual-label"><span>LIVE</span> 泛癌单细胞图谱</div>
+          </div>
+          <div class="research-copy">
+            <p class="research-number">01 / 计算肿瘤学</p>
+            <h3>绘制肿瘤生态系统中的通讯网络</h3>
+            <p>整合十余个癌种、超过两百万个单细胞，寻找保守的信号枢纽、细胞群落与肿瘤生态位，并进一步以空间转录组作为证据层进行验证。</p>
+            <dl class="research-metrics"><div><dt>规模</dt><dd>2M+ 细胞</dd></div><div><dt>范围</dt><dd>10+ 癌种</dd></div><div><dt>展示</dt><dd>70K 点位</dd></div></dl>
+            <a class="text-link" href="./outputs.html#pan-cancer-umap">探索交互式图谱 <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
+        <article class="research-card reveal">
+          <div class="research-card-top"><p class="research-number">02 / 功能基因组学</p><span class="research-status">进行中</span></div>
+          <div class="signal-diagram" aria-hidden="true"><span>TP53RK</span><i></i><span>dTAG</span><i></i><span>表型</span></div>
+          <h3>验证 TP53RK 在髓母细胞瘤中的作用方式</h3>
+          <p>通过突变体设计、靶向降解、免疫荧光与活细胞表型分析，区分其磷酸化依赖功能与 KEOPS 复合体依赖功能。</p>
+          <a class="text-link" href="./research.html">阅读项目记录 <span aria-hidden="true">↗</span></a>
+        </article>
+        <article class="research-card research-card-warm reveal">
+          <div class="research-card-top"><p class="research-number">03 / 肿瘤可塑性</p><span class="research-status">RNA-seq</span></div>
+          <div class="emt-diagram" aria-hidden="true">
+            <div class="emt-node"><span>KRAS</span><small>开启</small></div><div class="emt-path"><i></i><small>撤除 Dox</small></div>
+            <div class="emt-node emt-node-off"><span>KRAS</span><small>关闭</small></div><div class="emt-path"><i></i><small>肿瘤复发</small></div>
+            <div class="emt-node emt-node-hot"><span>EMT</span><small>↑ RNA-seq</small></div>
+          </div>
+          <h3>RAS 非依赖性 PDAC 复发中的 EMT 程序</h3>
+          <p>在多西环素调控的 KRAS 突变胰腺癌模型中，KRAS 失活后出现的复发肿瘤呈现 EMT 相关转录程序上调，提示其可能是 RAS 非依赖性复发的候选机制。</p>
+          <a class="text-link" href="./research.html#pdac-emt">阅读项目记录 <span aria-hidden="true">↗</span></a>
+        </article>
+        <article class="research-card research-card-mint reveal" data-tilt>
+          <div class="research-card-top"><p class="research-number">04 / 移动遗传元件</p><span class="research-status">2023 — 2024</span></div>
+          <div class="transfer-diagram" aria-hidden="true"><span>PICI</span><i></i><b>×</b><i></i><span>ICE</span></div>
+          <h3>验证金黄色葡萄球菌中的 PICI × ICE 共转移</h3>
+          <p>结合计算预测、生命周期验证与转移实验，研究移动遗传元件如何在细菌基因组中协同作用。</p>
+          <a class="text-link" href="./research.html">阅读项目记录 <span aria-hidden="true">↗</span></a>
+        </article>
+        <article class="research-card research-card-dark reveal" data-tilt>
+          <div class="research-card-top"><p class="research-number">05 / 合成生物学</p><span class="research-status">iGEM 2025</span></div>
+          <div class="anchor-diagram" aria-hidden="true"><div class="anchor-cell"></div><div class="anchor-line"></div><div class="anchor-surface"></div></div>
+          <h3>TasAnchor 全细胞固定化平台</h3>
+          <p>构建模块化枯草芽孢杆菌黏附支架，覆盖基因组编辑、SpyTag/SpyCatcher 设计、蛋白纯化与材料表面功能化。</p>
+          <a class="text-link" href="https://2025.igem.wiki/scu-china/">访问 iGEM 项目 <span aria-hidden="true">↗</span></a>
+        </article>
+      </div>
+    </section>
+
+    <section class="proof-section" id="proof">
+      <div class="proof-heading reveal"><p class="section-code">SELECTED HIGHLIGHTS / 02</p><h2>进展要可衡量，<br><em>不只是装饰。</em></h2><p>用一屏概览学业表现、研究规模与训练经历。</p></div>
+      <div class="proof-grid">
+        <article class="proof-card proof-card-feature reveal" data-tilt><span>学业荣誉</span><strong data-count="2" data-suffix="×">2×</strong><h3>国家奖学金</h3><p>于 2024 与 2025 年获得。</p></article>
+        <article class="proof-card reveal" data-tilt><span>专业排名</span><strong>#1</strong><h3>年级专业第一</h3><p>生物技术专业 GPA 3.89 / 4.0。</p></article>
+        <article class="proof-card reveal" data-tilt><span>研究规模</span><strong data-count="2" data-suffix="M+">2M+</strong><h3>整合单细胞</h3><p>覆盖十余个癌种。</p></article>
+        <article class="proof-card reveal" data-tilt><span>暑期训练</span><strong>北大<br>西湖</strong><h3>暑期项目</h3><p>计算生命科学、系统生物学与实验训练。</p></article>
+      </div>
+    </section>
+
+    <section class="experience-section" id="experience">
+      <div class="experience-intro reveal"><p class="section-code">EXPERIENCE / 03</p><h2>研究轨迹，<br>也是能力轨迹。</h2><p>从微生物遗传学走向泛癌系统生物学，让计算与实验始终处在同一条验证闭环中。</p></div>
+      <ol class="experience-line">
+        <li class="reveal"><time>2025 — 至今</time><div><span>计算肿瘤学</span><h3>泛癌肿瘤微环境图谱</h3><p>单细胞整合、信号网络、保守细胞枢纽与空间验证。</p></div></li>
+        <li class="reveal"><time>2026.01 — 02</time><div><span>功能基因组学</span><h3>TP53RK 扰动设计</h3><p>在髓母细胞瘤中进行 dTAG 降解、免疫荧光与活细胞表型分析。</p></div></li>
+        <li class="reveal"><time>2024 — 2025</time><div><span>SCU-China · iGEM</span><h3>TasAnchor 合成生物学平台</h3><p>基因组编辑、模块化蛋白设计、纯化与黏附验证。</p></div></li>
+        <li class="reveal"><time>2023 — 2024</time><div><span>微生物遗传学</span><h3>PICI × ICE 共转移机制</h3><p>在金黄色葡萄球菌中完成预测、实验设计与湿实验验证。</p></div></li>
+      </ol>
+    </section>
+
+    <section class="portal-section" id="portals">
+      <div class="portal-intro reveal"><p class="section-code">CONTINUE / 04</p><h2>继续深入。</h2><p>方法、证据、笔记，以及它们背后的人。</p></div>
+      <nav class="portal-list reveal" aria-label="浏览网站">
+        <a href="./cv.html"><span class="portal-no">01</span><strong>学术履历</strong><small>教育 · 经历 · 荣誉</small><i aria-hidden="true">↗</i></a>
+        <a href="./research.html"><span class="portal-no">02</span><strong>科研项目</strong><small>问题 · 方法 · 过程</small><i aria-hidden="true">↗</i></a>
+        <a href="./outputs.html"><span class="portal-no">03</span><strong>成果档案</strong><small>图表 · 文档 · 交互数据</small><i aria-hidden="true">↗</i></a>
+        <a href="https://blog.xiongxin.online"><span class="portal-no">04</span><strong>研究笔记</strong><small>阅读 · 方法 · 未完成的想法</small><i aria-hidden="true">↗</i></a>
+        <a href="./contact.html"><span class="portal-no">05</span><strong>与我联系</strong><small>讨论 · 合作</small><i aria-hidden="true">↗</i></a>
+      </nav>
+    </section>
+  </main>
+
+  <footer class="landing-footer">
+    <p><strong>熊鑫</strong> · 计算肿瘤学与肿瘤免疫学</p>
+    <p>© <span class="js-year"></span> · 中国成都</p>
+  </footer>
+  <script src="../app.js"></script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xin Xiong | Research</title>
+  <meta name="description" content="Selected research projects, visiting experiences, and academic training from Xin Xiong's academic work.">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+</head>
+<body>
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand brand-home" href="./index.html" aria-label="Back to portfolio homepage" title="Back to portfolio homepage">Xin Xiong <small>Academic Portfolio</small></a>
+      <nav class="top-nav" aria-label="Main navigation">
+        <a data-page="index.html" href="./index.html">Home</a>
+        <a data-page="about.html" href="./about.html">Profile</a>
+        <a data-page="research.html" href="./research.html">Research</a>
+        <a data-page="outputs.html" href="./outputs.html">Archive</a>
+        <a href="https://blog.xiongxin.online">Blog</a>
+        <a data-page="contact.html" href="./contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-wrap">
+    <div class="container">
+      <section class="page-hero reveal">
+        <p class="eyebrow">Research</p>
+        <div class="page-hero-grid">
+          <div>
+            <h1>Representative Projects <span>From computational inference to experimental validation and engineering implementation</span></h1>
+            <p class="lead">
+              My recent work spans four major directions: pan-cancer tumor microenvironment communication networks,
+              mechanisms of RAS-independent pancreatic cancer recurrence, functional-mode determination of TP53RK,
+              and synthetic biology engineering for whole-cell immobilization.
+            </p>
+          </div>
+          <div class="page-hero-side">
+            <p class="page-hero-note">Research Focus</p>
+            <p>Single-cell and spatial omics, tumor signaling networks, transcriptomic mechanism discovery, and function-oriented molecular and cellular validation.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-shell reveal">
+        <div class="section-head">
+          <h2>Representative Projects</h2>
+          <p class="section-note">Synced with the latest CV</p>
+        </div>
+
+        <div class="project-stack">
+          <article class="project-card">
+            <div class="project-head">
+              <div>
+                <p class="card-kicker">Jun 2025 - Present</p>
+                <h3>Pan-Cancer Dissection of Tumor Microenvironment Cell Communication Networks and Identification of Key Regulatory Axes</h3>
+              </div>
+              <p class="project-tag">scRNA-seq / CellChat / NicheNet / CoVarnet / Spatial Transcriptomics</p>
+            </div>
+            <p>
+              This project systematically dissects cell-cell communication structures across cancer types to identify
+              conserved regulatory circuits, cancer-specific signaling axes, and communication hub populations with important topological roles.
+            </p>
+            <ul class="list-clean">
+              <li>Built standardized single-cell RNA-seq analysis pipelines covering more than 10 cancer types to characterize tumor microenvironment composition and communication networks.</li>
+              <li>Combined CellChat and NicheNet to identify conserved and cancer-specific ligand-receptor regulatory circuits.</li>
+              <li>Reimplemented CoVarnet in Python and identified five modules associated with cancer development.</li>
+              <li>Integrated spatial transcriptomics with scRNA-seq to localize high-confidence signaling niches and validate spatial co-localization among sender cells, receiver cells, and pathway activity.</li>
+              <li>Identified communication hub populations using centrality and network-topology metrics, and linked hub-driven pathways to tumor-associated phenotypic programs.</li>
+            </ul>
+          </article>
+
+          <article class="project-card" id="pdac-emt">
+            <div class="project-head">
+              <div>
+                <p class="card-kicker">Jul 2026 - Aug 2026</p>
+                <h3>Deciphering the Upregulation of EMT-Related Genes in RAS-Independent Pancreatic Cancer</h3>
+              </div>
+              <p class="project-tag">Inducible KRAS Model / RNA-seq / EMT / Pancreatic Cancer</p>
+            </div>
+            <p>
+              This project uses a doxycycline-regulated KRAS-mutant pancreatic cancer model to investigate tumor recurrence
+              after KRAS inactivation and the molecular transition toward a RAS-independent disease state.
+            </p>
+            <ul class="list-clean">
+              <li>Investigated a doxycycline-inducible KRAS-mutant pancreatic cancer model and observed tumor recurrence after doxycycline withdrawal and KRAS inactivation.</li>
+              <li>Analyzed RNA-seq data from recurrent tumors and identified upregulation of EMT-related transcriptional programs.</li>
+              <li>Prioritized EMT-associated gene programs as a candidate mechanism of RAS-independent recurrence and as a basis for subsequent functional validation and therapeutic target discovery.</li>
+            </ul>
+          </article>
+
+          <article class="project-card">
+            <div class="project-head">
+              <div>
+                <p class="card-kicker">Jan 2026 - Feb 2026</p>
+                <h3>TP53RK Functional-Mode Determination: Phosphorylation-Dependent vs. KEOPS-Complex-Dependent</h3>
+              </div>
+              <p class="project-tag">Site-Directed Mutagenesis / Lentiviral Transduction / dTAG / Incucyte</p>
+            </div>
+            <p>
+              This project combines function-specific mutant construction with the dTAG rapid-degradation system to determine
+              whether TP53RK function in medulloblastoma primarily depends on phosphorylation-related activity or KEOPS-complex-associated mechanisms.
+            </p>
+            <ul class="list-clean">
+              <li>Constructed plasmids carrying TP53RK phosphorylation-site mutants and KEOPS critical-site mutants.</li>
+              <li>Introduced mutant constructs through lentiviral transduction and used dTAG-V1 to degrade endogenous TP53RK.</li>
+              <li>Used Incucyte live-cell imaging to quantify proliferation and compare rescue differences in medulloblastoma cell-death phenotypes between the two mutant classes.</li>
+            </ul>
+          </article>
+
+          <article class="project-card" id="tasanchor">
+            <div class="project-head">
+              <div>
+                <p class="card-kicker">Jun 2024 - Oct 2025</p>
+                <h3>iGEM “TasAnchor” — Construction of a Whole-Cell Immobilization Platform</h3>
+              </div>
+              <p class="project-tag">Synthetic Biology / Bacillus subtilis / SpyTag-SpyCatcher / Protein Engineering</p>
+            </div>
+            <p>
+              TasAnchor is a modular whole-cell adhesion and immobilization platform built in Bacillus subtilis,
+              integrating genetic engineering, protein-scaffold design, and bioreactor membrane immobilization.
+            </p>
+            <ul class="list-clean">
+              <li>Served as the current team leader of SCU-China; the 2025 project received an iGEM Gold Medal and was named an Undergraduate Top 10 Project.</li>
+              <li>Knocked out endogenous tasA in Bacillus subtilis and constructed a pHT01-based SpyTag/SpyCatcher modular adhesion scaffold.</li>
+              <li>Expressed and purified recombinant proteins in E. coli BL21(DE3) to validate the modular immobilization system.</li>
+              <li>Immobilized engineered Bacillus subtilis biofilms on polystyrene bioreactor membranes to demonstrate whole-cell immobilization performance.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-shell reveal">
+        <div class="section-head">
+          <h2>Research and Training Experience</h2>
+          <p class="section-note">Visiting Programs, Summer Research, and Academic Training</p>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-item">
+            <time>Jul 2026 - Aug 2026</time>
+            <div class="story">
+              <h3>University of Notre Dame Summer Visiting Student · Xin Lu Lab</h3>
+              <p>
+                Participated in research on an inducible KRAS-mutant pancreatic cancer model and analyzed RNA-seq data
+                to investigate RAS-independent recurrence and EMT-associated transcriptional programs.
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <time>Mar 2026 - Jun 2026</time>
+            <div class="story">
+              <h3>Beutler Institute</h3>
+              <p>Participated in a spring academic training program featuring English-language coursework and advanced topics in the life sciences.</p>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <time>Jan 2026</time>
+            <div class="story">
+              <h3>Westlake University Visiting Student · Jin Xin Lab</h3>
+              <p>
+                Contributed to TP53RK functional-mode research and received training in mutant construction,
+                lentiviral transduction, dTAG-mediated degradation, and Incucyte live-cell phenotyping.
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <time>Aug 2025</time>
+            <div class="story">
+              <h3>Westlake University International Undergraduate Summer School</h3>
+              <p>Completed English-language life-science coursework and interdisciplinary academic training in an international summer-school environment.</p>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <time>Jul 2025</time>
+            <div class="story">
+              <h3>Peking University Summer Training</h3>
+              <p>Participated in intensive life-science training focused on advanced topics in molecular and cellular biology.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; <span class="js-year"></span> Xin Xiong</p>
+      <p><a href="./outputs.html">Open archive and supporting materials</a></p>
+    </div>
+  </footer>
+
+  <script src="./app.js"></script>
+</body>
+</html>

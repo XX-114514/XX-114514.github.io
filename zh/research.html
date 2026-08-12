@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>熊鑫 | 科研经历</title>
+  <meta name="description" content="熊鑫学术工作中的代表性科研项目、访学经历与研究训练。">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+</head>
+<body>
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand brand-home" href="./index.html" aria-label="返回作品集首页" title="返回作品集首页">熊鑫<small>学术主页</small></a>
+      <nav class="top-nav" aria-label="主导航">
+        <a data-page="index.html" href="./index.html">首页</a>
+        <a data-page="about.html" href="./about.html">简介</a>
+        <a data-page="research.html" href="./research.html">研究</a>
+        <a data-page="outputs.html" href="./outputs.html">归档</a>
+        <a href="https://blog.xiongxin.online">博客</a>
+        <a data-page="contact.html" href="./contact.html">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-wrap">
+    <div class="container">
+      <section class="page-hero reveal">
+        <p class="eyebrow">研究</p>
+        <div class="page-hero-grid">
+          <div>
+            <h1>代表性项目<span>从计算推断到实验验证与工程实现</span></h1>
+            <p class="lead">
+              我近期的研究主要涵盖四个方向：泛癌肿瘤微环境细胞通讯网络解析、
+              RAS 非依赖性胰腺癌复发机制、TP53RK 功能模式判定，以及面向全细胞固定化的合成生物学工程。
+            </p>
+          </div>
+          <div class="page-hero-side">
+            <p class="page-hero-note">研究重点</p>
+            <p>单细胞与空间组学、肿瘤信号网络、转录组机制解析，以及功能导向的分子与细胞实验验证。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-shell reveal">
+        <div class="section-head">
+          <h2>代表性项目</h2>
+          <p class="section-note">与最新版 CV 同步</p>
+        </div>
+
+        <div class="project-stack">
+          <article class="project-card">
+            <div class="project-head">
+              <div>
+                <p class="card-kicker">2025年6月 - 至今</p>
+                <h3>泛癌肿瘤微环境细胞通讯网络解析与关键调控轴识别</h3>
+              </div>
+              <p class="project-tag">scRNA-seq / CellChat / NicheNet / CoVarnet / 空间转录组</p>
+            </div>
+            <p>
+              该项目旨在系统解析不同癌种肿瘤微环境中的细胞通讯结构，
+              识别跨癌种保守的调控回路、癌种特异性信号轴及具有关键拓扑作用的通讯枢纽细胞。
+            </p>
+            <ul class="list-clean">
+              <li>构建覆盖 10 余种癌症的标准化单细胞 RNA 测序分析流程，用于刻画肿瘤微环境组成与通讯网络。</li>
+              <li>结合 CellChat 与 NicheNet，识别跨癌种保守及癌种特异性的配体-受体调控回路。</li>
+              <li>使用 Python 复现 CoVarnet，并识别出五个与癌症发展相关的细胞协同变化模块。</li>
+              <li>整合空间转录组与 scRNA-seq 数据，定位高置信度信号生态位，并验证发送细胞、接收细胞及通路活性的空间共定位。</li>
+              <li>基于中心性与网络拓扑指标识别通讯枢纽细胞，并将枢纽驱动通路与肿瘤相关表型程序相联系。</li>
+            </ul>
+          </article>
+
+          <article class="project-card" id="pdac-emt">
+            <div class="project-head">
+              <div>
+                <p class="card-kicker">2026年7月 - 2026年8月</p>
+                <h3>RAS 非依赖性胰腺癌中 EMT 相关基因上调机制解析</h3>
+              </div>
+              <p class="project-tag">KRAS 诱导模型 / RNA-seq / EMT / 胰腺癌</p>
+            </div>
+            <p>
+              该项目基于可由多西环素调控的 KRAS 突变胰腺癌模型，
+              探索 KRAS 失活后肿瘤复发及其向 RAS 非依赖性状态转变的潜在分子机制。
+            </p>
+            <ul class="list-clean">
+              <li>研究多西环素诱导型 KRAS 突变胰腺癌模型，并观察撤除多西环素、关闭 KRAS 信号后出现的肿瘤复发。</li>
+              <li>分析复发肿瘤的 RNA-seq 数据，识别 EMT 相关基因程序的上调。</li>
+              <li>将 EMT 转录程序视为 RAS 非依赖性复发的候选机制，为后续功能验证与治疗靶点筛选提供依据。</li>
+            </ul>
+          </article>
+
+          <article class="project-card">
+            <div class="project-head">
+              <div>
+                <p class="card-kicker">2026年1月 - 2026年2月</p>
+                <h3>TP53RK 功能模式判定：磷酸化依赖与 KEOPS 复合体依赖</h3>
+              </div>
+              <p class="project-tag">定点突变 / 慢病毒转导 / dTAG / Incucyte</p>
+            </div>
+            <p>
+              该项目通过构建不同功能位点突变体并结合 dTAG 快速降解体系，
+              判断 TP53RK 在髓母细胞瘤中的关键功能主要依赖其磷酸化相关活性，
+              还是依赖 KEOPS 复合体相关作用。
+            </p>
+            <ul class="list-clean">
+              <li>构建携带 TP53RK 磷酸化位点突变和 KEOPS 关键位点突变的质粒。</li>
+              <li>通过慢病毒转导导入突变构建体，并使用 dTAG-V1 降解内源性 TP53RK。</li>
+              <li>使用 Incucyte 活细胞成像定量细胞增殖，并比较两类突变体对髓母细胞瘤细胞死亡表型的挽救差异。</li>
+            </ul>
+          </article>
+
+          <article class="project-card" id="tasanchor">
+            <div class="project-head">
+              <div>
+                <p class="card-kicker">2024年6月 - 2025年10月</p>
+                <h3>iGEM “TasAnchor” 全细胞固定化平台</h3>
+              </div>
+              <p class="project-tag">合成生物学 / 枯草芽孢杆菌 / SpyTag-SpyCatcher / 蛋白工程</p>
+            </div>
+            <p>
+              TasAnchor 是基于枯草芽孢杆菌构建的模块化全细胞黏附与固定化平台，
+              通过遗传改造、蛋白支架设计和反应器膜表面固定化实现工程菌生物膜的可控组装。
+            </p>
+            <ul class="list-clean">
+              <li>担任 SCU-China 团队负责人；项目获得 2025 iGEM 金奖，并入选本科生组全球 Top 10 项目。</li>
+              <li>敲除枯草芽孢杆菌内源 tasA，并构建基于 pHT01 的 SpyTag/SpyCatcher 模块化黏附支架。</li>
+              <li>在 E. coli BL21(DE3) 中表达并纯化重组蛋白，用于验证模块化固定化体系。</li>
+              <li>将工程化枯草芽孢杆菌生物膜固定于聚苯乙烯生物反应器膜表面，验证平台的全细胞固定化能力。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-shell reveal">
+        <div class="section-head">
+          <h2>研究与训练经历</h2>
+          <p class="section-note">访学、暑期项目与学术训练</p>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-item">
+            <time>2026年7月 - 8月</time>
+            <div class="story">
+              <h3>圣母大学暑期访学生 · Xin Lu Lab</h3>
+              <p>
+                参与可诱导 KRAS 突变胰腺癌模型研究，并围绕复发肿瘤的 RNA-seq 数据开展
+                RAS 非依赖性状态与 EMT 相关转录程序分析。
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <time>2026年3月 - 6月</time>
+            <div class="story">
+              <h3>Beutler Institute</h3>
+              <p>参加春季学术训练项目，持续开展英文课程学习与生命科学前沿主题训练。</p>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <time>2026年1月</time>
+            <div class="story">
+              <h3>西湖大学访学生 · Jin Xin Lab</h3>
+              <p>
+                参与 TP53RK 功能模式研究，开展突变体构建、慢病毒转导、
+                dTAG 降解与 Incucyte 活细胞表型分析相关训练。
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <time>2025年8月</time>
+            <div class="story">
+              <h3>西湖大学国际本科生暑期学校</h3>
+              <p>参加国际本科生暑期学校，接受全英文生命科学课程与跨学科学术训练。</p>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <time>2025年7月</time>
+            <div class="story">
+              <h3>北京大学暑期培训</h3>
+              <p>参加生命科学暑期集中训练，学习分子与细胞生物学前沿课程。</p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span class="js-year"></span> 熊鑫</p>
+      <p><a href="./outputs.html">打开归档与支持材料</a></p>
+    </div>
+  </footer>
+
+  <script src="../app.js"></script>
+</body>
+</html>
