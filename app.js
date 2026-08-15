@@ -86,15 +86,21 @@
     }
 
     try {
-      const isLocalPreview = ["localhost", "127.0.0.1"].includes(window.location.hostname);
+      const hostname = window.location.hostname;
+      const isLocalPreview = ["localhost", "127.0.0.1"].includes(hostname);
       if (isLocalPreview) return null;
-      const trace = await fetchWithTimeout("/cdn-cgi/trace", { cache: "no-store" });
-      if (trace.ok) {
-        const body = await trace.text();
-        const match = body.match(/^loc=([A-Z]{2})$/m);
-        if (match) {
-          writeCachedCountry(match[1]);
-          return match[1];
+      const isCloudflareHost = [".pages.dev", ".workers.dev", ".trycloudflare.com"].some((suffix) =>
+        hostname.endsWith(suffix),
+      );
+      if (isCloudflareHost) {
+        const trace = await fetchWithTimeout("/cdn-cgi/trace", { cache: "no-store" });
+        if (trace.ok) {
+          const body = await trace.text();
+          const match = body.match(/^loc=([A-Z]{2})$/m);
+          if (match) {
+            writeCachedCountry(match[1]);
+            return match[1];
+          }
         }
       }
     } catch (_error) {
