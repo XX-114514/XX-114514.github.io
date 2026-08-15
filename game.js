@@ -24,13 +24,17 @@
     over: "已被清除",
     startTitle: "Rogue Cell",
     startSub: "扮演一个癌细胞，躲避免疫系统的追杀，能活多久？",
-    startRules: ["方向键 / WASD 移动", "能力键释放已解锁的能力（默认 J / K / L，可在设置中修改）", "触屏：拖动移动，点击右下角按钮释放能力"],
+    startRules: ["方向键 / WASD 移动", "能力键释放已解锁的能力（默认 J / K / L，可在设置中修改）", "触屏：拖动移动或使用左下方向键，点击右下角技能按钮释放能力"],
     startBtn: "开始逃亡",
     resumeBtn: "继续",
     pauseBtn: "暂停",
     restartBtn: "重新开始",
     fullscreenBtn: "全屏",
+    moreBtn: "更多",
     settingsBtn: "按键设置",
+    rotateHint: "横屏体验更佳",
+    dismissBtn: "关闭",
+    dpadLabels: { up: "向上", down: "向下", left: "向左", right: "向右" },
     settingsTitle: "自定义能力按键",
     settingsHint: "点击按钮，然后按下想要绑定的按键",
     pressKeyLabel: "按下按键…",
@@ -112,13 +116,17 @@
     over: "Eliminated",
     startTitle: "Rogue Cell",
     startSub: "You are a cancer cell. Evade the immune system for as long as you can.",
-    startRules: ["Arrow keys / WASD to move", "Ability keys fire unlocked abilities (default J / K / L — remappable)", "Touch: drag to move, tap a round button to use an ability"],
+    startRules: ["Arrow keys / WASD to move", "Ability keys fire unlocked abilities (default J / K / L — remappable)", "Touch: drag to move or use the on-screen arrows, tap an ability button to use it"],
     startBtn: "Start the run",
     resumeBtn: "Resume",
     pauseBtn: "Pause",
     restartBtn: "Restart",
     fullscreenBtn: "Full screen",
+    moreBtn: "More",
     settingsBtn: "Keys",
+    rotateHint: "Rotate for a better view",
+    dismissBtn: "Dismiss",
+    dpadLabels: { up: "Up", down: "Down", left: "Left", right: "Right" },
     settingsTitle: "Customize ability keys",
     settingsHint: "Click a button, then press the key you want to bind",
     pressKeyLabel: "Press a key…",
@@ -212,14 +220,29 @@
   toolbar.className = "game-toolbar";
   toolbar.innerHTML = `
     <span class="game-status" data-status>${STR.ready}</span>
-    <div class="game-actions">
-      <button class="btn btn-compact" type="button" data-restart>${STR.restartBtn}</button>
+    <div class="game-toolbar-controls">
       <button class="btn btn-compact" type="button" data-pause>${STR.pauseBtn}</button>
-      <button class="btn btn-compact" type="button" data-stats>${STR.statsBtn}</button>
-      <button class="btn btn-compact" type="button" data-settings>${STR.settingsBtn}</button>
-      <button class="btn btn-compact" type="button" data-fullscreen>${STR.fullscreenBtn}</button>
+      <button class="btn btn-compact game-more-btn" type="button" data-more aria-haspopup="true" aria-expanded="false">${STR.moreBtn}</button>
+      <div class="game-actions" data-actions>
+        <button class="btn btn-compact" type="button" data-restart>${STR.restartBtn}</button>
+        <button class="btn btn-compact" type="button" data-stats>${STR.statsBtn}</button>
+        <button class="btn btn-compact" type="button" data-settings>${STR.settingsBtn}</button>
+        <button class="btn btn-compact" type="button" data-fullscreen>${STR.fullscreenBtn}</button>
+      </div>
     </div>`;
   root.insertBefore(toolbar, canvas);
+
+  const rotateHint = document.createElement("div");
+  rotateHint.className = "game-rotate-hint";
+  rotateHint.innerHTML = `
+    <span>${STR.rotateHint}</span>
+    <button type="button" data-rotate-dismiss aria-label="${STR.dismissBtn}">&times;</button>`;
+  root.insertBefore(rotateHint, canvas);
+
+  const stage = document.createElement("div");
+  stage.className = "game-stage";
+  canvas.parentElement.insertBefore(stage, canvas);
+  stage.appendChild(canvas);
 
   const settingsPanel = document.createElement("div");
   settingsPanel.className = "game-settings";
@@ -231,7 +254,7 @@
     <div class="game-settings-actions">
       <button class="btn btn-compact" type="button" data-settings-reset>${STR.resetKeysBtn}</button>
     </div>`;
-  root.insertBefore(settingsPanel, canvas);
+  stage.appendChild(settingsPanel);
 
   const statsPanel = document.createElement("div");
   statsPanel.className = "game-settings game-stats-panel";
@@ -241,12 +264,7 @@
     <div class="game-settings-rows" data-stats-rows></div>
     <p class="game-settings-title game-stats-subtitle">${STR.statsAbilitiesTitle}</p>
     <div class="game-settings-rows" data-stats-abilities></div>`;
-  root.insertBefore(statsPanel, canvas);
-
-  const stage = document.createElement("div");
-  stage.className = "game-stage";
-  canvas.parentElement.insertBefore(stage, canvas);
-  stage.appendChild(canvas);
+  stage.appendChild(statsPanel);
 
   const ABILITY_ORDER = ["hijack", "mitosis", "pulse"];
   const hud = document.createElement("div");
@@ -272,6 +290,12 @@
         <span class="hud-ability-key" data-ability-key="${kind}"></span>
         <span class="hud-ability-label">${STR.abilityNames[kind]}</span>
       </button>`).join("")}
+    </div>
+    <div class="game-dpad" data-dpad>
+      <button type="button" class="dpad-btn dpad-up" data-dir="up" aria-label="${STR.dpadLabels.up}">&#9650;</button>
+      <button type="button" class="dpad-btn dpad-left" data-dir="left" aria-label="${STR.dpadLabels.left}">&#9664;</button>
+      <button type="button" class="dpad-btn dpad-right" data-dir="right" aria-label="${STR.dpadLabels.right}">&#9654;</button>
+      <button type="button" class="dpad-btn dpad-down" data-dir="down" aria-label="${STR.dpadLabels.down}">&#9660;</button>
     </div>
     <div class="hud-milestone" data-milestone aria-live="polite"></div>
     <div class="hud-event" data-event aria-live="polite"></div>
@@ -455,6 +479,7 @@
   /* ---------------------------------------------------------------- */
   const keys = new Set();
   const touch = { active: false, ox: 0, oy: 0, dx: 0, dy: 0 };
+  const dpadState = { up: false, down: false, left: false, right: false };
   const abilityTapped = { pulse: false, mitosis: false, hijack: false };
 
   window.addEventListener("keydown", (event) => {
@@ -508,12 +533,31 @@
   });
   window.addEventListener("pointerup", () => { touch.active = false; touch.dx = 0; touch.dy = 0; });
 
+  const dpad = hud.querySelector("[data-dpad]");
+  dpad.querySelectorAll("[data-dir]").forEach((btn) => {
+    const dir = btn.getAttribute("data-dir");
+    const press = (event) => {
+      event.preventDefault();
+      try { btn.setPointerCapture(event.pointerId); } catch (_e) { /* ignore */ }
+      dpadState[dir] = true;
+    };
+    const release = () => { dpadState[dir] = false; };
+    btn.addEventListener("pointerdown", press);
+    btn.addEventListener("pointerup", release);
+    btn.addEventListener("pointercancel", release);
+    btn.addEventListener("lostpointercapture", release);
+  });
+
+  rotateHint.querySelector("[data-rotate-dismiss]").addEventListener("click", () => {
+    rotateHint.classList.add("is-dismissed");
+  });
+
   const moveVector = () => {
     let x = 0, y = 0;
-    if (keys.has("arrowleft") || keys.has("a")) x -= 1;
-    if (keys.has("arrowright") || keys.has("d")) x += 1;
-    if (keys.has("arrowup") || keys.has("w")) y -= 1;
-    if (keys.has("arrowdown") || keys.has("s")) y += 1;
+    if (keys.has("arrowleft") || keys.has("a") || dpadState.left) x -= 1;
+    if (keys.has("arrowright") || keys.has("d") || dpadState.right) x += 1;
+    if (keys.has("arrowup") || keys.has("w") || dpadState.up) y -= 1;
+    if (keys.has("arrowdown") || keys.has("s") || dpadState.down) y += 1;
     if (touch.active) {
       const mag = clamp(Math.hypot(touch.dx, touch.dy) / 46, 0, 1);
       const len = Math.hypot(touch.dx, touch.dy) || 1;
@@ -719,6 +763,28 @@
     } catch (_e) { /* ignore unsupported fullscreen */ }
   });
   root.addEventListener("fullscreenchange", () => window.setTimeout(resize, 60));
+
+  /* ---------------------------------------------------------------- */
+  /* Toolbar overflow menu (narrow screens)                            */
+  /* ---------------------------------------------------------------- */
+  const moreBtn = toolbar.querySelector("[data-more]");
+  const actionsMenu = toolbar.querySelector("[data-actions]");
+  const closeMoreMenu = () => {
+    actionsMenu.classList.remove("is-open");
+    moreBtn.setAttribute("aria-expanded", "false");
+  };
+  moreBtn.addEventListener("click", () => {
+    const open = actionsMenu.classList.toggle("is-open");
+    moreBtn.setAttribute("aria-expanded", String(open));
+  });
+  actionsMenu.addEventListener("click", (event) => {
+    if (event.target.closest("button")) closeMoreMenu();
+  });
+  document.addEventListener("pointerdown", (event) => {
+    if (!actionsMenu.classList.contains("is-open")) return;
+    if (event.target.closest(".game-toolbar-controls")) return;
+    closeMoreMenu();
+  });
 
   /* ---------------------------------------------------------------- */
   /* Key binding settings                                              */
@@ -1900,7 +1966,9 @@
     eventEl.textContent = state.eventTimer > 0 ? state.eventText : "";
     const toneClass = { coral: " is-warn", gold: " is-gold", violet: " is-violet", rose: " is-rose" }[state.eventTone] || "";
     eventEl.className = `hud-event${state.eventTimer > 0 ? " is-visible" : ""}${toneClass}`;
-    vignetteEl.classList.toggle("is-visible", state.stormActive);
+    const lowHp = player.hp / player.maxHp < 0.3;
+    vignetteEl.classList.toggle("is-visible", state.stormActive || lowHp);
+    vignetteEl.classList.toggle("is-critical", lowHp && !state.stormActive);
     if (!statsPanel.hidden) renderStatsPanel();
   };
 
