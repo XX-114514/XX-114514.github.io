@@ -13,6 +13,7 @@
 
   const isZh = document.documentElement.lang.toLowerCase().startsWith("zh");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
 
   /* ---------------------------------------------------------------- */
   /* Strings                                                           */
@@ -24,7 +25,7 @@
     over: "已被清除",
     startTitle: "Rogue Cell",
     startSub: "扮演一个癌细胞，躲避免疫系统的追杀，能活多久？",
-    startRules: ["方向键 / WASD 移动", "能力键释放已解锁的能力（默认 J / K / L，可在设置中修改）", "触屏：拖动移动或使用左下方向键，点击右下角技能按钮释放能力"],
+    startRules: ["方向键 / WASD 移动", "能力键释放已解锁的能力（默认 J / K / L，可在设置中修改）", "触屏：用左下角摇杆移动，点击右下角技能按钮释放能力"],
     startBtn: "开始逃亡",
     resumeBtn: "继续",
     pauseBtn: "暂停",
@@ -34,7 +35,7 @@
     settingsBtn: "按键设置",
     rotateHint: "横屏体验更佳",
     dismissBtn: "关闭",
-    dpadLabels: { up: "向上", down: "向下", left: "向左", right: "向右" },
+    joystickLabel: "移动摇杆",
     settingsTitle: "自定义能力按键",
     settingsHint: "点击按钮，然后按下想要绑定的按键",
     pressKeyLabel: "按下按键…",
@@ -46,7 +47,7 @@
     statLabels: {
       speed: "移动速度", hp: "最大膜完整性", regen: "膜完整性恢复", resist: "接触伤害抗性",
       evasion: "完全免疫几率", xpgain: "增殖倍率", magnet: "营养吸收半径", stealth: "探测范围降低",
-      shield: "护盾层数"
+      chemoResist: "化疗耐药性", shield: "护盾层数"
     },
     statsAbilitiesTitle: "已解锁能力",
     statsNoAbilities: "尚未解锁任何主动能力。",
@@ -101,6 +102,7 @@
       xpgain: { name: "快速分裂", desc: "营养获取的增殖值 +25%" },
       magnet: { name: "趋化性增强", desc: "营养吸收半径 +40%" },
       evasion: { name: "PD-L1 上调", desc: "有几率完全免疫一次接触伤害（+10%，上限 40%）" },
+      chemoResist: { name: "耐药性", desc: "降低你对化疗脉冲伤害的敏感度（-20%，上限 80%；对其他伤害无效）" },
       ability_pulse: { name: "细胞因子脉冲", desc: "解锁主动能力：击退并短暂麻痹附近的免疫细胞" },
       ability_mitosis: { name: "有丝分裂诱饵", desc: "解锁主动能力：分裂出一个能自主移动的诱饵细胞，长期吸引免疫细胞的注意" },
       ability_hijack: { name: "免疫劫持", desc: "解锁主动能力：策反一个附近的 T 细胞，使其转而攻击其他免疫细胞（信号灯在范围内时会被优先摧毁）" },
@@ -116,7 +118,7 @@
     over: "Eliminated",
     startTitle: "Rogue Cell",
     startSub: "You are a cancer cell. Evade the immune system for as long as you can.",
-    startRules: ["Arrow keys / WASD to move", "Ability keys fire unlocked abilities (default J / K / L — remappable)", "Touch: drag to move or use the on-screen arrows, tap an ability button to use it"],
+    startRules: ["Arrow keys / WASD to move", "Ability keys fire unlocked abilities (default J / K / L — remappable)", "Touch: use the joystick in the bottom-left to move, tap an ability button to use it"],
     startBtn: "Start the run",
     resumeBtn: "Resume",
     pauseBtn: "Pause",
@@ -126,7 +128,7 @@
     settingsBtn: "Keys",
     rotateHint: "Rotate for a better view",
     dismissBtn: "Dismiss",
-    dpadLabels: { up: "Up", down: "Down", left: "Left", right: "Right" },
+    joystickLabel: "Movement joystick",
     settingsTitle: "Customize ability keys",
     settingsHint: "Click a button, then press the key you want to bind",
     pressKeyLabel: "Press a key…",
@@ -138,7 +140,7 @@
     statLabels: {
       speed: "Move speed", hp: "Max membrane integrity", regen: "Membrane regeneration", resist: "Contact damage resistance",
       evasion: "Full-evade chance", xpgain: "Proliferation multiplier", magnet: "Nutrient pickup radius", stealth: "Detection radius reduction",
-      shield: "Shield charges"
+      chemoResist: "Chemoresistance", shield: "Shield charges"
     },
     statsAbilitiesTitle: "Unlocked abilities",
     statsNoAbilities: "No active abilities unlocked yet.",
@@ -193,6 +195,7 @@
       xpgain: { name: "Rapid Division", desc: "+25% proliferation from nutrients" },
       magnet: { name: "Chemotaxis Boost", desc: "+40% nutrient pickup radius" },
       evasion: { name: "PD-L1 Upregulation", desc: "Chance to fully evade a contact hit (+10%, capped at 40%)" },
+      chemoResist: { name: "Chemoresistance", desc: "Reduces your sensitivity to chemo pulse damage specifically (-20%, capped at 80%; no effect on other damage)" },
       ability_pulse: { name: "Cytokine Pulse", desc: "Unlock an active ability: knock back and briefly stun nearby immune cells" },
       ability_mitosis: { name: "Mitosis Decoy", desc: "Unlock an active ability: split off a decoy that moves on its own and keeps drawing attention for a long time" },
       ability_hijack: { name: "Immune Hijack", desc: "Unlock an active ability: turn a nearby T cell so it attacks other immune cells instead of you (a signal beacon in range is destroyed first)" },
@@ -291,11 +294,8 @@
         <span class="hud-ability-label">${STR.abilityNames[kind]}</span>
       </button>`).join("")}
     </div>
-    <div class="game-dpad" data-dpad>
-      <button type="button" class="dpad-btn dpad-up" data-dir="up" aria-label="${STR.dpadLabels.up}">&#9650;</button>
-      <button type="button" class="dpad-btn dpad-left" data-dir="left" aria-label="${STR.dpadLabels.left}">&#9664;</button>
-      <button type="button" class="dpad-btn dpad-right" data-dir="right" aria-label="${STR.dpadLabels.right}">&#9654;</button>
-      <button type="button" class="dpad-btn dpad-down" data-dir="down" aria-label="${STR.dpadLabels.down}">&#9660;</button>
+    <div class="game-joystick" data-joystick role="button" aria-label="${STR.joystickLabel}">
+      <div class="game-joystick-knob" data-joystick-knob></div>
     </div>
     <div class="hud-milestone" data-milestone aria-live="polite"></div>
     <div class="hud-event" data-event aria-live="polite"></div>
@@ -378,6 +378,10 @@
   const EXHAUST_LINGER = 8;
   const STAGE_DURATION = 300; // 5 minutes per stage: lung -> liver -> brain (scene only — no gameplay scaling is keyed off this)
   const RUN_LIMIT = STAGE_DURATION * 3; // 15 minutes total
+  const CHEMO_ESCALATE_T = 600; // the 10-minute mark: chemo's kill chance reaches certainty here, and its
+  // radius/frequency/player damage all start ramping toward maximum from here to the end of the run
+  const chemoKillProgress = (t) => clamp(t / CHEMO_ESCALATE_T, 0, 1);
+  const chemoEscalation = (t) => clamp((t - CHEMO_ESCALATE_T) / (RUN_LIMIT - CHEMO_ESCALATE_T), 0, 1);
   const STORM_START = 120;
   const STORM_INTERVAL = 48;
   const STORM_DURATION = 12;
@@ -405,8 +409,8 @@
   const ABILITY_UP_ID = { pulse: "pulseUp", mitosis: "mitosisUp", hijack: "hijackUp" };
   const UPGRADE_TO_ABILITY_KIND = { ability_pulse: "pulse", ability_mitosis: "mitosis", ability_hijack: "hijack", pulseUp: "pulse", mitosisUp: "mitosis", hijackUp: "hijack" };
 
-  const UPGRADE_ORDER = ["speed", "hp", "stealth", "regen", "resist", "xpgain", "magnet", "evasion", "ability_pulse", "ability_mitosis", "ability_hijack", "pulseUp", "mitosisUp", "hijackUp", "shield"];
-  const MAX_STACKS = { speed: 5, hp: 5, stealth: 4, regen: 3, resist: 4, xpgain: 4, magnet: 3, evasion: 4, ability_pulse: 1, ability_mitosis: 1, ability_hijack: 1, pulseUp: 3, mitosisUp: 3, hijackUp: 3, shield: 2 };
+  const UPGRADE_ORDER = ["speed", "hp", "stealth", "regen", "resist", "xpgain", "magnet", "evasion", "chemoResist", "ability_pulse", "ability_mitosis", "ability_hijack", "pulseUp", "mitosisUp", "hijackUp", "shield"];
+  const MAX_STACKS = { speed: 5, hp: 5, stealth: 4, regen: 3, resist: 4, xpgain: 4, magnet: 3, evasion: 4, chemoResist: 4, ability_pulse: 1, ability_mitosis: 1, ability_hijack: 1, pulseUp: 3, mitosisUp: 3, hijackUp: 3, shield: 2 };
 
   const freshState = () => ({
     phase: "idle", // idle | boot | running | levelup | paused | gameover | transition
@@ -453,6 +457,7 @@
     regen: 0,
     contactResist: 0,
     evasionChance: 0,
+    chemoResist: 0,
     xpMult: 1,
     magnetR: 46,
     detectMult: 1,
@@ -479,7 +484,8 @@
   /* ---------------------------------------------------------------- */
   const keys = new Set();
   const touch = { active: false, ox: 0, oy: 0, dx: 0, dy: 0 };
-  const dpadState = { up: false, down: false, left: false, right: false };
+  const STICK_RADIUS = 46;
+  const stick = { active: false, ox: 0, oy: 0, dx: 0, dy: 0 };
   const abilityTapped = { pulse: false, mitosis: false, hijack: false };
 
   window.addEventListener("keydown", (event) => {
@@ -533,20 +539,37 @@
   });
   window.addEventListener("pointerup", () => { touch.active = false; touch.dx = 0; touch.dy = 0; });
 
-  const dpad = hud.querySelector("[data-dpad]");
-  dpad.querySelectorAll("[data-dir]").forEach((btn) => {
-    const dir = btn.getAttribute("data-dir");
-    const press = (event) => {
-      event.preventDefault();
-      try { btn.setPointerCapture(event.pointerId); } catch (_e) { /* ignore */ }
-      dpadState[dir] = true;
-    };
-    const release = () => { dpadState[dir] = false; };
-    btn.addEventListener("pointerdown", press);
-    btn.addEventListener("pointerup", release);
-    btn.addEventListener("pointercancel", release);
-    btn.addEventListener("lostpointercapture", release);
+  const joystick = hud.querySelector("[data-joystick]");
+  const joystickKnob = hud.querySelector("[data-joystick-knob]");
+  const setJoystickKnob = (x, y) => { joystickKnob.style.transform = `translate(${x}px, ${y}px)`; };
+  joystick.addEventListener("pointerdown", (event) => {
+    event.preventDefault();
+    try { joystick.setPointerCapture(event.pointerId); } catch (_e) { /* ignore */ }
+    const rect = joystick.getBoundingClientRect();
+    stick.active = true;
+    stick.ox = rect.left + rect.width / 2;
+    stick.oy = rect.top + rect.height / 2;
+    stick.dx = 0;
+    stick.dy = 0;
+    setJoystickKnob(0, 0);
   });
+  joystick.addEventListener("pointermove", (event) => {
+    if (!stick.active) return;
+    stick.dx = event.clientX - stick.ox;
+    stick.dy = event.clientY - stick.oy;
+    const len = Math.hypot(stick.dx, stick.dy) || 1;
+    const clamped = Math.min(len, STICK_RADIUS);
+    setJoystickKnob((stick.dx / len) * clamped, (stick.dy / len) * clamped);
+  });
+  const releaseJoystick = () => {
+    stick.active = false;
+    stick.dx = 0;
+    stick.dy = 0;
+    setJoystickKnob(0, 0);
+  };
+  joystick.addEventListener("pointerup", releaseJoystick);
+  joystick.addEventListener("pointercancel", releaseJoystick);
+  joystick.addEventListener("lostpointercapture", releaseJoystick);
 
   rotateHint.querySelector("[data-rotate-dismiss]").addEventListener("click", () => {
     rotateHint.classList.add("is-dismissed");
@@ -554,10 +577,15 @@
 
   const moveVector = () => {
     let x = 0, y = 0;
-    if (keys.has("arrowleft") || keys.has("a") || dpadState.left) x -= 1;
-    if (keys.has("arrowright") || keys.has("d") || dpadState.right) x += 1;
-    if (keys.has("arrowup") || keys.has("w") || dpadState.up) y -= 1;
-    if (keys.has("arrowdown") || keys.has("s") || dpadState.down) y += 1;
+    if (keys.has("arrowleft") || keys.has("a")) x -= 1;
+    if (keys.has("arrowright") || keys.has("d")) x += 1;
+    if (keys.has("arrowup") || keys.has("w")) y -= 1;
+    if (keys.has("arrowdown") || keys.has("s")) y += 1;
+    if (stick.active) {
+      const mag = clamp(Math.hypot(stick.dx, stick.dy) / STICK_RADIUS, 0, 1);
+      const len = Math.hypot(stick.dx, stick.dy) || 1;
+      return { x: (stick.dx / len) * mag, y: (stick.dy / len) * mag };
+    }
     if (touch.active) {
       const mag = clamp(Math.hypot(touch.dx, touch.dy) / 46, 0, 1);
       const len = Math.hypot(touch.dx, touch.dy) || 1;
@@ -655,10 +683,22 @@
   /* ---------------------------------------------------------------- */
   /* Flow control                                                      */
   /* ---------------------------------------------------------------- */
+  // Orientation Lock only takes effect inside fullscreen (and isn't supported at all on iOS Safari) —
+  // the rotate-hint banner is the fallback for platforms where this silently does nothing.
+  const lockLandscapeIfPossible = () => {
+    try {
+      const orientation = screen.orientation;
+      if (orientation && orientation.lock) orientation.lock("landscape").catch(() => {});
+    } catch (_e) { /* ignore unsupported/denied orientation lock */ }
+  };
+
   const requestFullscreenIfPossible = () => {
     try {
       if (!document.fullscreenElement && root.requestFullscreen) {
-        root.requestFullscreen().catch(() => {});
+        const request = root.requestFullscreen();
+        if (isTouchDevice && request && request.then) request.then(lockLandscapeIfPossible).catch(() => {});
+      } else if (isTouchDevice) {
+        lockLandscapeIfPossible();
       }
     } catch (_e) { /* ignore unsupported/denied fullscreen */ }
   };
@@ -738,6 +778,7 @@
       case "xpgain": player.xpMult += 0.25; break;
       case "magnet": player.magnetR *= 1.4; break;
       case "evasion": player.evasionChance = clamp(player.evasionChance + 0.1, 0, 0.4); break;
+      case "chemoResist": player.chemoResist = clamp(player.chemoResist + 0.2, 0, 0.8); break;
       case "ability_pulse": player.abilities.pulse = { timer: 0, ...ABILITY_DEFAULTS.pulse }; break;
       case "ability_mitosis": player.abilities.mitosis = { timer: 0, ...ABILITY_DEFAULTS.mitosis }; break;
       case "ability_hijack": player.abilities.hijack = { timer: 0, ...ABILITY_DEFAULTS.hijack }; break;
@@ -758,11 +799,20 @@
   });
   toolbar.querySelector("[data-fullscreen]").addEventListener("click", async () => {
     try {
-      if (!document.fullscreenElement) await root.requestFullscreen();
-      else await document.exitFullscreen();
+      if (!document.fullscreenElement) {
+        await root.requestFullscreen();
+        if (isTouchDevice) lockLandscapeIfPossible();
+      } else {
+        await document.exitFullscreen();
+      }
     } catch (_e) { /* ignore unsupported fullscreen */ }
   });
-  root.addEventListener("fullscreenchange", () => window.setTimeout(resize, 60));
+  root.addEventListener("fullscreenchange", () => {
+    window.setTimeout(resize, 60);
+    if (!document.fullscreenElement) {
+      try { screen.orientation && screen.orientation.unlock && screen.orientation.unlock(); } catch (_e) { /* ignore */ }
+    }
+  });
 
   /* ---------------------------------------------------------------- */
   /* Toolbar overflow menu (narrow screens)                            */
@@ -842,6 +892,7 @@
     }
     if (stacksOf("resist")) lines.push([STR.statLabels.resist, `${Math.round(clamp(player.contactResist + state.auraResist, 0, 0.85) * 100)}%`]);
     if (stacksOf("evasion")) lines.push([STR.statLabels.evasion, `${Math.round(clamp(player.evasionChance + state.auraEvasion, 0, 0.75) * 100)}%`]);
+    if (stacksOf("chemoResist")) lines.push([STR.statLabels.chemoResist, `${Math.round(player.chemoResist * 100)}%`]);
     if (stacksOf("xpgain")) lines.push([STR.statLabels.xpgain, `×${player.xpMult.toFixed(2)}`]);
     if (stacksOf("magnet")) lines.push([STR.statLabels.magnet, `${Math.round(player.magnetR)}px`]);
     if (stacksOf("stealth")) lines.push([STR.statLabels.stealth, `-${Math.round((1 - player.detectMult) * 100)}%`]);
@@ -913,9 +964,9 @@
     });
   };
   const spawnChemo = () => {
-    // radius grows with total run time, not with count or stage, until late zones can blanket the whole arena
-    const lateness = clamp(state.t / RUN_LIMIT, 0, 1);
-    const r = rand(60, 96) + lateness * Math.max(W, H) * 0.8;
+    // small and mild before the 10-minute mark; only then does radius start ramping toward full-screen coverage
+    const escalation = chemoEscalation(state.t);
+    const r = rand(40, 70) + escalation * Math.max(W, H) * 0.85;
     // best-effort placement: try a few candidate centers and keep the one furthest from any still-active zone
     const margin = Math.min(r * 0.6, Math.min(W, H) * 0.4);
     let bestX = W / 2;
@@ -1180,11 +1231,14 @@
     }
     if (t > state.nextChemoT) {
       // deliberately irregular: neither the gap nor the burst count follows a fixed schedule, only their
-      // averages trend up with lateness — and a new wave can start while the last one is still resolving
-      const burstCount = 1 + Math.floor(rand(0, 1.4 + lateness * 3.6));
+      // averages trend up — and only past the 10-minute mark, so early runs see a single mild zone at a
+      // time while late runs see frequent, overlapping, near-continuous waves; a new wave can also start
+      // while the last one is still resolving
+      const escalation = chemoEscalation(t);
+      const burstCount = 1 + Math.floor(escalation * 4.2);
       for (let i = 0; i < burstCount; i += 1) spawnChemo();
-      const baseGap = clamp(6.5 - lateness * 4.8, 1.4, 6.5);
-      state.nextChemoT = t + baseGap * rand(0.5, 1.6);
+      const baseGap = clamp(8 - escalation * 6.2, 1.8, 8);
+      state.nextChemoT = t + baseGap * rand(0.6, 1.6);
     }
     const nutrientCap = Math.round(7 + lateness * 3);
     if (nutrients.length < nutrientCap && Math.random() < dt * (0.9 + lateness * 0.5)) spawnNutrient();
@@ -1513,25 +1567,30 @@
     });
     enemies = enemies.filter((enemy) => !enemy.marked);
 
-    // hazards — chemo bursts are indiscriminate: they hit the player, immune cells, AND decoys caught inside
+    // hazards — chemo bursts are indiscriminate: they can hit the player, immune cells, decoys, and even
+    // turned allies. Before the 10-minute mark every kill is a coin flip that only gets more favorable with
+    // time; from the 10-minute mark on it's a certain kill for everything except you — and your own hit
+    // grows heavier over the same back half of the run, tempered only by chemoresistance if you've taken it
     hazards.forEach((hz) => {
       hz.timer -= dt;
       if (hz.phase === "warn" && hz.timer <= 0) { hz.phase = "burst"; hz.timer = 0.4; }
       else if (hz.phase === "burst") {
         if (!hz.hitApplied && dist(player.x, player.y, hz.x, hz.y) < hz.r + player.r) {
-          damagePlayer(24);
+          const dmg = (20 + chemoEscalation(state.t) * 24) * (1 - player.chemoResist);
+          damagePlayer(dmg);
           hz.hitApplied = true;
         }
         if (!hz.enemyHitApplied) {
+          const killChance = chemoKillProgress(state.t);
           enemies.forEach((enemy) => {
-            if (!enemy.hijacked && dist(enemy.x, enemy.y, hz.x, hz.y) < hz.r + enemy.r) {
+            if (dist(enemy.x, enemy.y, hz.x, hz.y) < hz.r + enemy.r && Math.random() < killChance) {
               enemy.marked = true;
               burst(enemy.x, enemy.y, "coral", 10);
               gainXP(6);
             }
           });
           decoys.forEach((d) => {
-            if (dist(d.x, d.y, hz.x, hz.y) < hz.r + d.r) {
+            if (dist(d.x, d.y, hz.x, hz.y) < hz.r + d.r && Math.random() < killChance) {
               d.marked = true;
               burst(d.x, d.y, "coral", 8);
             }
