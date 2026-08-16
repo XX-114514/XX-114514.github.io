@@ -34,7 +34,6 @@
       <p class="game-splash-lead">You are a cancer cell inside a tissue microenvironment, playing out a fifteen-minute disease course in three acts — lung, then liver, then brain. Evade, absorb nutrients, mutate — and when you're ready, fight back on three fronts at once: split off decoys, turn immune cells against each other, and exploit the same checkpoints real tumors use to disappear from surveillance. The host doesn't hold out forever, but neither do you have to face it unchanged.</p>
       <div class="game-splash-actions">
         <button class="btn game-splash-cta" type="button" data-launch>Enter the arena, fullscreen <span aria-hidden="true">↗</span></button>
-        <a class="text-link" href="#field-guide">See the field guide <span aria-hidden="true">↓</span></a>
       </div>
     </section>
 
@@ -43,103 +42,6 @@
         <div class="game-viewer" data-cell-game>
           <canvas data-game-canvas aria-label="Rogue Cell game canvas"></canvas>
         </div>
-      </div>
-    </section>
-
-    <section class="game-doc-section" id="field-guide">
-      <div class="game-doc-head"><h2>Know your opposition</h2><p class="game-doc-note">Behavior inspired by real immune biology</p></div>
-      <div class="field-guide-grid">
-        <article class="field-card" style="--dot:#f1efe7">
-          <p class="field-card-dot">Chases · one-shot</p>
-          <h3>Cytotoxic T cell</h3>
-          <p>Tracks you continuously. The instant it lands a hit it finishes degranulating and self-destructs — a one-time threat — though that hit can still call in a clone. Left disengaged too long, it exhausts and clears out on its own.</p>
-        </article>
-        <article class="field-card" style="--dot:#ff6b57">
-          <p class="field-card-dot">Ambushes</p>
-          <h3>NK cell</h3>
-          <p>Patrols idly at range, then telegraphs a flash before bursting into a fast dash toward you. Dodge sideways rather than running straight away.</p>
-        </article>
-        <article class="field-card" style="--dot:#f1efe7">
-          <p class="field-card-dot">Engulfs · recruits</p>
-          <h3>Macrophage</h3>
-          <p>Large, slow, and easy to outrun — but a full engulfment hit triggers antigen presentation, which activates nearby T cells or summons a fresh one on the spot.</p>
-        </article>
-        <article class="field-card" style="--dot:#ff6b57">
-          <p class="field-card-dot">Detonates · grows</p>
-          <h3>Chemo pulse</h3>
-          <p>Mild and infrequent before the ten-minute mark — small zones, a coin-flip chance of killing whatever they catch. Past ten minutes it turns lethal: every kill becomes certain (for everything except you), zones grow toward covering the whole arena, and the hit you personally take gets noticeably heavier too. Immune cells, your own decoys, and even turned allies all die the same way if caught inside — luring pursuers in is a legitimate tactic throughout.</p>
-        </article>
-        <article class="field-card" style="--dot:#eac47a">
-          <p class="field-card-dot">Buffs · late game</p>
-          <h3>Signal beacon</h3>
-          <p>A drifting dendritic-style beacon that periodically boosts the speed and detection of every immune cell nearby. Destroy it outright with Immune Hijack.</p>
-        </article>
-        <article class="field-card" style="--dot:#c48ce0">
-          <p class="field-card-dot">Precise · rare</p>
-          <h3>Targeted therapy strike</h3>
-          <p>A rare, long-interval attack that starts a couple of minutes in: a reticle tracks your position, then locks briefly before firing. The hit is forced — it ignores shields and checkpoint evasion outright. The blast radius is tuned so a cell at base speed can never outrun the lock window, but exactly a +20% speed bonus makes escape just barely possible.</p>
-        </article>
-        <article class="field-card" style="--dot:#d89ea8">
-          <p class="field-card-dot">Friendly · stromal</p>
-          <h3>Cancer-associated fibroblast</h3>
-          <p>A stromal ally that appears from the liver stage onward. Shelter inside its aura for bonus regeneration and damage resistance — real tumors recruit these cells for exactly this kind of protection.</p>
-        </article>
-        <article class="field-card" style="--dot:#f1efe7">
-          <p class="field-card-dot">Friendly · cover</p>
-          <h3>Neutrophil extracellular trap</h3>
-          <p>A wide webbed zone that appears in the brain stage. It bogs immune cells down hard — you slow down too, but far less — on top of granting stealth and a burst of evasion. A real (if double-edged) phenomenon where NETs meant to catch pathogens end up shielding circulating tumor cells instead.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="game-doc-section" id="mechanics">
-      <div class="game-doc-head"><h2>Your adaptive arsenal</h2><p class="game-doc-note">Every level rewrites your survival strategy</p></div>
-      <div class="field-guide-grid">
-        <article class="field-card" style="--dot:#95e5c1">
-          <p class="field-card-dot">Active [K] · distraction</p>
-          <h3>Mitosis Decoy</h3>
-          <p>Split off a decoy that moves under its own steam and sticks around, splitting immune cells' attention away from you for a long stretch. Higher tiers split off more than one at once — and any immune cell that finishes one off dies with it. In the brain stage the cell starts dividing on its own, decoy ability or not.</p>
-        </article>
-        <article class="field-card" style="--dot:#95e5c1">
-          <p class="field-card-dot">Active [L] · turncoat</p>
-          <h3>Immune Hijack</h3>
-          <p>Turn a nearby T cell — or destroy a signal beacon outright if one's in range. A turned cell actively attacks other immune cells until the effect wears off: the one way to fight back instead of just outrunning everything. Higher tiers turn several T cells in a single activation.</p>
-        </article>
-        <article class="field-card" style="--dot:#eac47a">
-          <p class="field-card-dot">Passive · checkpoint</p>
-          <h3>PD-L1 Upregulation</h3>
-          <p>Modeled on real immune checkpoint biology — each stack raises your chance to fully evade a contact hit, capped at 40%.</p>
-        </article>
-        <article class="field-card" style="--dot:#ff6b57">
-          <p class="field-card-dot">Passive · chemo-specific</p>
-          <h3>Chemoresistance</h3>
-          <p>An optional pick that specifically dulls chemo pulse damage — each stack cuts it further, up to 80% — without touching resistance to any other source of damage.</p>
-        </article>
-        <article class="field-card" style="--dot:#95e5c1">
-          <p class="field-card-dot">Build · no exclusivity</p>
-          <h3>All three abilities at once</h3>
-          <p>Cytokine Pulse [J], Mitosis Decoy [K], and Immune Hijack [L] don't compete for the same slot — unlock and upgrade all three in a single run, each on its own cooldown, with remappable keys in the toolbar's Keys menu.</p>
-        </article>
-        <article class="field-card" style="--dot:#f1efe7">
-          <p class="field-card-dot">Emergent · late game</p>
-          <h3>Exhaustion &amp; clonal expansion</h3>
-          <p>T cells that stay engaged too long fade out on their own, but landing a hit can still trigger clonal expansion — and past the two-minute mark, periodic cytokine storms buff every immune cell at once.</p>
-        </article>
-        <article class="field-card" style="--dot:#bf6e3a">
-          <p class="field-card-dot">Three acts · five minutes each</p>
-          <h3>Metastasis: lung → liver → brain</h3>
-          <p>Every five minutes the cell sheds into the bloodstream and colonizes a new organ — lung, then liver, then brain — each with its own visual tint and reshuffled threats. Only the scenery changes at these boundaries: difficulty, chemo lethality, and your baseline regeneration all scale continuously with total run time instead.</p>
-        </article>
-        <article class="field-card" style="--dot:#f1efe7">
-          <p class="field-card-dot">Run length · fifteen minutes</p>
-          <h3>The clock is part of the fight</h3>
-          <p>A run can't go on forever — disease progression catches up at the fifteen-minute mark regardless of membrane integrity. Rare oversized nutrients also appear throughout, worth several times a normal pickup.</p>
-        </article>
-        <article class="field-card" style="--dot:#95e5c1">
-          <p class="field-card-dot">Toolbar · Stats</p>
-          <h3>Track your build live</h3>
-          <p>The Stats panel in the toolbar lists every attribute you've actually upgraded — speed, resistance, evasion, regeneration and more — plus the level, cooldown, and key for each unlocked ability, updating as the run goes on.</p>
-        </article>
       </div>
     </section>
   </main>
@@ -155,3 +57,4 @@
   <script src="./game.js"></script>
 </body>
 </html>
+

@@ -32,15 +32,35 @@
     restartBtn: "重新开始",
     fullscreenBtn: "全屏",
     moreBtn: "更多",
-    settingsBtn: "按键设置",
+    codexBtn: "图鉴",
+    settingsBtn: "设置",
     rotateHint: "横屏体验更佳",
     dismissBtn: "关闭",
     joystickLabel: "移动摇杆",
-    settingsTitle: "自定义能力按键",
+    modeSelectLabel: "选择模式",
+    modeNames: { survival: "生存模式", story: "剧情模式", rush: "闯关模式" },
+    modeDescs: {
+      survival: "完整的十五分钟三幕流程——肺、肝、脑依次转移，经典的核心玩法。",
+      story: "同样的生存流程，但每次转移都会有更完整的叙事文本，讲述这场病程的推进。",
+      rush: "只在肺部单一场景内进行，撑满 3 分钟即算过关——一次快节奏的技巧挑战。"
+    },
+    settingsTitle: "设置",
+    settingsKeysTitle: "按键",
     settingsHint: "点击按钮，然后按下想要绑定的按键",
     pressKeyLabel: "按下按键…",
     resetKeysBtn: "恢复默认",
     keyReserved: "该按键已被占用或保留",
+    settingsAudioTitle: "音频",
+    musicVolLabel: "音乐音量",
+    sfxVolLabel: "音效音量",
+    muteLabel: "静音",
+    settingsVisualTitle: "画面",
+    shakeLabel: "屏幕震动",
+    particleLabel: "粒子密度",
+    particleLevels: { low: "低", normal: "中", high: "高" },
+    codexTitle: "免疫图鉴",
+    codexEnemiesTitle: "认识你的对手",
+    codexMechanicsTitle: "你的适应性武器库",
     statsBtn: "属性面板",
     statsTitle: "当前属性",
     statsEmpty: "还没有获得任何强化。",
@@ -59,6 +79,9 @@
     overSub: "这一次，监视系统赢了。",
     timeUpTitle: "肿瘤负荷不可逆转",
     timeUpSub: "十五分钟后，病程还是占了上风——但你撑到了最后。",
+    rushClearTitle: "闯关成功",
+    rushClearSub: "撑满了 3 分钟——这个器官暂时守住了。",
+    rushFailSub: "还没撑到 3 分钟，这次闯关失败了。",
     statTime: "存活时间",
     statLevel: "突变等级",
     statNutrients: "吸收的营养",
@@ -73,6 +96,11 @@
     transitionLines: {
       2: ["脱落进入血流…", "在血管中存活…", "在新器官定植…", "转移灶：肝脏"],
       3: ["穿越血脑屏障…", "在中枢神经系统存活…", "在新器官定植…", "转移灶：脑"]
+    },
+    storyBootLines: ["一个细胞脱离了原发灶的秩序…", "它不再听从凋亡的指令…", "免疫系统尚未察觉…", "潜伏，即将开始"],
+    storyTransitionLines: {
+      2: ["原发灶已容不下它的野心…", "循环肿瘤细胞挤进血管，随血流漂泊…", "在肝脏的血窦中安顿下来…", "第二幕：肝脏定植"],
+      3: ["血脑屏障曾被认为坚不可摧…", "但总有分子能找到缝隙…", "中枢神经系统里，监视更松、增援更慢…", "第三幕：脑转移"]
     },
     milestones: [
       { t: 15, text: "微转移灶已建立" },
@@ -110,6 +138,29 @@
       mitosisUp: { name: "增殖强化", desc: "有丝分裂诱饵：冷却 -15%，持续时间更长，且额外多分裂一个诱饵" },
       hijackUp: { name: "劫持强化", desc: "免疫劫持：冷却 -20%，范围增大，策反持续时间更长，且可以一次策反更多 T 细胞" },
       shield: { name: "双核化", desc: "获得一层可抵挡下一次伤害的护盾，会自动恢复" }
+    },
+    codex: {
+      enemies: [
+        { dot: "#f1efe7", kicker: "持续追踪 · 一次性", title: "细胞毒性 T 细胞", desc: "一旦发现你就会持续追踪；命中你的瞬间会立即完成脱颗粒并自我凋亡消失——是一次性的威胁——但那次命中仍有几率召来一个克隆增援。长期未能命中也会自行耗竭消失。" },
+        { dot: "#ff6b57", kicker: "伏击冲刺", title: "NK 细胞", desc: "平时在远处游荡巡逻，靠近后会先有一次闪烁预警，随后高速冲刺。躲避时向侧面移动比直线逃跑更有效。" },
+        { dot: "#f1efe7", kicker: "缓慢吞噬 · 会招募", title: "巨噬细胞", desc: "体型大、移动慢，很容易甩开——但一次完整的吞噬重击会触发抗原呈递，激活附近的 T 细胞，或就地召唤一个新的 T 细胞。" },
+        { dot: "#ff6b57", kicker: "范围爆发 · 持续扩大", title: "化疗脉冲", desc: "存活前十分钟里效果温和、出现也不频繁——区域较小，命中的目标只有一半几率被清除。十分钟之后画风突变：几乎必定杀死区域内除你以外的一切，区域范围会持续扩大到接近覆盖整个战场，你自己受到的伤害也会明显加重。免疫细胞、你分裂出的诱饵，乃至被你策反的盟友，都会被同样对待——把追兵引进警戒区始终是一种合理战术。" },
+        { dot: "#eac47a", kicker: "增益 · 后期机制", title: "信号灯", desc: "缓慢漂移的树突状细胞式信号灯，会周期性地增强周围所有免疫细胞的速度与探测范围。可以用“免疫劫持”能力直接摧毁它。" },
+        { dot: "#c48ce0", kicker: "精准 · 罕见", title: "靶向药物打击", desc: "存活几分钟后开始出现的稀有远程攻击：准星会先持续锁定你的位置，短暂停留后发动一次重击。这次打击是强制生效的——会直接无视护盾和免疫检查点带来的免疫几率。打击范围经过精确计算：以基础速度绝无可能在停留窗口内逃出，但恰好 +20% 的速度加成就能让你勉强逃脱。" },
+        { dot: "#d89ea8", kicker: "友方 · 基质细胞", title: "癌症相关成纤维细胞", desc: "从肝脏阶段开始出现的基质盟友。躲进它的光环范围内可以获得额外的恢复速度与伤害抗性——真实的肿瘤也会招募这类细胞来获得类似的保护。" },
+        { dot: "#f1efe7", kicker: "友方 · 掩护", title: "中性粒细胞陷阱", desc: "脑转移阶段出现的大范围网状区域。免疫细胞进入其中会被明显拖慢，你自己也会变慢，但幅度小得多；同时还能获得隐匿效果与一次性的躲避几率提升——这参考了一个真实（且颇具争议）的现象：本用于捕获病原体的 NET 结构，有时反而会掩护循环肿瘤细胞。" }
+      ],
+      mechanics: [
+        { dot: "#95e5c1", kicker: "主动 [K] · 调虎离山", title: "有丝分裂诱饵", desc: "分裂出的诱饵细胞会持续自主移动、长期存在，把免疫细胞的注意力从你身上分散开；能力升级后可以一次分裂出更多诱饵，而任何杀死诱饵的免疫细胞也会同归于尽。到了脑转移阶段，即使没有这项能力，癌细胞也会开始自主分裂。" },
+        { dot: "#95e5c1", kicker: "主动 [L] · 策反", title: "免疫劫持", desc: "策反附近的一个 T 细胞——如果范围内有信号灯，则会优先直接摧毁它。被策反的细胞会主动攻击其他免疫细胞，直至效果结束——这是唯一能反过来清场、而非单纯躲避的手段。能力升级后可以一次策反多个 T 细胞。" },
+        { dot: "#eac47a", kicker: "被动 · 免疫检查点", title: "PD-L1 上调", desc: "参考真实的免疫检查点机制：每叠加一层，就提升一次完全免疫接触伤害的几率，上限 40%。" },
+        { dot: "#ff6b57", kicker: "被动 · 专对化疗", title: "耐药性", desc: "一项可选的强化，专门削弱化疗脉冲对你造成的伤害——每叠加一层效果更强，最高可达 80%，但对其他任何伤害来源都没有影响。" },
+        { dot: "#95e5c1", kicker: "build · 互不冲突", title: "三种能力可以同时拥有", desc: "细胞因子脉冲 [J]、有丝分裂诱饵 [K]、免疫劫持 [L] 并不互斥——可以在同一局中全部解锁，并分别独立升级、独立冷却；按键也可以在工具栏的“设置”中自由更改。" },
+        { dot: "#f1efe7", kicker: "涌现 · 后期机制", title: "耗竭与克隆增殖", desc: "长期交战的 T 细胞会自行耗竭消失，但一次命中仍可能触发克隆增殖；存活超过两分钟后，还会周期性出现细胞因子风暴，让所有免疫细胞同时增强。" },
+        { dot: "#bf6e3a", kicker: "三幕 · 每幕五分钟", title: "转移：肺 → 肝 → 脑", desc: "每五分钟，癌细胞就会脱落进入血流，并在一个新的器官定植——肺、肝、脑依次切换，各自有不同的色调与重新洗牌的威胁组合。这些节点只改变场景本身：难度、化疗杀伤力和你的基础恢复速度，都会随着总游戏时长连续变化，而不是在切换器官时跳变。" },
+        { dot: "#f1efe7", kicker: "总时长 · 十五分钟", title: "时间本身也是对手", desc: "一局游戏不会无限进行下去——无论膜完整性如何，病程都会在十五分钟时追上你。游戏过程中还会随机出现价值更高的大型营养物质，一次能顶好几个普通营养。" },
+        { dot: "#95e5c1", kicker: "工具栏 · 属性面板", title: "实时追踪你的build", desc: "工具栏中的“属性面板”会列出你实际强化过的每一项属性——移动速度、抗性、免疫几率、恢复速度等等——以及每个已解锁能力的等级、冷却时间和绑定按键，并随游戏进程实时更新。" }
+      ]
     }
   } : {
     ready: "Ready",
@@ -125,15 +176,35 @@
     restartBtn: "Restart",
     fullscreenBtn: "Full screen",
     moreBtn: "More",
-    settingsBtn: "Keys",
+    codexBtn: "Codex",
+    settingsBtn: "Settings",
     rotateHint: "Rotate for a better view",
     dismissBtn: "Dismiss",
     joystickLabel: "Movement joystick",
-    settingsTitle: "Customize ability keys",
+    modeSelectLabel: "Choose a mode",
+    modeNames: { survival: "Survival", story: "Story", rush: "Rush" },
+    modeDescs: {
+      survival: "The full fifteen-minute, three-act run — lung, liver, brain — the core experience.",
+      story: "The same survival run, but each metastasis now carries fuller narrative text about the disease's progression.",
+      rush: "Stays in the lung the whole time — survive 3 minutes to clear it. A short, focused skill test."
+    },
+    settingsTitle: "Settings",
+    settingsKeysTitle: "Keys",
     settingsHint: "Click a button, then press the key you want to bind",
     pressKeyLabel: "Press a key…",
     resetKeysBtn: "Reset to default",
     keyReserved: "That key is reserved or already in use",
+    settingsAudioTitle: "Audio",
+    musicVolLabel: "Music volume",
+    sfxVolLabel: "SFX volume",
+    muteLabel: "Mute",
+    settingsVisualTitle: "Visuals",
+    shakeLabel: "Screen shake",
+    particleLabel: "Particle density",
+    particleLevels: { low: "Low", normal: "Normal", high: "High" },
+    codexTitle: "Field codex",
+    codexEnemiesTitle: "Know your opposition",
+    codexMechanicsTitle: "Your adaptive arsenal",
     statsBtn: "Stats",
     statsTitle: "Current attributes",
     statsEmpty: "No adaptations acquired yet.",
@@ -152,6 +223,9 @@
     overSub: "Surveillance wins this round.",
     timeUpTitle: "Tumor burden becomes irreversible",
     timeUpSub: "After fifteen minutes, disease progression finally caught up — but you outlasted the clock.",
+    rushClearTitle: "Stage cleared",
+    rushClearSub: "You held the full 3 minutes — this organ is secure for now.",
+    rushFailSub: "Cleared out before the 3-minute mark — the stage failed.",
     statTime: "Time survived",
     statLevel: "Mutation level",
     statNutrients: "Nutrients absorbed",
@@ -166,6 +240,11 @@
     transitionLines: {
       2: ["Shedding into the bloodstream…", "Surviving vascular transit…", "Colonizing a new organ…", "Metastasis site: liver"],
       3: ["Crossing the blood-brain barrier…", "Surviving in the CNS…", "Colonizing a new organ…", "Metastasis site: brain"]
+    },
+    storyBootLines: ["One cell has slipped the discipline of the primary tumor…", "It no longer answers to apoptosis…", "Surveillance hasn't noticed yet…", "Dormant, and about to begin"],
+    storyTransitionLines: {
+      2: ["The primary site can no longer hold its ambition…", "A circulating tumor cell rides the bloodstream…", "It settles into the liver's sinusoids…", "Act two: liver colonization"],
+      3: ["The blood-brain barrier was once thought impassable…", "But there's always a molecule that finds the gap…", "Surveillance is thinner here, reinforcements slower…", "Act three: brain metastasis"]
     },
     milestones: [
       { t: 15, text: "Micrometastasis established" },
@@ -203,6 +282,29 @@
       mitosisUp: { name: "Mitotic Overcharge", desc: "Mitosis Decoy: -15% cooldown, longer duration, and splits one extra decoy" },
       hijackUp: { name: "Hijack Overcharge", desc: "Immune Hijack: -20% cooldown, larger radius, longer turned duration, and turns more T cells at once" },
       shield: { name: "Binucleation", desc: "Gain a shield that blocks the next hit, then slowly recharges" }
+    },
+    codex: {
+      enemies: [
+        { dot: "#f1efe7", kicker: "Chases · one-shot", title: "Cytotoxic T cell", desc: "Tracks you continuously. The instant it lands a hit it finishes degranulating and self-destructs — a one-time threat — though that hit can still call in a clone. Left disengaged too long, it exhausts and clears out on its own." },
+        { dot: "#ff6b57", kicker: "Ambushes", title: "NK cell", desc: "Patrols idly at range, then telegraphs a flash before bursting into a fast dash toward you. Dodge sideways rather than running straight away." },
+        { dot: "#f1efe7", kicker: "Engulfs · recruits", title: "Macrophage", desc: "Large, slow, and easy to outrun — but a full engulfment hit triggers antigen presentation, which activates nearby T cells or summons a fresh one on the spot." },
+        { dot: "#ff6b57", kicker: "Detonates · grows", title: "Chemo pulse", desc: "Mild and infrequent before the ten-minute mark — small zones, a coin-flip chance of killing whatever they catch. Past ten minutes it turns lethal: every kill becomes certain (for everything except you), zones grow toward covering the whole arena, and the hit you personally take gets noticeably heavier too. Immune cells, your own decoys, and even turned allies all die the same way if caught inside — luring pursuers in is a legitimate tactic throughout." },
+        { dot: "#eac47a", kicker: "Buffs · late game", title: "Signal beacon", desc: "A drifting dendritic-style beacon that periodically boosts the speed and detection of every immune cell nearby. Destroy it outright with Immune Hijack." },
+        { dot: "#c48ce0", kicker: "Precise · rare", title: "Targeted therapy strike", desc: "A rare, long-interval attack that starts a couple of minutes in: a reticle tracks your position, then locks briefly before firing. The hit is forced — it ignores shields and checkpoint evasion outright. The blast radius is tuned so a cell at base speed can never outrun the lock window, but exactly a +20% speed bonus makes escape just barely possible." },
+        { dot: "#d89ea8", kicker: "Friendly · stromal", title: "Cancer-associated fibroblast", desc: "A stromal ally that appears from the liver stage onward. Shelter inside its aura for bonus regeneration and damage resistance — real tumors recruit these cells for exactly this kind of protection." },
+        { dot: "#f1efe7", kicker: "Friendly · cover", title: "Neutrophil extracellular trap", desc: "A wide webbed zone that appears in the brain stage. It bogs immune cells down hard — you slow down too, but far less — on top of granting stealth and a burst of evasion. A real (if double-edged) phenomenon where NETs meant to catch pathogens end up shielding circulating tumor cells instead." }
+      ],
+      mechanics: [
+        { dot: "#95e5c1", kicker: "Active [K] · distraction", title: "Mitosis Decoy", desc: "Split off a decoy that moves under its own steam and sticks around, splitting immune cells' attention away from you for a long stretch. Higher tiers split off more than one at once — and any immune cell that finishes one off dies with it. In the brain stage the cell starts dividing on its own, decoy ability or not." },
+        { dot: "#95e5c1", kicker: "Active [L] · turncoat", title: "Immune Hijack", desc: "Turn a nearby T cell — or destroy a signal beacon outright if one's in range. A turned cell actively attacks other immune cells until the effect wears off: the one way to fight back instead of just outrunning everything. Higher tiers turn several T cells in a single activation." },
+        { dot: "#eac47a", kicker: "Passive · checkpoint", title: "PD-L1 Upregulation", desc: "Modeled on real immune checkpoint biology — each stack raises your chance to fully evade a contact hit, capped at 40%." },
+        { dot: "#ff6b57", kicker: "Passive · chemo-specific", title: "Chemoresistance", desc: "An optional pick that specifically dulls chemo pulse damage — each stack cuts it further, up to 80% — without touching resistance to any other source of damage." },
+        { dot: "#95e5c1", kicker: "Build · no exclusivity", title: "All three abilities at once", desc: "Cytokine Pulse [J], Mitosis Decoy [K], and Immune Hijack [L] don't compete for the same slot — unlock and upgrade all three in a single run, each on its own cooldown, with remappable keys in the toolbar's Settings menu." },
+        { dot: "#f1efe7", kicker: "Emergent · late game", title: "Exhaustion & clonal expansion", desc: "T cells that stay engaged too long fade out on their own, but landing a hit can still trigger clonal expansion — and past the two-minute mark, periodic cytokine storms buff every immune cell at once." },
+        { dot: "#bf6e3a", kicker: "Three acts · five minutes each", title: "Metastasis: lung → liver → brain", desc: "Every five minutes the cell sheds into the bloodstream and colonizes a new organ — lung, then liver, then brain — each with its own visual tint and reshuffled threats. Only the scenery changes at these boundaries: difficulty, chemo lethality, and your baseline regeneration all scale continuously with total run time instead." },
+        { dot: "#f1efe7", kicker: "Run length · fifteen minutes", title: "The clock is part of the fight", desc: "A run can't go on forever — disease progression catches up at the fifteen-minute mark regardless of membrane integrity. Rare oversized nutrients also appear throughout, worth several times a normal pickup." },
+        { dot: "#95e5c1", kicker: "Toolbar · Stats", title: "Track your build live", desc: "The Stats panel in the toolbar lists every attribute you've actually upgraded — speed, resistance, evasion, regeneration and more — plus the level, cooldown, and key for each unlocked ability, updating as the run goes on." }
+      ]
     }
   };
 
@@ -212,6 +314,25 @@
     const r = s % 60;
     return `${m}:${r < 10 ? "0" : ""}${r}`;
   };
+
+  /* ---------------------------------------------------------------- */
+  /* Settings persistence — declared early: the settings panel's       */
+  /* markup below reads these values while it's being built             */
+  /* ---------------------------------------------------------------- */
+  const SETTINGS_KEY = "xx-rogue-cell-settings";
+  const DEFAULT_SETTINGS = { musicVol: 0.35, sfxVol: 0.6, muted: false, shake: true, particles: "normal", lastMode: "survival" };
+  const loadSettings = () => {
+    try {
+      const raw = JSON.parse(localStorage.getItem(SETTINGS_KEY) || "null");
+      if (raw && typeof raw === "object") return { ...DEFAULT_SETTINGS, ...raw };
+    } catch (_e) { /* ignore */ }
+    return { ...DEFAULT_SETTINGS };
+  };
+  const saveSettings = () => {
+    try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); } catch (_e) { /* ignore */ }
+  };
+  let settings = loadSettings();
+  let selectedMode = ["survival", "story", "rush"].includes(settings.lastMode) ? settings.lastMode : "survival";
 
   /* ---------------------------------------------------------------- */
   /* DOM scaffolding (toolbar, HUD, overlays)                          */
@@ -229,6 +350,7 @@
       <div class="game-actions" data-actions>
         <button class="btn btn-compact" type="button" data-restart>${STR.restartBtn}</button>
         <button class="btn btn-compact" type="button" data-stats>${STR.statsBtn}</button>
+        <button class="btn btn-compact" type="button" data-codex>${STR.codexBtn}</button>
         <button class="btn btn-compact" type="button" data-settings>${STR.settingsBtn}</button>
         <button class="btn btn-compact" type="button" data-fullscreen>${STR.fullscreenBtn}</button>
       </div>
@@ -252,12 +374,52 @@
   settingsPanel.hidden = true;
   settingsPanel.innerHTML = `
     <p class="game-settings-title">${STR.settingsTitle}</p>
+    <p class="game-settings-title game-stats-subtitle">${STR.settingsAudioTitle}</p>
+    <div class="game-settings-rows">
+      <div class="game-settings-row"><span>${STR.musicVolLabel}</span><input type="range" min="0" max="1" step="0.05" data-vol="music" value="${settings.musicVol}"></div>
+      <div class="game-settings-row"><span>${STR.sfxVolLabel}</span><input type="range" min="0" max="1" step="0.05" data-vol="sfx" value="${settings.sfxVol}"></div>
+      <div class="game-settings-row"><span>${STR.muteLabel}</span><input type="checkbox" data-toggle="muted"${settings.muted ? " checked" : ""}></div>
+    </div>
+    <p class="game-settings-title game-stats-subtitle">${STR.settingsVisualTitle}</p>
+    <div class="game-settings-rows">
+      <div class="game-settings-row"><span>${STR.shakeLabel}</span><input type="checkbox" data-toggle="shake"${settings.shake ? " checked" : ""}></div>
+      <div class="game-settings-row"><span>${STR.particleLabel}</span>
+        <select data-select="particles">
+          <option value="low"${settings.particles === "low" ? " selected" : ""}>${STR.particleLevels.low}</option>
+          <option value="normal"${settings.particles === "normal" ? " selected" : ""}>${STR.particleLevels.normal}</option>
+          <option value="high"${settings.particles === "high" ? " selected" : ""}>${STR.particleLevels.high}</option>
+        </select>
+      </div>
+    </div>
+    <p class="game-settings-title game-stats-subtitle">${STR.settingsKeysTitle}</p>
     <p class="game-settings-hint">${STR.settingsHint}</p>
     <div class="game-settings-rows" data-settings-rows></div>
     <div class="game-settings-actions">
       <button class="btn btn-compact" type="button" data-settings-reset>${STR.resetKeysBtn}</button>
     </div>`;
   stage.appendChild(settingsPanel);
+  settingsPanel.querySelector('[data-vol="music"]').addEventListener("input", (e) => {
+    settings.musicVol = Number(e.target.value);
+    saveSettings();
+    audio.setMusicVolume(settings.musicVol);
+  });
+  settingsPanel.querySelector('[data-vol="sfx"]').addEventListener("input", (e) => {
+    settings.sfxVol = Number(e.target.value);
+    saveSettings();
+  });
+  settingsPanel.querySelector('[data-toggle="muted"]').addEventListener("change", (e) => {
+    settings.muted = e.target.checked;
+    saveSettings();
+    audio.setMuted(settings.muted);
+  });
+  settingsPanel.querySelector('[data-toggle="shake"]').addEventListener("change", (e) => {
+    settings.shake = e.target.checked;
+    saveSettings();
+  });
+  settingsPanel.querySelector('[data-select="particles"]').addEventListener("change", (e) => {
+    settings.particles = e.target.value;
+    saveSettings();
+  });
 
   const statsPanel = document.createElement("div");
   statsPanel.className = "game-settings game-stats-panel";
@@ -268,6 +430,55 @@
     <p class="game-settings-title game-stats-subtitle">${STR.statsAbilitiesTitle}</p>
     <div class="game-settings-rows" data-stats-abilities></div>`;
   stage.appendChild(statsPanel);
+
+  const codexPanel = document.createElement("div");
+  codexPanel.className = "game-settings game-codex-panel";
+  codexPanel.hidden = true;
+  codexPanel.innerHTML = `
+    <p class="game-settings-title">${STR.codexTitle}</p>
+    <p class="game-settings-title game-stats-subtitle">${STR.codexEnemiesTitle}</p>
+    <div class="field-guide-grid" data-codex-enemies></div>
+    <p class="game-settings-title game-stats-subtitle">${STR.codexMechanicsTitle}</p>
+    <div class="field-guide-grid" data-codex-mechanics></div>`;
+  stage.appendChild(codexPanel);
+  const renderCodex = () => {
+    const cards = (items) => items.map((c) => `
+      <article class="field-card" style="--dot:${c.dot}">
+        <p class="field-card-dot">${c.kicker}</p>
+        <h3>${c.title}</h3>
+        <p>${c.desc}</p>
+      </article>`).join("");
+    codexPanel.querySelector("[data-codex-enemies]").innerHTML = cards(STR.codex.enemies);
+    codexPanel.querySelector("[data-codex-mechanics]").innerHTML = cards(STR.codex.mechanics);
+  };
+  renderCodex();
+
+  const closeAllPanels = () => {
+    settingsPanel.hidden = true;
+    statsPanel.hidden = true;
+    codexPanel.hidden = true;
+  };
+  const openSettings = () => {
+    const wasHidden = settingsPanel.hidden;
+    closeAllPanels();
+    rebindingKind = null;
+    settingsPanel.hidden = !wasHidden;
+    if (!settingsPanel.hidden) renderKeySettings();
+    audio.sfx.uiClick();
+  };
+  const openStats = () => {
+    const wasHidden = statsPanel.hidden;
+    closeAllPanels();
+    statsPanel.hidden = !wasHidden;
+    if (!statsPanel.hidden) renderStatsPanel();
+    audio.sfx.uiClick();
+  };
+  const openCodex = () => {
+    const wasHidden = codexPanel.hidden;
+    closeAllPanels();
+    codexPanel.hidden = !wasHidden;
+    audio.sfx.uiClick();
+  };
 
   const ABILITY_ORDER = ["hijack", "mitosis", "pulse"];
   const hud = document.createElement("div");
@@ -343,21 +554,161 @@
   /* Game state                                                         */
   /* ---------------------------------------------------------------- */
   const BEST_KEY = "xx-rogue-cell-best";
+  const DEFAULT_BEST = { survival: { time: 0, level: 1, nutrients: 0 }, rush: { cleared: false, bestTime: 0 } };
   const loadBest = () => {
     try {
       const raw = JSON.parse(localStorage.getItem(BEST_KEY) || "null");
-      if (raw && typeof raw.time === "number") return raw;
+      if (raw && raw.survival && raw.rush) return raw;
+      // migrate the old flat { time, level, nutrients } shape from before modes existed
+      if (raw && typeof raw.time === "number") return { survival: raw, rush: { ...DEFAULT_BEST.rush } };
     } catch (_e) { /* ignore */ }
-    return { time: 0, level: 1, nutrients: 0 };
+    return { survival: { ...DEFAULT_BEST.survival }, rush: { ...DEFAULT_BEST.rush } };
   };
   const saveBest = (record) => {
     try { localStorage.setItem(BEST_KEY, JSON.stringify(record)); } catch (_e) { /* ignore */ }
   };
   let best = loadBest();
 
+  /* ---------------------------------------------------------------- */
+  /* Audio — fully procedural (Web Audio API), no external files       */
+  /* ---------------------------------------------------------------- */
+  const audio = (() => {
+    let ctx = null;
+    let musicGain = null;
+    let musicNodes = null; // { oscs, gains } for the currently playing ambient pad
+
+    const ensureCtx = () => {
+      if (ctx) return ctx;
+      try {
+        const AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return null;
+        ctx = new AC();
+        musicGain = ctx.createGain();
+        musicGain.gain.value = settings.muted ? 0 : settings.musicVol;
+        musicGain.connect(ctx.destination);
+      } catch (_e) { ctx = null; }
+      return ctx;
+    };
+
+    const unlock = () => {
+      const c = ensureCtx();
+      if (c && c.state === "suspended") c.resume().catch(() => {});
+    };
+
+    const tone = (freq, dur, type, gain, delay) => {
+      try {
+        const c = ensureCtx();
+        if (!c || settings.muted) return;
+        const t0 = c.currentTime + (delay || 0);
+        const osc = c.createOscillator();
+        osc.type = type || "sine";
+        osc.frequency.setValueAtTime(freq, t0);
+        const g = c.createGain();
+        g.gain.setValueAtTime(0, t0);
+        g.gain.linearRampToValueAtTime((gain ?? 0.2) * settings.sfxVol, t0 + 0.012);
+        g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+        osc.connect(g);
+        g.connect(ctx.destination);
+        osc.start(t0);
+        osc.stop(t0 + dur + 0.02);
+      } catch (_e) { /* ignore unsupported/blocked audio */ }
+    };
+
+    const noiseBurst = (dur, gain) => {
+      try {
+        const c = ensureCtx();
+        if (!c || settings.muted) return;
+        const size = Math.max(1, Math.floor(c.sampleRate * dur));
+        const buffer = c.createBuffer(1, size, c.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < size; i += 1) data[i] = (Math.random() * 2 - 1) * (1 - i / size);
+        const src = c.createBufferSource();
+        src.buffer = buffer;
+        const g = c.createGain();
+        g.gain.value = (gain ?? 0.15) * settings.sfxVol;
+        src.connect(g);
+        g.connect(ctx.destination);
+        src.start();
+      } catch (_e) { /* ignore */ }
+    };
+
+    const sfx = {
+      pickup: () => tone(680, 0.09, "sine", 0.18),
+      bigPickup: () => { tone(680, 0.1, "sine", 0.2); tone(880, 0.14, "sine", 0.16, 0.05); },
+      hit: () => { tone(120, 0.16, "sawtooth", 0.22); noiseBurst(0.08, 0.1); },
+      evade: () => tone(920, 0.08, "triangle", 0.12),
+      levelUp: () => { [523, 659, 784, 1046].forEach((f, i) => tone(f, 0.16, "triangle", 0.15, i * 0.06)); },
+      ability: () => tone(400, 0.12, "square", 0.14),
+      abilityFail: () => tone(200, 0.1, "square", 0.08),
+      enemyDown: () => tone(300, 0.1, "sawtooth", 0.12),
+      chemo: () => { tone(90, 0.3, "sawtooth", 0.2); noiseBurst(0.22, 0.16); },
+      milestone: () => tone(760, 0.14, "sine", 0.12),
+      warn: () => tone(200, 0.18, "square", 0.14),
+      uiClick: () => tone(500, 0.05, "sine", 0.08),
+      gameOver: () => [400, 340, 260, 180].forEach((f, i) => tone(f, 0.22, "sawtooth", 0.16, i * 0.11))
+    };
+
+    // a minimal generative ambient pad, one per organ — three detuned sine oscillators through a
+    // slow-sweeping lowpass filter, crossfading whenever the stage changes
+    const stageTones = { 1: [110, 165, 220], 2: [98, 147, 196], 3: [87, 130.8, 174.6] };
+    const stopMusic = () => {
+      if (!musicNodes || !ctx) { musicNodes = null; return; }
+      try {
+        const t1 = ctx.currentTime + 0.8;
+        musicNodes.gains.forEach((g) => g.gain.linearRampToValueAtTime(0, t1));
+        musicNodes.oscs.forEach((o) => o.stop(t1 + 0.05));
+      } catch (_e) { /* ignore */ }
+      musicNodes = null;
+    };
+    const startMusic = (stage) => {
+      const c = ensureCtx();
+      if (!c) return;
+      stopMusic();
+      const freqs = stageTones[stage] || stageTones[1];
+      const filter = c.createBiquadFilter();
+      filter.type = "lowpass";
+      filter.frequency.value = 900;
+      filter.connect(musicGain);
+      const oscs = [];
+      const gains = [];
+      freqs.forEach((f, i) => {
+        const osc = c.createOscillator();
+        osc.type = "sine";
+        osc.frequency.value = f;
+        osc.detune.value = (i - 1) * 4;
+        const g = c.createGain();
+        g.gain.value = 0;
+        osc.connect(g);
+        g.connect(filter);
+        osc.start();
+        g.gain.linearRampToValueAtTime(0.055, c.currentTime + 2.2);
+        oscs.push(osc);
+        gains.push(g);
+      });
+      const lfo = c.createOscillator();
+      lfo.frequency.value = 0.06;
+      const lfoGain = c.createGain();
+      lfoGain.gain.value = 260;
+      lfo.connect(lfoGain);
+      lfoGain.connect(filter.frequency);
+      lfo.start();
+      oscs.push(lfo);
+      musicNodes = { oscs, gains };
+    };
+
+    return {
+      unlock,
+      sfx,
+      startMusic,
+      stopMusic,
+      setMusicVolume: (v) => { if (musicGain) musicGain.gain.value = settings.muted ? 0 : v; },
+      setMuted: (m) => { if (musicGain) musicGain.gain.value = m ? 0 : settings.musicVol; }
+    };
+  })();
+
   const KEYBINDS_KEY = "xx-rogue-cell-keys";
   const DEFAULT_KEYBINDS = { pulse: "j", mitosis: "k", hijack: "l" };
-  const RESERVED_KEYS = new Set(["w", "a", "s", "d", "arrowup", "arrowdown", "arrowleft", "arrowright", "p", "escape", " ", "enter", "1", "2", "3"]);
+  const RESERVED_KEYS = new Set(["w", "a", "s", "d", "arrowup", "arrowdown", "arrowleft", "arrowright", "p", "escape", "tab", " ", "enter", "1", "2", "3"]);
   const loadKeyBindings = () => {
     try {
       const raw = JSON.parse(localStorage.getItem(KEYBINDS_KEY) || "null");
@@ -378,6 +729,7 @@
   const EXHAUST_LINGER = 8;
   const STAGE_DURATION = 300; // 5 minutes per stage: lung -> liver -> brain (scene only — no gameplay scaling is keyed off this)
   const RUN_LIMIT = STAGE_DURATION * 3; // 15 minutes total
+  const RUSH_LIMIT = 180; // rush mode: single organ, 3-minute clear
   const CHEMO_ESCALATE_T = 600; // the 10-minute mark: chemo's kill chance reaches certainty here, and its
   // radius/frequency/player damage all start ramping toward maximum from here to the end of the run
   const chemoKillProgress = (t) => clamp(t / CHEMO_ESCALATE_T, 0, 1);
@@ -414,6 +766,7 @@
 
   const freshState = () => ({
     phase: "idle", // idle | boot | running | levelup | paused | gameover | transition
+    mode: selectedMode, // survival | story | rush
     t: 0,
     bootTimer: 0,
     transitionTimer: 0,
@@ -478,6 +831,7 @@
   let decoys = [];
   let strikes = [];
   let auras = [];
+  let playerTrail = [];
 
   /* ---------------------------------------------------------------- */
   /* Input                                                              */
@@ -508,8 +862,8 @@
     if (key === keyBindings.pulse) abilityTapped.pulse = true;
     if (key === keyBindings.mitosis) abilityTapped.mitosis = true;
     if (key === keyBindings.hijack) abilityTapped.hijack = true;
-    if (key === "escape" && !settingsPanel.hidden) { settingsPanel.hidden = true; return; }
-    if (key === "escape" && !statsPanel.hidden) { statsPanel.hidden = true; return; }
+    if (key === "escape" && (!settingsPanel.hidden || !statsPanel.hidden || !codexPanel.hidden)) { closeAllPanels(); return; }
+    if (key === "tab" && state.phase !== "idle") { event.preventDefault(); openStats(); return; }
     if (key === "p" || key === "escape") togglePause();
     if (state.phase === "levelup" && ["1", "2", "3"].includes(event.key)) {
       chooseUpgrade(Number(event.key) - 1);
@@ -603,16 +957,41 @@
   /* ---------------------------------------------------------------- */
   const renderOverlay = () => {
     if (state.phase === "idle") {
+      const bestLine = selectedMode === "rush"
+        ? (best.rush.cleared ? `<p class="game-panel-best">${STR.rushClearTitle}: ${fmtTime(best.rush.bestTime)}</p>` : "")
+        : (best.survival.time > 0 ? `<p class="game-panel-best">${STR.statBest}: ${fmtTime(best.survival.time)} · ${STR.level} ${best.survival.level}</p>` : "");
+      const modeCards = ["survival", "story", "rush"].map((m) => `
+        <button class="game-card mode-card${m === selectedMode ? " is-selected" : ""}" type="button" data-mode="${m}">
+          <strong>${STR.modeNames[m]}</strong>
+          <span>${STR.modeDescs[m]}</span>
+        </button>`).join("");
       overlay.innerHTML = `
-        <div class="game-panel">
+        <div class="game-panel game-panel-wide">
           <p class="game-panel-kicker">${STR.ready}</p>
           <h3>${STR.startTitle}</h3>
           <p class="game-panel-sub">${STR.startSub}</p>
+          <p class="game-panel-section-label">${STR.modeSelectLabel}</p>
+          <div class="game-card-row">${modeCards}</div>
           <ul class="game-panel-rules">${STR.startRules.map((r) => `<li>${r}</li>`).join("")}</ul>
           <button class="btn game-panel-btn" type="button" data-start>${STR.startBtn}</button>
-          ${best.time > 0 ? `<p class="game-panel-best">${STR.statBest}: ${fmtTime(best.time)} · ${STR.level} ${best.level}</p>` : ""}
+          <div class="game-panel-links">
+            <button class="text-link" type="button" data-open-codex>${STR.codexBtn}</button>
+            <button class="text-link" type="button" data-open-settings>${STR.settingsBtn}</button>
+          </div>
+          ${bestLine}
         </div>`;
       overlay.querySelector("[data-start]")?.addEventListener("click", startRun);
+      overlay.querySelectorAll("[data-mode]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          selectedMode = btn.getAttribute("data-mode");
+          settings.lastMode = selectedMode;
+          saveSettings();
+          renderOverlay();
+          audio.sfx.uiClick();
+        });
+      });
+      overlay.querySelector("[data-open-codex]")?.addEventListener("click", openCodex);
+      overlay.querySelector("[data-open-settings]")?.addEventListener("click", openSettings);
       overlay.hidden = false;
     } else if (state.phase === "paused") {
       overlay.innerHTML = `
@@ -647,20 +1026,34 @@
       });
       overlay.hidden = false;
     } else if (state.phase === "gameover") {
-      const record = { time: state.t, level: player.level, nutrients: state.nutrients };
-      const isNewBest = record.time > best.time;
-      if (isNewBest) { best = record; saveBest(best); }
       const timeUp = state.deathCause === "time";
+      const isRush = state.mode === "rush";
+      let isNewBest = false;
+      if (isRush) {
+        if (timeUp && (!best.rush.cleared || state.t > best.rush.bestTime)) {
+          isNewBest = true;
+          best.rush = { cleared: true, bestTime: Math.max(best.rush.bestTime, state.t) };
+          saveBest(best);
+        }
+      } else {
+        const record = { time: state.t, level: player.level, nutrients: state.nutrients };
+        isNewBest = record.time > best.survival.time;
+        if (isNewBest) { best.survival = record; saveBest(best); }
+      }
+      const title = isRush ? (timeUp ? STR.rushClearTitle : STR.overTitle) : (timeUp ? STR.timeUpTitle : STR.overTitle);
+      const sub = isRush ? (timeUp ? STR.rushClearSub : STR.rushFailSub) : (timeUp ? STR.timeUpSub : STR.overSub);
+      const kicker = isRush && timeUp ? (isNewBest ? STR.newBest : STR.modeNames.rush) : `${STR.over}${isNewBest ? ` · ${STR.newBest}` : ""}`;
+      const bestStat = isRush ? (best.rush.cleared ? fmtTime(best.rush.bestTime) : "—") : fmtTime(best.survival.time);
       overlay.innerHTML = `
         <div class="game-panel">
-          <p class="game-panel-kicker">${STR.over}${isNewBest ? ` · ${STR.newBest}` : ""}</p>
-          <h3>${timeUp ? STR.timeUpTitle : STR.overTitle}</h3>
-          <p class="game-panel-sub">${timeUp ? STR.timeUpSub : STR.overSub}</p>
+          <p class="game-panel-kicker">${kicker}</p>
+          <h3>${title}</h3>
+          <p class="game-panel-sub">${sub}</p>
           <dl class="game-stats">
             <div><dt>${STR.statTime}</dt><dd>${fmtTime(state.t)}</dd></div>
             <div><dt>${STR.statLevel}</dt><dd>${player.level}</dd></div>
             <div><dt>${STR.statNutrients}</dt><dd>${state.nutrients}</dd></div>
-            <div><dt>${STR.statBest}</dt><dd>${fmtTime(best.time)}</dd></div>
+            <div><dt>${STR.statBest}</dt><dd>${bestStat}</dd></div>
           </dl>
           <button class="btn game-panel-btn" type="button" data-restart-panel>${STR.restartBtn}</button>
         </div>`;
@@ -705,6 +1098,8 @@
 
   function startRun() {
     requestFullscreenIfPossible();
+    audio.unlock();
+    audio.sfx.uiClick();
     state = freshState();
     player = freshPlayer();
     player.x = W / 2;
@@ -717,10 +1112,12 @@
     decoys = [];
     strikes = [];
     auras = [];
+    playerTrail = [];
     state.phase = "boot";
     setStatus();
     renderOverlay();
     canvas.focus({ preventScroll: true });
+    audio.startMusic(state.stage);
   }
 
   function togglePause() {
@@ -729,6 +1126,7 @@
     else return;
     setStatus();
     renderOverlay();
+    audio.sfx.uiClick();
   }
 
   function endRun(cause) {
@@ -736,6 +1134,8 @@
     state.phase = "gameover";
     setStatus();
     renderOverlay();
+    audio.sfx.gameOver();
+    audio.stopMusic();
   }
 
   const upgradePool = () => {
@@ -763,11 +1163,13 @@
     state.phase = "levelup";
     setStatus();
     renderOverlay();
+    audio.sfx.levelUp();
   };
 
   function chooseUpgrade(index) {
     const id = state.pendingUpgrades[index];
     if (!id) return;
+    audio.sfx.uiClick();
     player.stacks[id] = (player.stacks[id] || 0) + 1;
     switch (id) {
       case "speed": player.baseSpeed *= 1.1; break;
@@ -861,12 +1263,7 @@
     });
   };
 
-  toolbar.querySelector("[data-settings]").addEventListener("click", () => {
-    statsPanel.hidden = true;
-    settingsPanel.hidden = !settingsPanel.hidden;
-    rebindingKind = null;
-    if (!settingsPanel.hidden) renderKeySettings();
-  });
+  toolbar.querySelector("[data-settings]").addEventListener("click", openSettings);
   settingsPanel.querySelector("[data-settings-reset]").addEventListener("click", () => {
     keyBindings = { ...DEFAULT_KEYBINDS };
     saveKeyBindings();
@@ -910,11 +1307,8 @@
     abilitiesEl.innerHTML = abilityLines.length ? abilityLines.join("") : `<p class="game-settings-hint">${STR.statsNoAbilities}</p>`;
   };
 
-  toolbar.querySelector("[data-stats]").addEventListener("click", () => {
-    settingsPanel.hidden = true;
-    statsPanel.hidden = !statsPanel.hidden;
-    if (!statsPanel.hidden) renderStatsPanel();
-  });
+  toolbar.querySelector("[data-stats]").addEventListener("click", openStats);
+  toolbar.querySelector("[data-codex]").addEventListener("click", openCodex);
 
   const launchButton = document.querySelector("[data-launch]");
   if (launchButton) {
@@ -987,14 +1381,18 @@
       r, timer: 1.1, phase: "warn", hitApplied: false, enemyHitApplied: false
     });
   };
+  const announceEvent = (text, tone, duration) => {
+    state.eventText = text;
+    state.eventTone = tone;
+    state.eventTimer = duration;
+    audio.sfx.warn();
+  };
   const spawnBeacon = () => {
     beacons.push({
       x: rand(W * 0.25, W * 0.75), y: rand(H * 0.25, H * 0.75),
       r: 15, life: 26, pulseTimer: 1.5, vx: rand(-14, 14), vy: rand(-14, 14)
     });
-    state.eventText = STR.beaconWarn;
-    state.eventTone = "gold";
-    state.eventTimer = 3;
+    announceEvent(STR.beaconWarn, "gold", 3);
   };
   const spawnNutrient = () => {
     const big = Math.random() < 0.1;
@@ -1023,7 +1421,9 @@
   /* ---------------------------------------------------------------- */
   /* Abilities                                                          */
   /* ---------------------------------------------------------------- */
+  const PARTICLE_MULT = { low: 0.45, normal: 1, high: 1.7 };
   const burst = (x, y, tone, count) => {
+    count = Math.max(1, Math.round(count * (PARTICLE_MULT[settings.particles] ?? 1)));
     for (let i = 0; i < count; i += 1) {
       const angle = (i / count) * Math.PI * 2;
       particles.push({
@@ -1049,6 +1449,7 @@
     if (!ab || ab.timer > 0) return;
     if (kind === "pulse") {
       ab.timer = ab.cooldown;
+      audio.sfx.ability();
       player.invuln = Math.max(player.invuln, 0.25);
       state.shake = Math.max(state.shake, 6);
       enemies.forEach((enemy) => {
@@ -1065,6 +1466,7 @@
       burst(player.x, player.y, "mint", 20);
     } else if (kind === "mitosis") {
       ab.timer = ab.cooldown;
+      audio.sfx.ability();
       spawnDecoy(ab.count);
       burst(player.x, player.y, "mint", 14);
     } else if (kind === "hijack") {
@@ -1078,6 +1480,7 @@
       });
       if (bestBeacon) {
         ab.timer = ab.cooldown;
+        audio.sfx.ability();
         beacons = beacons.filter((b) => b !== bestBeacon);
         burst(bestBeacon.x, bestBeacon.y, "gold", 18);
         gainXP(20);
@@ -1091,9 +1494,11 @@
         .slice(0, ab.count);
       if (!targets.length) {
         burst(player.x, player.y, "ivory", 8);
+        audio.sfx.abilityFail();
         return;
       }
       ab.timer = ab.cooldown;
+      audio.sfx.ability();
       targets.forEach(({ enemy }) => {
         enemy.hijacked = true;
         enemy.hijackTimer = ab.duration;
@@ -1113,6 +1518,7 @@
     if (totalEvasion > 0 && Math.random() < totalEvasion) {
       player.invuln = 0.3;
       player.evadeFlash = 0.6;
+      audio.sfx.evade();
       return;
     }
     if (player.shield > 0) {
@@ -1130,6 +1536,7 @@
     player.hitFlash = 0.35;
     state.shake = Math.max(state.shake, Math.min(10, amount * 0.7));
     burst(player.x, player.y, "coral", 8);
+    audio.sfx.hit();
     if (player.hp <= 0) { player.hp = 0; endRun("immune"); }
   };
 
@@ -1143,6 +1550,7 @@
     player.hitFlash = 0.4;
     state.shake = Math.max(state.shake, 9);
     burst(player.x, player.y, "violet", 14);
+    audio.sfx.hit();
     if (player.hp <= 0) { player.hp = 0; endRun("immune"); }
   };
 
@@ -1173,11 +1581,10 @@
     strikes = [];
     auras = [];
     state.pendingClones = [];
-    state.eventText = STR.metastasisWarn;
-    state.eventTone = "gold";
-    state.eventTimer = 3.4;
+    announceEvent(STR.metastasisWarn, "gold", 3.4);
     setStatus();
     renderOverlay();
+    audio.startMusic(targetStage);
   };
 
   const updateBoot = (dt) => {
@@ -1201,11 +1608,13 @@
   const update = (dt) => {
     state.t += dt;
 
-    if (state.t >= RUN_LIMIT) {
+    const runLimit = state.mode === "rush" ? RUSH_LIMIT : RUN_LIMIT;
+    if (state.t >= runLimit) {
       endRun("time");
       return;
     }
-    if (state.stage < 3 && state.t >= state.stage * STAGE_DURATION) {
+    // rush mode stays in a single organ the whole time — no stage transitions
+    if (state.mode !== "rush" && state.stage < 3 && state.t >= state.stage * STAGE_DURATION) {
       beginTransition(state.stage + 1);
       return;
     }
@@ -1252,18 +1661,14 @@
     // mid/late-game targeted therapy strikes — rare, powerful, long interval
     if (t > state.nextTargetedT && strikes.length === 0) {
       strikes.push({ x: player.x, y: player.y, phase: "track", timer: TARGETED_TRACK });
-      state.eventText = STR.targetedWarn;
-      state.eventTone = "violet";
-      state.eventTimer = 3;
+      announceEvent(STR.targetedWarn, "violet", 3);
       state.nextTargetedT = t + TARGETED_INTERVAL;
     }
 
     // cancer-associated fibroblasts (mid-game onward) — a friendly stromal aura that shields and heals nearby
     if (t > state.nextCafT && auras.filter((a) => a.kind === "caf").length === 0) {
       auras.push({ kind: "caf", x: rand(W * 0.2, W * 0.8), y: rand(H * 0.2, H * 0.8), r: 70, life: 32, vx: rand(-10, 10), vy: rand(-10, 10) });
-      state.eventText = STR.cafWarn;
-      state.eventTone = "rose";
-      state.eventTimer = 3;
+      announceEvent(STR.cafWarn, "rose", 3);
       state.nextCafT = t + CAF_INTERVAL;
     }
 
@@ -1271,9 +1676,7 @@
     // the cancer cell barely notices, plus stealth + evasion while inside
     if (t > state.nextNetT && auras.filter((a) => a.kind === "net").length === 0) {
       auras.push({ kind: "net", x: rand(W * 0.25, W * 0.75), y: rand(H * 0.25, H * 0.75), r: 150, life: 26, vx: 0, vy: 0 });
-      state.eventText = STR.netWarn;
-      state.eventTone = "rose";
-      state.eventTimer = 3;
+      announceEvent(STR.netWarn, "rose", 3);
       state.nextNetT = t + NET_INTERVAL;
     }
 
@@ -1287,9 +1690,7 @@
     if (!state.stormActive && t > state.nextStormT) {
       state.stormActive = true;
       state.stormTimer = STORM_DURATION;
-      state.eventText = STR.stormWarn;
-      state.eventTone = "coral";
-      state.eventTimer = 3.4;
+      announceEvent(STR.stormWarn, "coral", 3.4);
       state.nextStormT = t + STORM_INTERVAL;
     }
     if (state.stormActive) {
@@ -1311,6 +1712,7 @@
       state.milestoneText = nextMilestone.text;
       state.milestoneTimer = 3.2;
       state.milestoneIndex += 1;
+      audio.sfx.milestone();
     }
     if (state.milestoneTimer > 0) state.milestoneTimer -= dt;
     if (state.eventTimer > 0) state.eventTimer -= dt;
@@ -1323,6 +1725,13 @@
     if (move.x || move.y) player.facing = Math.atan2(move.y, move.x);
     player.x = clamp(player.x + player.vx * dt, player.r, W - player.r);
     player.y = clamp(player.y + player.vy * dt, player.r, H - player.r);
+
+    // a short fading motion trail, only while moving fast — pure polish, no gameplay effect
+    playerTrail.forEach((p) => { p.life -= dt; });
+    playerTrail = playerTrail.filter((p) => p.life > 0);
+    if (Math.hypot(player.vx, player.vy) > player.baseSpeed * 0.45) {
+      playerTrail.push({ x: player.x, y: player.y, life: 0.22, maxLife: 0.22 });
+    }
 
     if (player.invuln > 0) player.invuln -= dt;
     if (player.hitFlash > 0) player.hitFlash -= dt;
@@ -1554,9 +1963,7 @@
               nearbyT.forEach((e) => { e.buffTimer = Math.max(e.buffTimer || 0, 10); });
             } else {
               triggerClone(enemy.x, enemy.y);
-              state.eventText = STR.cloneWarn;
-              state.eventTone = "gold";
-              state.eventTimer = 2.6;
+              announceEvent(STR.cloneWarn, "gold", 2.6);
             }
           } else {
             damagePlayer(5);
@@ -1573,7 +1980,7 @@
     // grows heavier over the same back half of the run, tempered only by chemoresistance if you've taken it
     hazards.forEach((hz) => {
       hz.timer -= dt;
-      if (hz.phase === "warn" && hz.timer <= 0) { hz.phase = "burst"; hz.timer = 0.4; }
+      if (hz.phase === "warn" && hz.timer <= 0) { hz.phase = "burst"; hz.timer = 0.4; audio.sfx.chemo(); }
       else if (hz.phase === "burst") {
         if (!hz.hitApplied && dist(player.x, player.y, hz.x, hz.y) < hz.r + player.r) {
           const dmg = (20 + chemoEscalation(state.t) * 24) * (1 - player.chemoResist);
@@ -1587,6 +1994,7 @@
               enemy.marked = true;
               burst(enemy.x, enemy.y, "coral", 10);
               gainXP(6);
+              audio.sfx.enemyDown();
             }
           });
           decoys.forEach((d) => {
@@ -1617,6 +2025,7 @@
         gainXP(nutrientValue(n));
         state.nutrients += 1;
         burst(n.x, n.y, n.big ? "gold" : "mint", n.big ? 12 : 6);
+        audio.sfx[n.big ? "bigPickup" : "pickup"]();
         return false;
       }
       return true;
@@ -1635,10 +2044,23 @@
   /* ---------------------------------------------------------------- */
   /* Rendering                                                          */
   /* ---------------------------------------------------------------- */
+  const STAGE_TINT_RGB = { 1: "23, 87, 71", 2: "191, 110, 58", 3: "140, 110, 214" }; // lung / liver / brain
+  const STAGE_MOTE_TONE = { 1: "mint", 2: "gold", 3: "violet" };
+
+  let ambientMotes = [];
+  let ambientMoteStage = 0;
+  const regenAmbientMotes = () => {
+    const count = Math.round(16 * (PARTICLE_MULT[settings.particles] ?? 1));
+    ambientMotes = Array.from({ length: count }, () => ({
+      ax: rand(0, W), ay: rand(0, H), r: rand(1.5, 4),
+      speed: rand(0.6, 1.4), phase: rand(0, Math.PI * 2), sparkPhase: rand(0, Math.PI * 2)
+    }));
+    ambientMoteStage = state.stage;
+  };
   const drawBackground = (time) => {
     ctx.fillStyle = "#07110f";
     ctx.fillRect(0, 0, W, H);
-    let tint = state.stage === 3 ? "rgba(140, 110, 214, 0.28)" : state.stage === 2 ? "rgba(191, 110, 58, 0.30)" : "rgba(23, 87, 71, 0.32)";
+    let tint = `rgba(${STAGE_TINT_RGB[state.stage] || STAGE_TINT_RGB[1]}, 0.3)`;
     if (state.stormActive) tint = "rgba(255, 107, 87, 0.2)";
     const grad = ctx.createRadialGradient(W * 0.5, H * 0.42, 20, W * 0.5, H * 0.5, Math.max(W, H) * 0.75);
     grad.addColorStop(0, tint);
@@ -1655,6 +2077,19 @@
     for (let y = (time * 0.004) % grid; y < H; y += grid) {
       ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
     }
+
+    // ambient drifting motes — a cheap per-organ "tissue" texture, purely procedural (no image assets)
+    if (ambientMoteStage !== state.stage || !ambientMotes.length) regenAmbientMotes();
+    const moteTone = STAGE_MOTE_TONE[state.stage] || "mint";
+    ambientMotes.forEach((m) => {
+      const x = m.ax + Math.sin(time * 0.00018 * m.speed + m.phase) * 40;
+      const y = m.ay + Math.cos(time * 0.00013 * m.speed + m.phase) * 28;
+      const spark = state.stage === 3 ? Math.max(0, Math.sin(time * 0.0025 + m.sparkPhase)) : 0.4;
+      ctx.beginPath();
+      ctx.arc(x, y, m.r, 0, Math.PI * 2);
+      ctx.fillStyle = rgba(moteTone, 0.08 + spark * 0.16);
+      ctx.fill();
+    });
   };
 
   const drawCellBody = (x, y, r, toneA, toneB, spikes, wobble, alpha = 1) => {
@@ -1686,11 +2121,31 @@
   };
 
   const drawPlayer = () => {
+    playerTrail.forEach((p) => {
+      const a = clamp(p.life / p.maxLife, 0, 1) * 0.16;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, player.r * 0.8, 0, Math.PI * 2);
+      ctx.fillStyle = rgba("mint", a);
+      ctx.fill();
+    });
+
     const flashed = player.hitFlash > 0 && Math.floor(player.hitFlash * 20) % 2 === 0;
     const tone = flashed ? "coral" : "mint";
+    const speedMag = Math.hypot(player.vx, player.vy);
+    const stretch = clamp(speedMag / player.baseSpeed, 0, 1) * 0.22;
+    const breathe = speedMag < 4 ? Math.sin(state.t * 2.2) * 0.04 : 0;
     ctx.save();
     if (player.invuln > 0) ctx.globalAlpha = 0.75;
-    drawCellBody(player.x, player.y, player.r, tone, "coral", 6, state.t * 4);
+    if (stretch > 0.01) {
+      ctx.save();
+      ctx.translate(player.x, player.y);
+      ctx.rotate(player.facing);
+      ctx.scale(1 + stretch, 1 - stretch * 0.7);
+      drawCellBody(0, 0, player.r, tone, "coral", 6, state.t * 4);
+      ctx.restore();
+    } else {
+      drawCellBody(player.x, player.y, player.r * (1 + breathe), tone, "coral", 6, state.t * 4);
+    }
     if (player.shield > 0) {
       ctx.beginPath();
       ctx.arc(player.x, player.y, player.r + 6, 0, Math.PI * 2);
@@ -1923,11 +2378,67 @@
     ctx.globalAlpha = 1;
   };
 
-  const drawCinematic = (timer, duration, lines) => {
-    ctx.fillStyle = "#07110f";
-    ctx.fillRect(0, 0, W, H);
+  // faint procedural per-organ watermark, drawn behind the cinematic rings — no image assets
+  const drawOrganSilhouette = (cx, cy, r, targetStage, timer) => {
+    ctx.beginPath();
+    if (targetStage === 2) {
+      ctx.ellipse(cx, cy, r * 1.15, r * 0.78, 0.15, 0, Math.PI * 2);
+    } else if (targetStage === 3) {
+      const segs = 28;
+      for (let i = 0; i <= segs; i += 1) {
+        const a = (i / segs) * Math.PI * 2;
+        const rr = r * 0.95 + Math.sin(a * 6 + timer * 0.4) * r * 0.08;
+        const x = cx + Math.cos(a) * rr;
+        const y = cy + Math.sin(a) * rr * 0.86;
+        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.closePath();
+    } else {
+      ctx.ellipse(cx - r * 0.42, cy, r * 0.62, r * 0.95, 0, 0, Math.PI * 2);
+      ctx.moveTo(cx + r * 0.42 + r * 0.62, cy);
+      ctx.ellipse(cx + r * 0.42, cy, r * 0.62, r * 0.95, 0, 0, Math.PI * 2);
+    }
+    ctx.stroke();
+  };
+
+  const drawCinematic = (timer, duration, lines, targetStage) => {
     const cx = W / 2, cy = H / 2;
     const frac = clamp(timer / duration, 0, 1);
+    const tint = STAGE_TINT_RGB[targetStage] || STAGE_TINT_RGB[1];
+
+    ctx.fillStyle = "#07110f";
+    ctx.fillRect(0, 0, W, H);
+
+    const wash = ctx.createRadialGradient(cx, cy, 10, cx, cy, Math.max(W, H) * 0.7);
+    wash.addColorStop(0, `rgba(${tint}, ${0.22 * frac})`);
+    wash.addColorStop(1, "rgba(7, 17, 15, 0)");
+    ctx.fillStyle = wash;
+    ctx.fillRect(0, 0, W, H);
+
+    ctx.save();
+    ctx.globalAlpha = 0.05 + frac * 0.05;
+    ctx.strokeStyle = rgba("ivory", 1);
+    ctx.lineWidth = 1.4;
+    drawOrganSilhouette(cx, cy, Math.min(W, H) * 0.3, targetStage, timer);
+    ctx.restore();
+
+    // converging particle streams (bloodstream-travel effect) — golden-angle spaced so they stay
+    // stable frame to frame without needing any persisted random state
+    const streamCount = 22;
+    const rOuter = Math.max(W, H) * 0.75;
+    for (let i = 0; i < streamCount; i += 1) {
+      const angle = i * 2.399963;
+      const travel = (timer * 0.6 + i * 0.11) % 1;
+      const r1 = rOuter * (1 - travel);
+      const r0 = Math.min(rOuter, r1 + rOuter * 0.14);
+      ctx.beginPath();
+      ctx.moveTo(cx + Math.cos(angle) * r0, cy + Math.sin(angle) * r0);
+      ctx.lineTo(cx + Math.cos(angle) * r1, cy + Math.sin(angle) * r1);
+      ctx.strokeStyle = rgba("mint", (1 - travel) * 0.22);
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+
     for (let i = 0; i < 3; i += 1) {
       const ringFrac = clamp(frac * 3 - i, 0, 1);
       if (ringFrac <= 0) continue;
@@ -1954,16 +2465,18 @@
 
   const render = (time) => {
     ctx.save();
-    if (state.shake > 0) {
+    if (state.shake > 0 && settings.shake) {
       ctx.translate(rand(-1, 1) * state.shake, rand(-1, 1) * state.shake);
     }
     if (state.phase === "boot") {
-      drawCinematic(state.bootTimer, BOOT_DURATION, STR.bootLines);
+      const lines = state.mode === "story" ? STR.storyBootLines : STR.bootLines;
+      drawCinematic(state.bootTimer, BOOT_DURATION, lines, 1);
       ctx.restore();
       return;
     }
     if (state.phase === "transition") {
-      drawCinematic(state.transitionTimer, TRANSITION_DURATION, STR.transitionLines[state.transitionTarget]);
+      const lines = state.mode === "story" ? STR.storyTransitionLines[state.transitionTarget] : STR.transitionLines[state.transitionTarget];
+      drawCinematic(state.transitionTimer, TRANSITION_DURATION, lines, state.transitionTarget);
       ctx.restore();
       return;
     }
@@ -1993,12 +2506,12 @@
   const milestoneEl = hud.querySelector("[data-milestone]");
   const eventEl = hud.querySelector("[data-event]");
   const vignetteEl = hud.querySelector("[data-vignette]");
-  bestEl.textContent = best.time > 0 ? `${STR.statBest} ${fmtTime(best.time)}` : "";
+  bestEl.textContent = "";
 
   const abilityButtons = {};
   ABILITY_ORDER.forEach((kind) => {
     const btn = hud.querySelector(`[data-ability-btn="${kind}"]`);
-    btn.addEventListener("click", () => { abilityTapped[kind] = true; });
+    btn.addEventListener("click", () => { abilityTapped[kind] = true; audio.sfx.uiClick(); });
     abilityButtons[kind] = {
       btn,
       fill: btn.querySelector(`[data-ability-fill="${kind}"]`)
@@ -2011,6 +2524,9 @@
     levelEl.textContent = `${STR.level} ${player.level}`;
     timerEl.textContent = fmtTime(state.t);
     organEl.textContent = STR.organNames[state.stage] || "";
+    bestEl.textContent = state.mode === "rush"
+      ? (best.rush.cleared ? `${STR.statBest} ${fmtTime(best.rush.bestTime)}` : "")
+      : (best.survival.time > 0 ? `${STR.statBest} ${fmtTime(best.survival.time)}` : "");
     ABILITY_ORDER.forEach((kind) => {
       const ab = player.abilities[kind];
       const { btn, fill } = abilityButtons[kind];
