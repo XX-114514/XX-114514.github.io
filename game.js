@@ -144,9 +144,9 @@
         { dot: "#f1efe7", kicker: "持续追踪 · 一次性", title: "细胞毒性 T 细胞", desc: "一旦发现你就会持续追踪；命中你的瞬间会立即完成脱颗粒并自我凋亡消失——是一次性的威胁——但那次命中仍有几率召来一个克隆增援。长期未能命中也会自行耗竭消失。" },
         { dot: "#ff6b57", kicker: "伏击冲刺", title: "NK 细胞", desc: "平时在远处游荡巡逻，靠近后会先有一次闪烁预警，随后高速冲刺。躲避时向侧面移动比直线逃跑更有效。" },
         { dot: "#f1efe7", kicker: "缓慢吞噬 · 会招募", title: "巨噬细胞", desc: "体型大、移动慢，很容易甩开——但一次完整的吞噬重击会触发抗原呈递，激活附近的 T 细胞，或就地召唤一个新的 T 细胞。" },
-        { dot: "#ff6b57", kicker: "范围爆发 · 持续扩大", title: "化疗脉冲", desc: "存活前十分钟里效果温和、出现也不频繁——区域较小，命中的目标只有一半几率被清除。十分钟之后画风突变：几乎必定杀死区域内除你以外的一切，区域范围会持续扩大到接近覆盖整个战场，你自己受到的伤害也会明显加重。免疫细胞、你分裂出的诱饵，乃至被你策反的盟友，都会被同样对待——把追兵引进警戒区始终是一种合理战术。" },
+        { dot: "#ff6b57", kicker: "范围爆发 · 概率杀伤", title: "化疗脉冲", desc: "杀伤永远是概率性的、从不是必死——命中即死的几率会从存活初期的一成左右，随着时间推移平稳爬升到八成左右，但从未变成必然。即便是最早出现的区域，面积也至少能覆盖战场的四分之一，之后还会继续扩大。免疫细胞、你分裂出的诱饵，乃至被你策反的盟友，都会被同样对待——把追兵引进警戒区始终是一种合理战术。你自己受到的伤害同样会随时间加重。" },
         { dot: "#eac47a", kicker: "增益 · 后期机制", title: "信号灯", desc: "缓慢漂移的树突状细胞式信号灯，会周期性地增强周围所有免疫细胞的速度与探测范围。可以用“免疫劫持”能力直接摧毁它。" },
-        { dot: "#c48ce0", kicker: "精准 · 罕见", title: "靶向药物打击", desc: "存活几分钟后开始出现的稀有远程攻击：准星会先持续锁定你的位置，短暂停留后发动一次重击。这次打击是强制生效的——会直接无视护盾和免疫检查点带来的免疫几率。打击范围经过精确计算：以基础速度绝无可能在停留窗口内逃出，但恰好 +20% 的速度加成就能让你勉强逃脱。" },
+        { dot: "#c48ce0", kicker: "精准 · 罕见", title: "靶向药物打击", desc: "存活几分钟后开始出现的稀有远程攻击：准星会先持续锁定你的位置，短暂停留后发动一次重击。这次打击是强制生效的——会直接无视护盾和免疫检查点带来的免疫几率。在没有耐药手段的情况下，一次打击至少会扣除当前最大膜完整性的 3/7。打击范围经过精确计算：以基础速度绝无可能在停留窗口内逃出，但恰好 +20% 的速度加成就能让你勉强逃脱。" },
         { dot: "#d89ea8", kicker: "友方 · 基质细胞", title: "癌症相关成纤维细胞", desc: "从肝脏阶段开始出现的基质盟友。躲进它的光环范围内可以获得额外的恢复速度与伤害抗性——真实的肿瘤也会招募这类细胞来获得类似的保护。" },
         { dot: "#f1efe7", kicker: "友方 · 掩护", title: "中性粒细胞陷阱", desc: "脑转移阶段出现的大范围网状区域。免疫细胞进入其中会被明显拖慢，你自己也会变慢，但幅度小得多；同时还能获得隐匿效果与一次性的躲避几率提升——这参考了一个真实（且颇具争议）的现象：本用于捕获病原体的 NET 结构，有时反而会掩护循环肿瘤细胞。" }
       ],
@@ -159,7 +159,9 @@
         { dot: "#f1efe7", kicker: "涌现 · 后期机制", title: "耗竭与克隆增殖", desc: "长期交战的 T 细胞会自行耗竭消失，但一次命中仍可能触发克隆增殖；存活超过两分钟后，还会周期性出现细胞因子风暴，让所有免疫细胞同时增强。" },
         { dot: "#bf6e3a", kicker: "三幕 · 每幕五分钟", title: "转移：肺 → 肝 → 脑", desc: "每五分钟，癌细胞就会脱落进入血流，并在一个新的器官定植——肺、肝、脑依次切换，各自有不同的色调与重新洗牌的威胁组合。这些节点只改变场景本身：难度、化疗杀伤力和你的基础恢复速度，都会随着总游戏时长连续变化，而不是在切换器官时跳变。" },
         { dot: "#f1efe7", kicker: "总时长 · 十五分钟", title: "时间本身也是对手", desc: "一局游戏不会无限进行下去——无论膜完整性如何，病程都会在十五分钟时追上你。游戏过程中还会随机出现价值更高的大型营养物质，一次能顶好几个普通营养。" },
-        { dot: "#95e5c1", kicker: "工具栏 · 属性面板", title: "实时追踪你的build", desc: "工具栏中的“属性面板”会列出你实际强化过的每一项属性——移动速度、抗性、免疫几率、恢复速度等等——以及每个已解锁能力的等级、冷却时间和绑定按键，并随游戏进程实时更新。" }
+        { dot: "#95e5c1", kicker: "工具栏 · 属性面板", title: "实时追踪你的build", desc: "工具栏中的“属性面板”会列出你实际强化过的每一项属性——移动速度、抗性、免疫几率、恢复速度等等——以及每个已解锁能力的等级、冷却时间和绑定按键，并随游戏进程实时更新。" },
+        { dot: "#ff6b57", kicker: "涌现 · 威胁转移", title: "威胁的重心会转移", desc: "免疫细胞的接触伤害在早期更高、后期会明显减弱；与此同时，化疗与靶向药物的威胁则完全相反——早期温和，后期才是主要的杀伤来源。整局游戏的危险感会从“被追杀”逐渐过渡到“被环境针对”。" },
+        { dot: "#c48ce0", kicker: "细胞因子风暴 · 陷阱", title: "风暴中的分子陷阱", desc: "细胞因子风暴发生时，一批小型细胞因子分子会散布在战场上、缓慢漂移，触碰会造成伤害，为风暴增添一层需要主动躲避的挑战。风暴期间吸收营养的收益也会提升——愿意冒险穿过陷阱区觅食，是值得的。" }
       ]
     }
   } : {
@@ -288,9 +290,9 @@
         { dot: "#f1efe7", kicker: "Chases · one-shot", title: "Cytotoxic T cell", desc: "Tracks you continuously. The instant it lands a hit it finishes degranulating and self-destructs — a one-time threat — though that hit can still call in a clone. Left disengaged too long, it exhausts and clears out on its own." },
         { dot: "#ff6b57", kicker: "Ambushes", title: "NK cell", desc: "Patrols idly at range, then telegraphs a flash before bursting into a fast dash toward you. Dodge sideways rather than running straight away." },
         { dot: "#f1efe7", kicker: "Engulfs · recruits", title: "Macrophage", desc: "Large, slow, and easy to outrun — but a full engulfment hit triggers antigen presentation, which activates nearby T cells or summons a fresh one on the spot." },
-        { dot: "#ff6b57", kicker: "Detonates · grows", title: "Chemo pulse", desc: "Mild and infrequent before the ten-minute mark — small zones, a coin-flip chance of killing whatever they catch. Past ten minutes it turns lethal: every kill becomes certain (for everything except you), zones grow toward covering the whole arena, and the hit you personally take gets noticeably heavier too. Immune cells, your own decoys, and even turned allies all die the same way if caught inside — luring pursuers in is a legitimate tactic throughout." },
+        { dot: "#ff6b57", kicker: "Detonates · probabilistic", title: "Chemo pulse", desc: "Every kill is always a roll of the dice, never a certainty — the odds climb steadily from around 10% early to around 80% late, but they never hit 100%. Even the very first zone covers at least a quarter of the arena, and it only grows from there. Immune cells, your own decoys, and even turned allies are all treated the same way if caught inside — luring pursuers in is a legitimate tactic throughout. The hit you personally take also grows heavier as the run goes on." },
         { dot: "#eac47a", kicker: "Buffs · late game", title: "Signal beacon", desc: "A drifting dendritic-style beacon that periodically boosts the speed and detection of every immune cell nearby. Destroy it outright with Immune Hijack." },
-        { dot: "#c48ce0", kicker: "Precise · rare", title: "Targeted therapy strike", desc: "A rare, long-interval attack that starts a couple of minutes in: a reticle tracks your position, then locks briefly before firing. The hit is forced — it ignores shields and checkpoint evasion outright. The blast radius is tuned so a cell at base speed can never outrun the lock window, but exactly a +20% speed bonus makes escape just barely possible." },
+        { dot: "#c48ce0", kicker: "Precise · rare", title: "Targeted therapy strike", desc: "A rare, long-interval attack that starts a couple of minutes in: a reticle tracks your position, then locks briefly before firing. The hit is forced — it ignores shields and checkpoint evasion outright. Without some form of resistance, a single strike always costs at least 3/7 of your current max HP. The blast radius is tuned so a cell at base speed can never outrun the lock window, but exactly a +20% speed bonus makes escape just barely possible." },
         { dot: "#d89ea8", kicker: "Friendly · stromal", title: "Cancer-associated fibroblast", desc: "A stromal ally that appears from the liver stage onward. Shelter inside its aura for bonus regeneration and damage resistance — real tumors recruit these cells for exactly this kind of protection." },
         { dot: "#f1efe7", kicker: "Friendly · cover", title: "Neutrophil extracellular trap", desc: "A wide webbed zone that appears in the brain stage. It bogs immune cells down hard — you slow down too, but far less — on top of granting stealth and a burst of evasion. A real (if double-edged) phenomenon where NETs meant to catch pathogens end up shielding circulating tumor cells instead." }
       ],
@@ -303,7 +305,9 @@
         { dot: "#f1efe7", kicker: "Emergent · late game", title: "Exhaustion & clonal expansion", desc: "T cells that stay engaged too long fade out on their own, but landing a hit can still trigger clonal expansion — and past the two-minute mark, periodic cytokine storms buff every immune cell at once." },
         { dot: "#bf6e3a", kicker: "Three acts · five minutes each", title: "Metastasis: lung → liver → brain", desc: "Every five minutes the cell sheds into the bloodstream and colonizes a new organ — lung, then liver, then brain — each with its own visual tint and reshuffled threats. Only the scenery changes at these boundaries: difficulty, chemo lethality, and your baseline regeneration all scale continuously with total run time instead." },
         { dot: "#f1efe7", kicker: "Run length · fifteen minutes", title: "The clock is part of the fight", desc: "A run can't go on forever — disease progression catches up at the fifteen-minute mark regardless of membrane integrity. Rare oversized nutrients also appear throughout, worth several times a normal pickup." },
-        { dot: "#95e5c1", kicker: "Toolbar · Stats", title: "Track your build live", desc: "The Stats panel in the toolbar lists every attribute you've actually upgraded — speed, resistance, evasion, regeneration and more — plus the level, cooldown, and key for each unlocked ability, updating as the run goes on." }
+        { dot: "#95e5c1", kicker: "Toolbar · Stats", title: "Track your build live", desc: "The Stats panel in the toolbar lists every attribute you've actually upgraded — speed, resistance, evasion, regeneration and more — plus the level, cooldown, and key for each unlocked ability, updating as the run goes on." },
+        { dot: "#ff6b57", kicker: "Emergent · shifting threat", title: "The danger changes character", desc: "Immune cell contact damage is higher early and noticeably softer late; chemo and targeted therapy run the exact opposite curve — mild early, the dominant threat late. The whole run shifts from \"being hunted\" to \"the environment itself turning against you.\"" },
+        { dot: "#c48ce0", kicker: "Cytokine storm · trap field", title: "Molecular traps in the storm", desc: "Whenever a cytokine storm hits, a scatter of small cytokine molecules drifts across the arena and stings on contact — an active dodging layer on top of the storm's usual buffs. Nutrients are also worth more while a storm is live, making a run through the trap field a real risk-reward call." }
       ]
     }
   };
@@ -730,13 +734,14 @@
   const STAGE_DURATION = 300; // 5 minutes per stage: lung -> liver -> brain (scene only — no gameplay scaling is keyed off this)
   const RUN_LIMIT = STAGE_DURATION * 3; // 15 minutes total
   const RUSH_LIMIT = 180; // rush mode: single organ, 3-minute clear
-  const CHEMO_ESCALATE_T = 600; // the 10-minute mark: chemo's kill chance reaches certainty here, and its
-  // radius/frequency/player damage all start ramping toward maximum from here to the end of the run
-  const chemoKillProgress = (t) => clamp(t / CHEMO_ESCALATE_T, 0, 1);
-  const chemoEscalation = (t) => clamp((t - CHEMO_ESCALATE_T) / (RUN_LIMIT - CHEMO_ESCALATE_T), 0, 1);
+  // chemo is purely probabilistic across the whole run — it never flips to a guaranteed kill, it just
+  // keeps getting more likely; a single continuous 0..1 progress value drives every chemo knob
+  const chemoLateness = (t) => clamp(t / RUN_LIMIT, 0, 1);
+  const chemoKillChance = (t) => 0.1 + chemoLateness(t) * 0.7; // 10% early -> 80% late, never certain
   const STORM_START = 120;
   const STORM_INTERVAL = 48;
   const STORM_DURATION = 12;
+  const STORM_TRAP_COUNT = 12;
   const BEACON_START = 75;
   const BEACON_INTERVAL = 21;
   const TARGETED_START = 130;
@@ -746,7 +751,7 @@
   // calibrated so a player at base speed (150) and base radius (15) cannot outrun the lock window,
   // but exactly a +20% speed bonus makes it (just barely) survivable — no speed upgrade, no escape
   const TARGETED_RADIUS = 150 * 1.2 * TARGETED_LOCK - 15;
-  const TARGETED_DAMAGE = 38;
+  const TARGETED_DAMAGE_RATIO = 3 / 7; // unresisted, a strike always costs at least 3/7 of current max HP
   const CAF_START = 300; // a pure time threshold — happens to land around the liver-stage transition, not gated by stage
   const CAF_INTERVAL = 60;
   const NET_START = 600; // a pure time threshold — happens to land around the brain-stage transition, not gated by stage
@@ -831,6 +836,7 @@
   let decoys = [];
   let strikes = [];
   let auras = [];
+  let traps = [];
   let playerTrail = [];
 
   /* ---------------------------------------------------------------- */
@@ -1112,6 +1118,7 @@
     decoys = [];
     strikes = [];
     auras = [];
+    traps = [];
     playerTrail = [];
     state.phase = "boot";
     setStatus();
@@ -1358,9 +1365,11 @@
     });
   };
   const spawnChemo = () => {
-    // small and mild before the 10-minute mark; only then does radius start ramping toward full-screen coverage
-    const escalation = chemoEscalation(state.t);
-    const r = rand(40, 70) + escalation * Math.max(W, H) * 0.85;
+    // even the earliest zone covers at least a quarter of the arena's area — chemo was never meant to be
+    // a small poke — and it only grows larger from there as the run goes on
+    const lateness = chemoLateness(state.t);
+    const minR = Math.sqrt((W * H) / (4 * Math.PI));
+    const r = minR + rand(0, 24) + lateness * Math.max(W, H) * 0.6;
     // best-effort placement: try a few candidate centers and keep the one furthest from any still-active zone
     const margin = Math.min(r * 0.6, Math.min(W, H) * 0.4);
     let bestX = W / 2;
@@ -1402,7 +1411,21 @@
   };
   const nutrientValue = (n) => {
     const base = 10 + Math.floor(state.t / 22) * 2;
-    return n && n.big ? Math.round(base * 3.2) : base;
+    const stormBonus = state.stormActive ? 1.4 : 1; // foraging through the storm's trap field pays off
+    return Math.round((n && n.big ? base * 3.2 : base) * stormBonus);
+  };
+
+  // small drifting cytokine molecules that scatter across the arena for the duration of a storm — a
+  // bullet-hell-lite dodge layer, cleared out again the moment the storm subsides
+  const spawnStormTraps = () => {
+    traps = [];
+    for (let i = 0; i < STORM_TRAP_COUNT; i += 1) {
+      traps.push({
+        x: rand(40, W - 40), y: rand(40, H - 40),
+        r: rand(9, 14), hitCd: 0, phase: rand(0, Math.PI * 2),
+        vx: rand(-16, 16), vy: rand(-16, 16)
+      });
+    }
   };
 
   const spawnDecoy = (count) => {
@@ -1580,6 +1603,7 @@
     beacons = [];
     strikes = [];
     auras = [];
+    traps = [];
     state.pendingClones = [];
     announceEvent(STR.metastasisWarn, "gold", 3.4);
     setStatus();
@@ -1624,6 +1648,9 @@
     const t = state.t;
     const lateness = clamp(t / RUN_LIMIT, 0, 1); // 0 at the start of the run, 1 at the 15-minute mark
     const lateGameSpawnMult = 1 + lateness * 0.9; // immune spawns thin out continuously as the run goes on
+    // the threat profile shifts over the run: immune cells hit harder early, then hand off to chemo and
+    // targeted therapy as the primary damage sources late
+    const immuneDmgMult = 1.3 - lateness * 0.7;
     const tInterval = clamp(2.3 - t * 0.012, 0.75, 2.3) * lateGameSpawnMult;
     state.lastSpawnT.t += dt;
     if (state.lastSpawnT.t >= tInterval) { state.lastSpawnT.t = 0; spawnTCell(); }
@@ -1640,13 +1667,13 @@
     }
     if (t > state.nextChemoT) {
       // deliberately irregular: neither the gap nor the burst count follows a fixed schedule, only their
-      // averages trend up — and only past the 10-minute mark, so early runs see a single mild zone at a
-      // time while late runs see frequent, overlapping, near-continuous waves; a new wave can also start
-      // while the last one is still resolving
-      const escalation = chemoEscalation(t);
-      const burstCount = 1 + Math.floor(escalation * 4.2);
+      // averages trend up continuously across the whole run, so early runs see a single zone at a time
+      // while late runs see frequent, overlapping waves; a new wave can also start while the last is
+      // still resolving
+      const lateness = chemoLateness(t);
+      const burstCount = 1 + Math.floor(lateness * 4.2);
       for (let i = 0; i < burstCount; i += 1) spawnChemo();
-      const baseGap = clamp(8 - escalation * 6.2, 1.8, 8);
+      const baseGap = clamp(8 - lateness * 6.2, 1.8, 8);
       state.nextChemoT = t + baseGap * rand(0.6, 1.6);
     }
     const nutrientCap = Math.round(7 + lateness * 3);
@@ -1686,18 +1713,33 @@
       if (state.autoMitosisTimer <= 0) { state.autoMitosisTimer = 16; spawnDecoy(1); }
     }
 
-    // cytokine storm escalation
+    // cytokine storm escalation — the storm itself also scatters small cytokine molecules across the
+    // arena as short-lived dodge-hazards, plus a nutrient bonus for anyone bold enough to forage through it
     if (!state.stormActive && t > state.nextStormT) {
       state.stormActive = true;
       state.stormTimer = STORM_DURATION;
       announceEvent(STR.stormWarn, "coral", 3.4);
       state.nextStormT = t + STORM_INTERVAL;
+      spawnStormTraps();
     }
     if (state.stormActive) {
       state.stormTimer -= dt;
-      if (state.stormTimer <= 0) { state.stormActive = false; }
+      if (state.stormTimer <= 0) { state.stormActive = false; traps = []; }
     }
     const stormMult = state.stormActive ? 1.25 : 1;
+
+    traps.forEach((tr) => {
+      tr.phase += dt * 3;
+      tr.x = clamp(tr.x + tr.vx * dt, tr.r, W - tr.r);
+      tr.y = clamp(tr.y + tr.vy * dt, tr.r, H - tr.r);
+      if (tr.x <= tr.r || tr.x >= W - tr.r) tr.vx *= -1;
+      if (tr.y <= tr.r || tr.y >= H - tr.r) tr.vy *= -1;
+      tr.hitCd = Math.max(0, tr.hitCd - dt);
+      if (tr.hitCd <= 0 && dist(player.x, player.y, tr.x, tr.y) < tr.r + player.r) {
+        damagePlayer(7);
+        tr.hitCd = 0.75;
+      }
+    });
 
     // pending clonal-expansion reinforcements
     state.pendingClones.forEach((c) => { c.timer -= dt; });
@@ -1819,7 +1861,7 @@
       } else if (s.phase === "lock") {
         if (s.timer <= 0) {
           if (dist(player.x, player.y, s.x, s.y) < TARGETED_RADIUS + player.r) {
-            damagePlayerForced(TARGETED_DAMAGE);
+            damagePlayerForced(player.maxHp * TARGETED_DAMAGE_RATIO);
           }
           burst(s.x, s.y, "violet", 16);
           s.phase = "fade";
@@ -1946,15 +1988,15 @@
         }
       } else if (overlapPlayer && enemy.hitCd <= 0) {
         if (enemy.type === "t") {
-          damagePlayer(9);
+          damagePlayer(9 * immuneDmgMult);
           enemy.marked = true;
           burst(enemy.x, enemy.y, "ivory", 10);
           if (Math.random() < 0.16) { triggerClone(enemy.x, enemy.y); }
         } else if (enemy.type === "nk") {
-          if (enemy.dashState === "dash") { damagePlayer(15); enemy.hitCd = 0.6; } else { damagePlayer(4); enemy.hitCd = 0.5; }
+          if (enemy.dashState === "dash") { damagePlayer(15 * immuneDmgMult); enemy.hitCd = 0.6; } else { damagePlayer(4 * immuneDmgMult); enemy.hitCd = 0.5; }
         } else if (enemy.type === "mac") {
           if (enemy.engulf > 0.9) {
-            damagePlayer(26);
+            damagePlayer(26 * immuneDmgMult);
             enemy.engulf = 0;
             enemy.hitCd = 1.1;
             enemy.presentTimer = 1.4;
@@ -1966,7 +2008,7 @@
               announceEvent(STR.cloneWarn, "gold", 2.6);
             }
           } else {
-            damagePlayer(5);
+            damagePlayer(5 * immuneDmgMult);
             enemy.hitCd = 0.5;
           }
         }
@@ -1975,20 +2017,20 @@
     enemies = enemies.filter((enemy) => !enemy.marked);
 
     // hazards — chemo bursts are indiscriminate: they can hit the player, immune cells, decoys, and even
-    // turned allies. Before the 10-minute mark every kill is a coin flip that only gets more favorable with
-    // time; from the 10-minute mark on it's a certain kill for everything except you — and your own hit
-    // grows heavier over the same back half of the run, tempered only by chemoresistance if you've taken it
+    // turned allies. Every kill is always a coin flip, never a certainty — the odds just climb steadily
+    // from 10% toward 80% across the run — and your own hit grows heavier the same way, tempered only by
+    // chemoresistance if you've taken it
     hazards.forEach((hz) => {
       hz.timer -= dt;
       if (hz.phase === "warn" && hz.timer <= 0) { hz.phase = "burst"; hz.timer = 0.4; audio.sfx.chemo(); }
       else if (hz.phase === "burst") {
         if (!hz.hitApplied && dist(player.x, player.y, hz.x, hz.y) < hz.r + player.r) {
-          const dmg = (20 + chemoEscalation(state.t) * 24) * (1 - player.chemoResist);
+          const dmg = (16 + chemoLateness(state.t) * 28) * (1 - player.chemoResist);
           damagePlayer(dmg);
           hz.hitApplied = true;
         }
         if (!hz.enemyHitApplied) {
-          const killChance = chemoKillProgress(state.t);
+          const killChance = chemoKillChance(state.t);
           enemies.forEach((enemy) => {
             if (dist(enemy.x, enemy.y, hz.x, hz.y) < hz.r + enemy.r && Math.random() < killChance) {
               enemy.marked = true;
@@ -2242,6 +2284,28 @@
     ctx.stroke();
   };
 
+  const drawTrap = (tr) => {
+    const pulse = Math.sin(tr.phase) * 0.25 + 1;
+    ctx.beginPath();
+    for (let i = 0; i < 5; i += 1) {
+      const a = (i / 5) * Math.PI * 2 + tr.phase * 0.5;
+      const spike = i % 2 === 0 ? tr.r * pulse : tr.r * pulse * 0.45;
+      const px = tr.x + Math.cos(a) * spike;
+      const py = tr.y + Math.sin(a) * spike;
+      if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+    }
+    ctx.closePath();
+    ctx.fillStyle = rgba("violet", 0.4);
+    ctx.fill();
+    ctx.strokeStyle = rgba("coral", 0.75);
+    ctx.lineWidth = 1.3;
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(tr.x, tr.y, tr.r * pulse + 5, 0, Math.PI * 2);
+    ctx.strokeStyle = rgba("violet", 0.22);
+    ctx.stroke();
+  };
+
   const drawStrike = (s) => {
     if (s.phase === "track") {
       const alpha = 0.35 + Math.sin(state.t * 14) * 0.15;
@@ -2486,6 +2550,7 @@
     state.pendingClones.forEach(drawClonePending);
     beacons.forEach(drawBeacon);
     strikes.forEach(drawStrike);
+    traps.forEach(drawTrap);
     nutrients.forEach(drawNutrient);
     enemies.forEach(drawEnemy);
     decoys.forEach(drawDecoy);

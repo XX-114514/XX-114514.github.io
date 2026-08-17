@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 840" role="img" aria-label="Rogue Cell — a cancer cell evading immune cells across a dark tissue microenvironment">
+  <defs>
+    <radialGradient id="bgGlow" cx="50%" cy="42%" r="75%">
+      <stop offset="0%" stop-color="#175747" stop-opacity="0.55"/>
+      <stop offset="55%" stop-color="#0e1b18" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#07110f" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vignette" cx="50%" cy="38%" r="72%">
+      <stop offset="55%" stop-color="#07110f" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#07110f" stop-opacity="0.85"/>
+    </radialGradient>
+    <pattern id="grid" width="46" height="46" patternUnits="userSpaceOnUse">
+      <path d="M46 0H0V46" fill="none" stroke="#f1efe7" stroke-opacity="0.05" stroke-width="1"/>
+    </pattern>
+    <g id="tcell">
+      <circle r="34" fill="none" stroke="#f1efe7" stroke-opacity="0.14"/>
+      <path d="M0 -24 L5.4 -19 L4 -12 L11 -8.5 L14 -1.5 L21.5 2 L20 9 L26 14.5 L20.5 20 L23 27.5 L15 27 L11.5 33.5 L4.5 29 L-2 34 L-6 27.5 L-14 29 L-13.5 21 L-21 18.5 L-17.5 11.5 L-23.5 6 L-16.5 1 L-19 -6.5 L-11 -8 L-9.5 -16 L-2 -13.5 Z"
+        fill="#f1efe7" fill-opacity="0.22" stroke="#f1efe7" stroke-opacity="0.65" stroke-width="1.4"/>
+      <circle cx="-5.5" cy="3.5" r="12" fill="#ff6b57" fill-opacity="0.42"/>
+    </g>
+    <g id="nkcell">
+      <circle r="26" fill="none" stroke="#ff6b57" stroke-opacity="0.2"/>
+      <path d="M0 -20 L5.4 -16.6 L11.6 -14.4 L14.6 -8.4 L20 -4.4 L18.4 2.6 L21.6 9 L15.6 13 L14.4 20 L7 18.4 L1.4 23 L-3.4 17.6 L-10.6 18.4 L-11 11.4 L-18 8.4 L-13.6 2.4 L-16.4 -4.4 L-9.4 -6.6 L-7.6 -14.6 L-1 -12.4 Z"
+        fill="#ff6b57" fill-opacity="0.28" stroke="#ff6b57" stroke-opacity="0.7" stroke-width="1.4"/>
+      <circle cx="-4" cy="2.4" r="9" fill="#f1efe7" fill-opacity="0.4"/>
+    </g>
+    <g id="mac">
+      <path d="M46 3 C46 27 27 46 2 45 C-24 44 -47 25 -46 -1 C-45 -26 -22 -47 3 -46 C28 -45 46 -21 46 3 Z"
+        fill="#f1efe7" fill-opacity="0.16" stroke="#f1efe7" stroke-opacity="0.5" stroke-width="1.6"/>
+      <circle cx="-10" cy="6" r="17" fill="#f1efe7" fill-opacity="0.3"/>
+    </g>
+    <g id="playercell">
+      <circle r="58" fill="none" stroke="#95e5c1" stroke-opacity="0.16"/>
+      <path d="M0 -44 L9.7 -35.8 L20.9 -31.4 L26.3 -19.9 L37.4 -12.7 L34.8 -0.4 L40.2 11.3 L28.7 18.6 L26 30.7 L13.4 26.9 L2.6 33.9 L-6.4 24.6 L-19 26.4 L-19.9 13.4 L-31.9 8.6 L-25.3 -2.4 L-30.4 -14.6 L-18.3 -18.8 L-14.8 -31.4 L-2 -27.1 Z"
+        fill="#95e5c1" fill-opacity="0.26" stroke="#95e5c1" stroke-opacity="0.75" stroke-width="1.8"/>
+      <circle cx="-9.5" cy="6.4" r="20.5" fill="#ff6b57" fill-opacity="0.4"/>
+      <circle cx="19" cy="-16" r="2.3" fill="#95e5c1" fill-opacity="0.7"/>
+      <circle cx="27" cy="6" r="2" fill="#95e5c1" fill-opacity="0.7"/>
+      <circle cx="9" cy="30" r="2.2" fill="#95e5c1" fill-opacity="0.7"/>
+      <circle cx="-24" cy="18" r="2" fill="#95e5c1" fill-opacity="0.7"/>
+      <circle cx="-22" cy="-14" r="2.2" fill="#95e5c1" fill-opacity="0.7"/>
+    </g>
+  </defs>
+
+  <rect width="1600" height="840" fill="#07110f"/>
+  <rect width="1600" height="840" fill="url(#bgGlow)"/>
+  <rect width="1600" height="840" fill="url(#grid)"/>
+
+  <!-- signal beacon, upper right -->
+  <g transform="translate(1310,150)" opacity="0.85">
+    <circle r="60" fill="none" stroke="#eac47a" stroke-opacity="0.18"/>
+    <circle r="40" fill="none" stroke="#eac47a" stroke-opacity="0.28"/>
+    <path d="M18 0 L9 15.6 L-9 15.6 L-18 0 L-9 -15.6 L9 -15.6 Z" fill="#eac47a" fill-opacity="0.3" stroke="#eac47a" stroke-opacity="0.8" stroke-width="1.6"/>
+  </g>
+
+  <!-- targeted-therapy reticle, lower left -->
+  <g transform="translate(230,660)" opacity="0.8" stroke="#c48ce0">
+    <circle r="52" fill="none" stroke-opacity="0.55" stroke-width="2" stroke-dasharray="6 7"/>
+    <path d="M-64 0H-44 M44 0H64 M0 -64V-44 M0 44V64" stroke-opacity="0.75" stroke-width="2.4"/>
+  </g>
+
+  <!-- chemo hazard telegraph, right edge -->
+  <circle cx="1420" cy="560" r="90" fill="none" stroke="#ff6b57" stroke-opacity="0.35" stroke-width="2" stroke-dasharray="7 8"/>
+
+  <!-- pursuing immune cells, converging toward center-bottom -->
+  <use href="#tcell" transform="translate(430,300)"/>
+  <use href="#tcell" transform="translate(1080,255) scale(0.85)"/>
+  <use href="#tcell" transform="translate(980,520) scale(0.92)"/>
+  <use href="#nkcell" transform="translate(300,540)"/>
+  <use href="#nkcell" transform="translate(1180,470) scale(0.9)"/>
+  <use href="#mac" transform="translate(1230,700) scale(0.95)"/>
+  <use href="#mac" transform="translate(150,220) scale(0.7)" opacity="0.8"/>
+
+  <!-- a couple of drifting nutrients for scale/atmosphere -->
+  <circle cx="560" cy="180" r="5" fill="#95e5c1" fill-opacity="0.7"/>
+  <circle cx="560" cy="180" r="9" fill="none" stroke="#95e5c1" stroke-opacity="0.25"/>
+  <circle cx="900" cy="700" r="5" fill="#95e5c1" fill-opacity="0.7"/>
+  <circle cx="900" cy="700" r="9" fill="none" stroke="#95e5c1" stroke-opacity="0.25"/>
+
+  <!-- the player cell, front and center -->
+  <use href="#playercell" transform="translate(700,470)"/>
+
+  <rect width="1600" height="840" fill="url(#vignette)"/>
+</svg>
