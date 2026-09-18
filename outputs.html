@@ -7,23 +7,23 @@
   <meta name="description" content="Selected academic outputs by Xin Xiong, including pan-cancer single-cell data integration, coursework posters, core documents, and presentations.">
   <link rel="stylesheet" href="./styles.css">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#07110f">
+  <link rel="stylesheet" href="./interior.css">
 </head>
-<body>
+<body class="landing-body interior-page">
   <div class="scroll-progress" aria-hidden="true"></div>
 
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand brand-home" href="./index.html" aria-label="Back to portfolio homepage" title="Back to portfolio homepage">Xin Xiong <small>Academic Portfolio</small></a>
-      <nav class="top-nav" aria-label="Main navigation">
-        <a data-page="index.html" href="./index.html">Home</a>
-        <a data-page="about.html" href="./about.html">Profile</a>
-        <a data-page="research.html" href="./research.html">Research</a>
-        <a data-page="outputs.html" href="./outputs.html">Archive</a>
-        <a data-page="game.html" href="./game.html">Game</a>
-        <a href="https://blog.xiongxin.online">Blog</a>
-        <a data-page="contact.html" href="./contact.html">Contact</a>
-      </nav>
-    </div>
+  <header class="landing-header interior-header">
+    <a class="landing-brand" href="./index.html" aria-label="Xin Xiong, homepage"><span>XX</span><small>Science &amp; Humanity</small></a>
+    <nav class="landing-nav" aria-label="Main navigation"><a data-page="index.html" href="./index.html">Home</a>
+<a data-page="about.html" href="./about.html">Profile</a>
+<a data-page="research.html" href="./research.html">Research</a>
+<a data-page="outputs.html" href="./outputs.html" aria-current="page">Archive</a>
+<a data-page="game.html" href="./game.html">Game</a>
+<a href="https://blog.xiongxin.online">Notes</a>
+<a data-page="contact.html" href="./contact.html">Contact</a>
+<a class="nav-cv" href="./cv.html">Academic CV <span aria-hidden="true">↗</span></a>
+<a class="interior-language" href="./zh/outputs.html" aria-label="切换到中文">中文</a></nav>
   </header>
 
   <main class="page-wrap">
@@ -51,7 +51,7 @@
         </div>
         <div class="umap-viewer" data-umap-viewer>
           <div class="umap-toolbar"><span class="umap-status">Interactive view</span><div class="umap-actions"><button class="btn btn-compact js-umap-reset" type="button">Reset view</button><button class="btn btn-compact js-umap-legend" type="button" aria-pressed="false">Show legend</button><button class="btn btn-compact js-umap-fullscreen" type="button">Full screen</button></div></div>
-          <iframe src="./files/umap/umap-interactive.html" title="Interactive 3D UMAP of integrated pan-cancer single-cell data" loading="lazy"></iframe>
+          <iframe src="./files/umap/umap-interactive.html?theme=dark" title="Interactive 3D UMAP of integrated pan-cancer single-cell data" loading="lazy"></iframe>
         </div>
       </section>
 
@@ -72,7 +72,6 @@
               <li>Placed near the top of the archive for quick review.</li>
               <li>Displayed as a high-resolution image rather than a hidden file link.</li>
               <li>Preserved as the original PNG for full-size inspection.</li> -->
-            </ul>
             <div class="cta-row">
               <a class="btn" href="./files/Poster_01.png" target="_blank" rel="noopener noreferrer">Open Poster</a>
             </div>
@@ -133,7 +132,7 @@
     </div>
   </main>
 
-  <footer class="site-footer">
+  <footer class="landing-footer interior-footer">
     <div class="container footer-inner">
       <p>&copy; <span class="js-year"></span> Xin Xiong</p>
       <p><a href="./contact.html">More materials</a></p>
