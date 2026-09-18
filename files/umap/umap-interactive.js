@@ -1,6 +1,7 @@
 (() => {
   const frame = document.getElementById("umap-frame");
   const isZh = new URLSearchParams(location.search).get("lang") === "zh";
+  const dark = new URLSearchParams(location.search).get("theme") === "dark";
   const initialCamera = { eye: { x: 1.55, y: 1.55, z: 1.2 } };
   let legendVisible = false;
   let layoutTimer = null;
@@ -56,7 +57,8 @@
     "legend.xanchor": "right",
     "legend.y": 0.98,
     "legend.yanchor": "top",
-    "legend.bgcolor": "rgba(255,255,255,0.94)",
+    "legend.bgcolor": dark ? "rgba(7,17,15,0.94)" : "rgba(255,255,255,0.94)",
+    "legend.font.color": dark ? "#f1efe7" : "#121212",
     "legend.bordercolor": "rgba(17,17,17,0.22)",
     "legend.borderwidth": 1
   });
@@ -76,9 +78,18 @@
 
     win.Plotly.relayout(plot, {
       ...legendLayout(),
-      paper_bgcolor: "#ffffff",
-      "scene.bgcolor": "#ffffff",
-      "scene.camera": initialCamera
+      paper_bgcolor: dark ? "#07110f" : "#ffffff",
+      "scene.bgcolor": dark ? "#07110f" : "#ffffff",
+      ...(dark ? {
+        "font.color": "#b4c5bd",
+        ...Object.fromEntries(["xaxis", "yaxis", "zaxis"].flatMap(axis => [
+          [`scene.${axis}.color`, "#b4c5bd"],
+          [`scene.${axis}.gridcolor`, "#263b32"],
+          [`scene.${axis}.zerolinecolor`, "#263b32"],
+          [`scene.${axis}.backgroundcolor`, "#07110f"]
+        ]))
+      } : {}),
+      "scene.camera": JSON.parse(JSON.stringify(initialCamera))
     });
     win.Plotly.Plots.resize(plot);
     window.parent.postMessage({ type: "umap-ready" }, location.origin);
@@ -101,7 +112,7 @@
   const resetView = () => {
     const context = getPlot();
     if (context?.plot && context.win.Plotly) {
-      context.win.Plotly.relayout(context.plot, { "scene.camera": initialCamera });
+      context.win.Plotly.relayout(context.plot, { "scene.camera": JSON.parse(JSON.stringify(initialCamera)) });
     }
   };
 

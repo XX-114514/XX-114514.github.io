@@ -30,6 +30,16 @@
     setStoredLang(preferredFromUrl);
   }
 
+  const interiorLanguage = document.querySelector(".interior-language");
+  if (interiorLanguage) {
+    const updateLanguageHref = () => {
+      interiorLanguage.href = (isZh ? `../${pageName}` : `./zh/${pageName}`) + window.location.hash;
+    };
+    updateLanguageHref();
+    window.addEventListener("hashchange", updateLanguageHref);
+    interiorLanguage.addEventListener("click", () => setStoredLang(isZh ? "en" : "zh"));
+  }
+
   const headerInner = document.querySelector(".header-inner");
   if (headerInner && !document.querySelector(".lang-toggle")) {
     const controls = document.createElement("div");
@@ -276,7 +286,7 @@
   }
 
   const header = document.querySelector(".landing-header");
-  if (header && !header.querySelector(".landing-lang")) {
+  if (header && !header.querySelector(".landing-lang, .interior-language")) {
     const isZh = document.documentElement.lang.toLowerCase().startsWith("zh");
     const languageLink = document.createElement("a");
     languageLink.className = "landing-lang";

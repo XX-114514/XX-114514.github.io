@@ -1,0 +1,121 @@
+/* Interior pages share the homepage palette, typography and navigation.
+   Scoped to .interior-page so the existing landing pages remain independent. */
+.interior-page {
+  --ink: #07110f;
+  --ink-soft: #44504d;
+  --ink-faint: #52625b;
+  --line-soft: rgba(7,17,15,.18);
+  background: var(--ivory);
+  color: var(--night);
+  overflow-x: clip;
+}
+.interior-page.is-zh { font-family: "Avenir Next", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; }
+.interior-page .interior-header,
+.interior-page .interior-header.is-scrolled { position: sticky; inset: 0 0 auto; min-height: 5rem; background: rgba(7,17,15,.97); padding: 1rem 3.2vw; }
+.interior-page .landing-nav { gap: clamp(.65rem,1.5vw,1.7rem); flex-wrap: wrap; justify-content: flex-end; }
+.interior-page .landing-nav a { display: inline-flex; align-items: center; min-height: 30px; }
+.interior-page .landing-nav a[aria-current="page"] { color: var(--mint); }
+.interior-page .landing-nav a[aria-current="page"]::after { transform: scaleX(1); }
+.interior-page .landing-nav .nav-cv[aria-current="page"] { border-color: var(--mint); }
+.interior-page .interior-language { border-left: 1px solid var(--landing-line); padding-left: .8rem; }
+.interior-page .scroll-progress { background: var(--mint); }
+.interior-page .page-wrap { padding: 0 0 5rem; }
+.interior-page .page-wrap > .container { width: 100%; }
+.interior-page .page-hero,
+.interior-page .hero { padding: clamp(3rem,6vw,6rem) 6vw; border: 0; border-radius: 0; box-shadow: none; background: radial-gradient(ellipse at 90% 10%,#143b2d 0,transparent 52%),var(--night); color: var(--ivory); }
+.interior-page .page-hero::before,
+.interior-page .page-hero::after,
+.interior-page .hero::before,
+.interior-page .hero::after,
+.interior-page .section-shell::before,
+.interior-page .section-shell::after { display: none; }
+.interior-page .page-hero-grid,
+.interior-page .hero-inner { padding: 0; gap: 5vw; grid-template-columns: minmax(0,1.65fr) minmax(230px,.65fr); }
+.interior-page .eyebrow { color: var(--mint); font: 500 .7rem/1.6 var(--font-mono); letter-spacing: .12em; margin-bottom: 1.8rem; }
+.interior-page .eyebrow::before { background: var(--mint); width: .4rem; height: .4rem; border-radius: 50%; }
+.interior-page h1 { font-family: Georgia,"Times New Roman",serif; font-size: clamp(3rem,6.6vw,6.8rem); font-weight: 400; line-height: .99; letter-spacing: -.045em; }
+.interior-page h1 span { margin-top: 1.25rem; max-width: 50ch; color: var(--mint); font: 400 clamp(.9rem,1.4vw,1.1rem)/1.6 var(--font-sans); letter-spacing: 0; text-transform: none; }
+.interior-page .lead { color: #b7c4bc; font-size: .98rem; line-height: 1.85; margin-top: 1.6rem; }
+.interior-page .page-hero-side,
+.interior-page .hero-panel { border: 0; border-left: 1px solid var(--landing-line); border-radius: 0; background: none; box-shadow: none; padding: 0 0 0 1.7rem; }
+.interior-page .page-hero-side p { color: #b7c4bc; font-size: .85rem; }
+.interior-page .page-hero-note,
+.interior-page .panel-label { color: var(--mint); background: none; border: 0; border-radius: 0; padding: 0; font: 400 .65rem/1.5 var(--font-mono); }
+.interior-page .section-shell { margin: 0; padding: clamp(2.5rem,5vw,5rem) 6vw; border: 0; border-bottom: 1px solid var(--line-soft); border-radius: 0; background: var(--ivory); box-shadow: none; backdrop-filter: none; overflow: visible; scroll-margin-top: 7rem; }
+.interior-page .section-shell:nth-of-type(odd) { background: #dfe6df; }
+.interior-page .section-head { padding-bottom: 1.4rem; margin-bottom: 2rem; border-color: var(--line-soft); flex-wrap: wrap; }
+.interior-page h2 { font: 400 clamp(2rem,3.6vw,3.6rem)/1.08 Georgia,"Times New Roman",serif; letter-spacing: -.035em; }
+.interior-page .section-note { padding: 0; border: 0; background: none; color: var(--mint-dark); font: 400 .65rem/1.6 var(--font-mono); white-space: normal; }
+.interior-page .card-kicker { color: var(--mint-dark); font-size: .65rem; }
+.interior-page :is(.paper,.feature-card,.card,.resource-card,.project-card,.poster-copy,.pdf-feature,.blog-post) { border: 1px solid var(--line-soft); border-radius: 0; background: rgba(251,250,246,.55); box-shadow: none; padding: clamp(1.25rem,2.5vw,2.5rem); }
+.interior-page :is(.paper,.feature-card,.card,.resource-card,.project-card):hover { transform: none; box-shadow: none; border-color: #8da699; }
+.interior-page :is(.paper,.feature-card,.card,.resource-card,.project-card) h3 { font: 400 clamp(1.35rem,2.1vw,2.15rem)/1.2 Georgia,"Times New Roman",serif; margin-bottom: 1rem; max-width: none; }
+.interior-page :is(.paper,.feature-card,.card,.resource-card,.project-card) p { line-height: 1.8; }
+.interior-page :is(.layout-split,.layout-two-thirds,.feature-grid,.card-grid,.resource-grid,.media-grid,.project-stack) { gap: 1rem; }
+.interior-page .project-tag,
+.interior-page .chip-list li { border-color: var(--line-soft); border-radius: 0; background: transparent; color: var(--mint-dark); }
+.interior-page .project-head { gap: 2rem; }
+.interior-page .btn { border: 1px solid currentColor; border-radius: 0; background: transparent; color: var(--night); box-shadow: none; font-family: var(--font-sans); text-transform: none; letter-spacing: 0; }
+.interior-page .btn:hover { background: var(--night); color: var(--ivory); transform: none; }
+.interior-page :is(.hero,.page-hero) .btn { color: var(--ivory); border-color: var(--landing-line); }
+.interior-page :is(.hero,.page-hero) .btn:hover { color: var(--night); background: var(--mint); }
+.interior-page .hero .chip-list li { color: var(--mint); border-color: var(--landing-line); }
+.interior-page .metric-tile { border: 0; border-top: 1px solid var(--landing-line); border-radius: 0; background: none; padding: 1rem 0; box-shadow: none; }
+.interior-page .metric-tile strong { color: var(--ivory); font-size: .9rem; }
+.interior-page .metric-tile span { color: #b7c4bc; font-size: .8rem; }
+.interior-page .metric-grid { grid-template-columns: 1fr; }
+.interior-page .timeline-item time { color: var(--mint-dark); }
+.interior-page .timeline-item .story { border-color: var(--line-soft); }
+.interior-page .poster-frame { border-radius: 0; box-shadow: none; background: #dfe6df; padding: 1.5rem; }
+.interior-page .poster-frame img { border: 0; border-radius: 0; box-shadow: none; }
+.interior-page .poster-copy h3 { font: 400 2.3rem/1.1 Georgia,serif; }
+.interior-page #pan-cancer-umap { --ink-soft: #b7c4bc; --ink-faint: #b7c4bc; background: var(--night); color: var(--ivory); border-top: 1px solid var(--landing-line); }
+.interior-page #pan-cancer-umap .section-head { border-color: var(--landing-line); }
+.interior-page #pan-cancer-umap :is(.card-kicker,.section-note) { color: var(--mint); }
+.interior-page .umap-output-intro { gap: 3rem; margin-bottom: 2rem; }
+.interior-page .umap-output-intro h3 { font: 400 clamp(1.6rem,2.7vw,2.7rem)/1.15 Georgia,serif; margin: .65rem 0 1rem; }
+.interior-page .umap-output-intro p { font-size: .9rem; line-height: 1.8; }
+.interior-page .umap-stats { gap: 0; grid-template-columns: repeat(3,minmax(0,1fr)); border-block: 1px solid var(--landing-line); }
+.interior-page .umap-stats div { border: 0; border-radius: 0; background: none; padding: 1.25rem .6rem; }
+.interior-page .umap-stats dt { font-size: .6rem; }
+.interior-page .umap-stats dd { color: var(--mint); font: 400 clamp(1.3rem,2.3vw,2.3rem)/1.3 Georgia,serif; }
+.interior-page .umap-viewer { border: 1px solid var(--landing-line); border-radius: 0; background: var(--night); }
+.interior-page .umap-toolbar { background: var(--night-soft); border-color: var(--landing-line); padding: .8rem 1rem; }
+.interior-page .umap-status { color: var(--mint); font-size: .65rem; }
+.interior-page .umap-toolbar .btn { color: var(--ivory); border-color: var(--landing-line); }
+.interior-page .umap-toolbar .btn:hover,
+.interior-page .umap-toolbar .btn[aria-pressed="true"] { color: var(--night); background: var(--mint); }
+.interior-page .umap-viewer iframe { background: var(--night); }
+.interior-page .interior-footer { padding: 2rem 6vw; }
+.interior-page .footer-inner { width: 100%; }
+.interior-page .footer-inner p { color: #b7c4bc; }
+.interior-page a:focus-visible,
+.interior-page button:focus-visible { outline: 2px solid #3d9975; outline-offset: 5px; }
+.interior-page .game-splash { padding-top: 5rem; }
+.interior-page.game-page .page-wrap { padding-bottom: 0; }
+.interior-page.game-page .game-splash .btn { background: var(--mint); color: var(--night); }
+.interior-page :is(.project-card,.paper,.resource-card,.hero-copy,.page-hero-grid > div) { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 1000px) {
+  .interior-page .landing-brand small { display: none; }
+  .interior-page .page-hero-grid,
+  .interior-page .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .interior-page .hero-panel .metric-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+@media (max-width: 720px) {
+  .interior-page .interior-header,
+  .interior-page .interior-header.is-scrolled { position: relative; align-items: flex-start; gap: 1rem; padding: 1rem 5vw; }
+  .interior-page .landing-nav { max-width: none; overflow: visible; gap: .3rem .9rem; }
+  .interior-page .landing-nav a { display: inline-flex; min-height: 36px; font-size: .65rem; }
+  .interior-page .landing-nav .nav-cv { padding: .35rem .6rem; }
+  .interior-page .page-hero,.interior-page .hero { padding: 3rem 6vw; }
+  .interior-page .section-shell { scroll-margin-top: 1rem; }
+  .interior-page :is(.layout-two-thirds,.layout-split,.feature-grid,.poster-feature,.pdf-feature) { grid-template-columns: minmax(0,1fr); }
+  .interior-page .project-head { flex-direction: column; gap: 1rem; }
+  .interior-page .umap-output-intro { grid-template-columns: minmax(0,1fr); gap: 1.5rem; }
+  .interior-page .resource-grid,.interior-page .card-grid { grid-template-columns: minmax(0,1fr); }
+  .interior-page .poster-frame { min-height: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .interior-page *, .interior-page *::before { animation: none !important; transition: none !important; } }
+.interior-page .hero-panel .micro-timeline span { color: var(--mint); }
+.interior-page .hero-panel .micro-timeline p { color: #b7c4bc; }
+.interior-page .hero-panel .micro-timeline div { border-color: var(--landing-line); }
