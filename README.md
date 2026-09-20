@@ -14,9 +14,20 @@ The language switch links between English and Chinese.
 
 - index.html — English homepage
 - zh/index.html — Chinese homepage
+- blog.html and zh/blog.html — bilingual research-document indexes
+- blog/ and zh/blog/ — document introduction and reading pages
+- files/ — original PDFs and downloadable academic files
+- assets/pdf-reader.js and assets/pdfjs/ — self-hosted PDF reader and PDF.js runtime
 - styles.css — shared layout, responsive design, and effects
 - app.js — language handling, reveal/count animations, interactive canvas, and card tilt
 - output/playwright/ — browser-validation screenshots (not included in the delivery archive)
+
+## Add a research document
+
+1. Put the original PDF in `files/` with a stable, descriptive filename.
+2. Add its English and Chinese reading pages under `blog/` and `zh/blog/`.
+3. Add a card to both blog indexes with document type, version, date, and status.
+4. Keep an explicit link to the original PDF for full-screen viewing and download.
 
 ## GitHub Pages
 

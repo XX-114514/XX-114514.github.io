@@ -33,7 +33,7 @@
   const interiorLanguage = document.querySelector(".interior-language");
   if (interiorLanguage) {
     const updateLanguageHref = () => {
-      interiorLanguage.href = (isZh ? `../${pageName}` : `./zh/${pageName}`) + window.location.hash;
+      interiorLanguage.href = (interiorLanguage.dataset.langHref || (isZh ? `../${pageName}` : `./zh/${pageName}`)) + window.location.hash;
     };
     updateLanguageHref();
     window.addEventListener("hashchange", updateLanguageHref);
