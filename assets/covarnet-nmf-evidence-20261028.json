@@ -1,0 +1,439 @@
+{
+  "title": "CoVarNet NMF extensions retrospective",
+  "published_date": "2026-10-28",
+  "source_observed_utc": "2026-10-28T04:36:06.088077Z",
+  "scope": "Historical 106-state prototype, not the October 2026 atlas modules",
+  "verification": "Read source code and aggregate summaries; no raw-data refit in this review",
+  "source_fingerprints": [
+    {
+      "path": "Project_v4/README.md",
+      "bytes": 4839,
+      "sha256": "b9dab17b961cb9df10bbb9c6090856b336bfd94587b40060ea95ecacc9defaf4"
+    },
+    {
+      "path": "Project_v4/docs/00_algorithm_design.md",
+      "bytes": 7541,
+      "sha256": "319d70a659f9e3c6efe6751889b45ec6d6766372846f5594dfcd516baa4c7304"
+    },
+    {
+      "path": "Project_v4/docs/02_validation_plan.md",
+      "bytes": 5170,
+      "sha256": "1748b6cfb99643bd08eb00293a306913fcaed175d9272d4dfef8c1172e06bdb0"
+    },
+    {
+      "path": "Project_v4/docs/05_initial_feasibility_results.md",
+      "bytes": 2976,
+      "sha256": "df7f24db70727fdf5c8286395d912b86d4bb75a11efb5256d7900b6388da68cc"
+    },
+    {
+      "path": "Project_v4/docs/06_h2_multiseed_falsification.md",
+      "bytes": 7220,
+      "sha256": "2d4ad3279b012ccbcdbc426682d3b647800fd500dd4f7b013a79ddbb2406ab2a"
+    },
+    {
+      "path": "Project_v4/docs/07_kl_loss_dev_log.md",
+      "bytes": 16573,
+      "sha256": "7fc6dfbda37fc965b62a6954981b8e53d2737fcd31e7b0f4f12072f5b321fba1"
+    },
+    {
+      "path": "Project_v4/docs/08_spatial_block_holdout_dev_log.md",
+      "bytes": 12790,
+      "sha256": "ab0b6b08b0dd40b9b770c80f111a1cc44468762103f083c2072ee8399d29bc37"
+    },
+    {
+      "path": "Project_v4/src/spacovarnet/graph_sparse_nmf.py",
+      "bytes": 19168,
+      "sha256": "8e9dde7e1ea717d410baec828f1b86e93978ca83d4a67c403e588eb3ddb672aa"
+    },
+    {
+      "path": "Project_v4/tests/test_graph_sparse_nmf.py",
+      "bytes": 7843,
+      "sha256": "2b8799035c2ea3bf8aca592634d7c363e07ce37e40b75a36a46560ea9d463aa5"
+    },
+    {
+      "path": "Project_v4/scripts/h2_multiseed_null_graph_falsification.py",
+      "bytes": 10384,
+      "sha256": "e34757596df87c9298c3cb4cccdffc3d23a53023a83fab11aca266971199ed9e"
+    },
+    {
+      "path": "Project_v4/scripts/h2_spatial_block_holdout.py",
+      "bytes": 10789,
+      "sha256": "ffb2360a9a26c781672afb70927ae40b92ab0dd456fb73a0b98d6c720de47c94"
+    },
+    {
+      "path": "Project_v4/config/defaults.yaml",
+      "bytes": 856,
+      "sha256": "fa88b6e771e2ce4ecd22043bccd1c1793bb82d1b061470eaec0b04918a25060f"
+    },
+    {
+      "path": "Project_v4/results/pilot_joint_sc_cosmx_20260812_v1/summary.json",
+      "bytes": 11370,
+      "sha256": "9b184bf9008af8441571bc09ae9f6bcebc4e716ecf22c3a8ddf5970b89462e7d"
+    },
+    {
+      "path": "Project_v4/results/h2_multiseed_null_graph_20260821_v1/summary.json",
+      "bytes": 4096,
+      "sha256": "e04abff65e30a3b8187ff6301e2e19514c762b45af0274eefc19ae3f19c6bc2b"
+    },
+    {
+      "path": "Project_v4/results/h2_multiseed_null_graph_20260821_v1_klloss/summary.json",
+      "bytes": 3956,
+      "sha256": "88708d237e4332fa60f1b46eca66304a8d479312747b1923720de49b8bedfe6d"
+    },
+    {
+      "path": "Project_v4/results/h2_spatial_block_holdout_20260822_v1/summary.json",
+      "bytes": 4246,
+      "sha256": "2da64a78d4bbf317107c1e08c59fa93f1f6c00d382debd6d9c92c7d0606852d3"
+    },
+    {
+      "path": "Project_v4/results/h2_spatial_block_holdout_20260822_v1_partition2/summary.json",
+      "bytes": 4172,
+      "sha256": "8917be5708909bd056dd01009118dd08678a2cd7ab442b772617692f382e871f"
+    },
+    {
+      "path": "Project_v2/CoVarNet/docs/CoVarNet_python_migration_plan.md",
+      "bytes": 6125,
+      "sha256": "b62262f3b1ddb821eedda3b2a84821f0cbcb5675ae608ced822bd91ecab02cde"
+    },
+    {
+      "path": "Project_v2/CoVarNet/python/covarnet_py/core.py",
+      "bytes": 37937,
+      "sha256": "b7d504f235ee20454853fe1f05ff7995eecd3e597f74c7836d612c7cc947b13e"
+    },
+    {
+      "path": "Project_v2/CoVarNet/python/README.md",
+      "bytes": 1247,
+      "sha256": "221321f37fff06f04f6e9b78ca8293f7c91fd99b057d2a907c27b3d1fb4c624a"
+    }
+  ],
+  "experiments": [
+    {
+      "source": "Project_v4/results/h2_multiseed_null_graph_20260821_v1/summary.json",
+      "sha256": "e04abff65e30a3b8187ff6301e2e19514c762b45af0274eefc19ae3f19c6bc2b",
+      "parameters": {
+        "n_seeds": 30,
+        "rank": 9,
+        "max_iter": 500,
+        "graph_lambda": 0.1,
+        "l1_w": 0.001,
+        "l1_h": 0.0001,
+        "cosmx_weight_multiplier": 0.1,
+        "loss": "frobenius"
+      },
+      "comparisons": [
+        {
+          "treatment": "real_graph",
+          "control": "permuted_graph",
+          "metric": "cosmx_real_graph_roughness",
+          "n_seeds": 30,
+          "mean_diff": -0.2332571803669203,
+          "std_diff": 0.01768693181838697,
+          "median_diff": -0.2351889849803417,
+          "fraction_seeds_favoring_treatment": 1.0,
+          "wilcoxon_statistic": 0.0,
+          "wilcoxon_pvalue": 1.862645149230957e-09
+        },
+        {
+          "treatment": "real_graph",
+          "control": "degree_matched_graph",
+          "metric": "cosmx_real_graph_roughness",
+          "n_seeds": 30,
+          "mean_diff": -0.2260572216674465,
+          "std_diff": 0.01847837580419218,
+          "median_diff": -0.2285774860514591,
+          "fraction_seeds_favoring_treatment": 1.0,
+          "wilcoxon_statistic": 0.0,
+          "wilcoxon_pvalue": 1.862645149230957e-09
+        },
+        {
+          "treatment": "real_graph",
+          "control": "no_graph",
+          "metric": "cosmx_real_graph_roughness",
+          "n_seeds": 30,
+          "mean_diff": -1.4541061122429884,
+          "std_diff": 0.1090109881497675,
+          "median_diff": -1.4641576938252479,
+          "fraction_seeds_favoring_treatment": 1.0,
+          "wilcoxon_statistic": 0.0,
+          "wilcoxon_pvalue": 1.862645149230957e-09
+        },
+        {
+          "treatment": "real_graph",
+          "control": "permuted_graph",
+          "metric": "frozen_w_match_mean",
+          "n_seeds": 30,
+          "mean_diff": 9.91397549592432e-05,
+          "std_diff": 0.005878295684074671,
+          "median_diff": 2.171617084539834e-05,
+          "fraction_seeds_favoring_treatment": 0.5333333333333333,
+          "wilcoxon_statistic": 232.0,
+          "wilcoxon_pvalue": 1.0
+        },
+        {
+          "treatment": "real_graph",
+          "control": "degree_matched_graph",
+          "metric": "frozen_w_match_mean",
+          "n_seeds": 30,
+          "mean_diff": 0.0015642452527710015,
+          "std_diff": 0.006777910933615293,
+          "median_diff": -1.4288318700816927e-05,
+          "fraction_seeds_favoring_treatment": 0.4666666666666667,
+          "wilcoxon_statistic": 224.0,
+          "wilcoxon_pvalue": 0.871207794174552
+        }
+      ]
+    },
+    {
+      "source": "Project_v4/results/h2_multiseed_null_graph_20260821_v1_klloss/summary.json",
+      "sha256": "88708d237e4332fa60f1b46eca66304a8d479312747b1923720de49b8bedfe6d",
+      "parameters": {
+        "loss": "kl",
+        "n_seeds": 15,
+        "rank": 9,
+        "max_iter": 500,
+        "graph_lambda": 0.1,
+        "l1_w": 0.001,
+        "l1_h": 0.0001,
+        "cosmx_weight_multiplier": 0.1
+      },
+      "comparisons": [
+        {
+          "treatment": "real_graph",
+          "control": "permuted_graph",
+          "metric": "cosmx_real_graph_roughness",
+          "n_seeds": 15,
+          "mean_diff": -0.133998903178914,
+          "std_diff": 0.028261082665140942,
+          "median_diff": -0.1231265409138933,
+          "fraction_seeds_favoring_treatment": 1.0,
+          "wilcoxon_statistic": 0.0,
+          "wilcoxon_pvalue": 6.103515625e-05
+        },
+        {
+          "treatment": "real_graph",
+          "control": "degree_matched_graph",
+          "metric": "cosmx_real_graph_roughness",
+          "n_seeds": 15,
+          "mean_diff": -0.12141445550760513,
+          "std_diff": 0.017436361489419613,
+          "median_diff": -0.11553001213444247,
+          "fraction_seeds_favoring_treatment": 1.0,
+          "wilcoxon_statistic": 0.0,
+          "wilcoxon_pvalue": 6.103515625e-05
+        },
+        {
+          "treatment": "real_graph",
+          "control": "no_graph",
+          "metric": "cosmx_real_graph_roughness",
+          "n_seeds": 15,
+          "mean_diff": -0.9470249279348625,
+          "std_diff": 0.10519439252637583,
+          "median_diff": -0.975058615066791,
+          "fraction_seeds_favoring_treatment": 1.0,
+          "wilcoxon_statistic": 0.0,
+          "wilcoxon_pvalue": 6.103515625e-05
+        },
+        {
+          "treatment": "real_graph",
+          "control": "permuted_graph",
+          "metric": "frozen_w_match_mean",
+          "n_seeds": 15,
+          "mean_diff": -1.6544886220892786e-05,
+          "std_diff": 0.0013343320069946138,
+          "median_diff": -5.892338365209859e-05,
+          "fraction_seeds_favoring_treatment": 0.13333333333333333,
+          "wilcoxon_statistic": 22.0,
+          "wilcoxon_pvalue": 0.0301513671875
+        },
+        {
+          "treatment": "real_graph",
+          "control": "degree_matched_graph",
+          "metric": "frozen_w_match_mean",
+          "n_seeds": 15,
+          "mean_diff": -0.00015243225959877816,
+          "std_diff": 0.0006445473096241579,
+          "median_diff": -5.254736541571159e-05,
+          "fraction_seeds_favoring_treatment": 0.2,
+          "wilcoxon_statistic": 28.0,
+          "wilcoxon_pvalue": 0.072998046875
+        }
+      ]
+    },
+    {
+      "source": "Project_v4/results/h2_spatial_block_holdout_20260822_v1/summary.json",
+      "sha256": "2da64a78d4bbf317107c1e08c59fa93f1f6c00d382debd6d9c92c7d0606852d3",
+      "parameters": {
+        "loss": "frobenius",
+        "n_blocks": 8,
+        "block_partition_seed": 0,
+        "rank": 9,
+        "max_iter": 500,
+        "projection_max_iter": 1000,
+        "graph_lambda": 0.1,
+        "l1_w": 0.001,
+        "l1_h": 0.0001,
+        "cosmx_weight_multiplier": 0.1
+      },
+      "comparisons": [
+        {
+          "treatment": "real_graph",
+          "control": "permuted_graph",
+          "metric": "held_out_mse",
+          "n_blocks": 8,
+          "mean_diff": -1.5372963964987302e-05,
+          "median_diff": -6.625169199367745e-06,
+          "fraction_blocks_favoring_treatment": 0.625,
+          "wilcoxon_statistic": 6.0,
+          "wilcoxon_pvalue": 0.109375
+        },
+        {
+          "treatment": "real_graph",
+          "control": "degree_matched_graph",
+          "metric": "held_out_mse",
+          "n_blocks": 8,
+          "mean_diff": -1.6826202557060268e-05,
+          "median_diff": -7.052372365501727e-06,
+          "fraction_blocks_favoring_treatment": 0.625,
+          "wilcoxon_statistic": 7.0,
+          "wilcoxon_pvalue": 0.1484375
+        },
+        {
+          "treatment": "real_graph",
+          "control": "no_graph",
+          "metric": "held_out_mse",
+          "n_blocks": 8,
+          "mean_diff": 2.837105443323799e-05,
+          "median_diff": 1.9955611334658563e-05,
+          "fraction_blocks_favoring_treatment": 0.125,
+          "wilcoxon_statistic": 2.0,
+          "wilcoxon_pvalue": 0.0234375
+        },
+        {
+          "treatment": "real_graph",
+          "control": "permuted_graph",
+          "metric": "held_out_mean_kl",
+          "n_blocks": 8,
+          "mean_diff": -4.367264442451269e-05,
+          "median_diff": -8.612026529030564e-06,
+          "fraction_blocks_favoring_treatment": 0.75,
+          "wilcoxon_statistic": 6.0,
+          "wilcoxon_pvalue": 0.109375
+        },
+        {
+          "treatment": "real_graph",
+          "control": "degree_matched_graph",
+          "metric": "held_out_mean_kl",
+          "n_blocks": 8,
+          "mean_diff": -3.541468064046163e-05,
+          "median_diff": -6.995387574770112e-06,
+          "fraction_blocks_favoring_treatment": 0.625,
+          "wilcoxon_statistic": 10.0,
+          "wilcoxon_pvalue": 0.3125
+        },
+        {
+          "treatment": "real_graph",
+          "control": "no_graph",
+          "metric": "held_out_mean_kl",
+          "n_blocks": 8,
+          "mean_diff": 1.1208067916636255e-05,
+          "median_diff": -1.1048406089765594e-05,
+          "fraction_blocks_favoring_treatment": 0.625,
+          "wilcoxon_statistic": 15.0,
+          "wilcoxon_pvalue": 0.7421875
+        }
+      ]
+    },
+    {
+      "source": "Project_v4/results/h2_spatial_block_holdout_20260822_v1_partition2/summary.json",
+      "sha256": "8917be5708909bd056dd01009118dd08678a2cd7ab442b772617692f382e871f",
+      "parameters": {
+        "loss": "frobenius",
+        "n_blocks": 8,
+        "block_partition_seed": 1,
+        "rank": 9,
+        "max_iter": 500,
+        "projection_max_iter": 1000,
+        "graph_lambda": 0.1,
+        "l1_w": 0.001,
+        "l1_h": 0.0001,
+        "cosmx_weight_multiplier": 0.1
+      },
+      "comparisons": [
+        {
+          "treatment": "real_graph",
+          "control": "permuted_graph",
+          "metric": "held_out_mse",
+          "n_blocks": 8,
+          "mean_diff": -2.7713170479086967e-06,
+          "median_diff": 7.562083600178016e-07,
+          "fraction_blocks_favoring_treatment": 0.375,
+          "wilcoxon_statistic": 15.0,
+          "wilcoxon_pvalue": 0.7421875
+        },
+        {
+          "treatment": "real_graph",
+          "control": "degree_matched_graph",
+          "metric": "held_out_mse",
+          "n_blocks": 8,
+          "mean_diff": -4.0849220677902955e-06,
+          "median_diff": 7.579908022584819e-07,
+          "fraction_blocks_favoring_treatment": 0.5,
+          "wilcoxon_statistic": 14.0,
+          "wilcoxon_pvalue": 0.640625
+        },
+        {
+          "treatment": "real_graph",
+          "control": "no_graph",
+          "metric": "held_out_mse",
+          "n_blocks": 8,
+          "mean_diff": 1.417182509565705e-06,
+          "median_diff": 1.7912147411140722e-05,
+          "fraction_blocks_favoring_treatment": 0.375,
+          "wilcoxon_statistic": 11.0,
+          "wilcoxon_pvalue": 0.3828125
+        },
+        {
+          "treatment": "real_graph",
+          "control": "permuted_graph",
+          "metric": "held_out_mean_kl",
+          "n_blocks": 8,
+          "mean_diff": 2.5803643783316177e-06,
+          "median_diff": 8.407460062868216e-06,
+          "fraction_blocks_favoring_treatment": 0.375,
+          "wilcoxon_statistic": 16.0,
+          "wilcoxon_pvalue": 0.84375
+        },
+        {
+          "treatment": "real_graph",
+          "control": "degree_matched_graph",
+          "metric": "held_out_mean_kl",
+          "n_blocks": 8,
+          "mean_diff": -7.662547408894549e-06,
+          "median_diff": -2.67720819083217e-07,
+          "fraction_blocks_favoring_treatment": 0.5,
+          "wilcoxon_statistic": 13.0,
+          "wilcoxon_pvalue": 0.546875
+        },
+        {
+          "treatment": "real_graph",
+          "control": "no_graph",
+          "metric": "held_out_mean_kl",
+          "n_blocks": 8,
+          "mean_diff": 6.536347193917408e-06,
+          "median_diff": 1.6074957833053793e-05,
+          "fraction_blocks_favoring_treatment": 0.5,
+          "wilcoxon_statistic": 14.0,
+          "wilcoxon_pvalue": 0.640625
+        }
+      ]
+    }
+  ],
+  "interpretation": {
+    "seeds": "Algorithmic repetitions on the same data; not independent biological samples",
+    "partitions": "Two spatial partitions of the same FOV; not independent tissue replications",
+    "no_graph": "Disables both sc-composition and spatial graph penalties in the inspected scripts",
+    "rewiring": "Preserves unweighted node degrees and global edge-weight multiset, not each node strength",
+    "holdout": "Fixed-W dictionary reconstruction using observed held-out X to estimate H; not prediction of unobserved features",
+    "status": "Prototype; no demonstrated stable held-out reconstruction gain in the inspected pilot"
+  }
+}
