@@ -1,69 +1,45 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>给 CoVarNet 的 NMF 加上空间图之后 | Xin Xiong</title><meta name="description" content="共享基底、多视图、稀疏约束与 KL 扩展，以及比活动图更平滑更难的一道检验。"><meta name="theme-color" content="#07110f"><link rel="canonical" href="https://xx-114514.github.io/zh/blog/covarnet-nmf-spatial-regularization.html"><link rel="alternate" hreflang="en" href="https://xx-114514.github.io/blog/covarnet-nmf-spatial-regularization.html"><link rel="alternate" hreflang="zh-CN" href="https://xx-114514.github.io/zh/blog/covarnet-nmf-spatial-regularization.html"><link rel="icon" href="../../favicon.svg"><link rel="stylesheet" href="../../styles.css"><link rel="stylesheet" href="../../interior.css"><link rel="stylesheet" href="../../assets/covarnet-nmf-20261028.css"><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "给 CoVarNet 的 NMF 加上空间图之后", "datePublished": "2026-10-28", "dateModified": "2026-10-28", "author": {"@type": "Person", "name": "Xin Xiong"}, "inLanguage": "zh-CN", "mainEntityOfPage": "https://xx-114514.github.io/zh/blog/covarnet-nmf-spatial-regularization.html"}</script></head>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SpaCoVarNet-GS：联合学习细胞组成与空间组织的模块框架 | Xin Xiong</title><meta name="description" content="共享模块基底与图约束，让跨样本组成和局部空间邻域共同参与模块发现。"><meta name="theme-color" content="#07110f"><link rel="canonical" href="https://xx-114514.github.io/zh/blog/covarnet-nmf-spatial-regularization.html"><link rel="alternate" hreflang="en" href="https://xx-114514.github.io/blog/covarnet-nmf-spatial-regularization.html"><link rel="alternate" hreflang="zh-CN" href="https://xx-114514.github.io/zh/blog/covarnet-nmf-spatial-regularization.html"><link rel="icon" href="../../favicon.svg"><link rel="stylesheet" href="../../styles.css"><link rel="stylesheet" href="../../interior.css"><link rel="stylesheet" href="../../assets/covarnet-nmf-20261028.css"><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "SpaCoVarNet-GS：联合学习细胞组成与空间组织的模块框架", "datePublished": "2026-10-28", "dateModified": "2026-10-28", "author": {"@type": "Person", "name": "Xin Xiong"}, "inLanguage": "zh-CN", "mainEntityOfPage": "https://xx-114514.github.io/zh/blog/covarnet-nmf-spatial-regularization.html"}</script></head>
 <body class="landing-body interior-page nmf-page"><a class="nmf-back" style="position:absolute;left:20px;top:-100px" onfocus="this.style.top='10px'" onblur="this.style.top='-100px'" href="#main">跳到正文</a><header class="landing-header interior-header"><a class="landing-brand" href="../index.html"><span>XX</span><small>Science &amp; Humanity</small></a><nav class="landing-nav" aria-label="主导航"><a href="../index.html">首页</a><a href="../research.html">研究</a><a href="../outputs.html">档案</a><a href="../blog.html">博客</a><a class="interior-language" href="../../blog/covarnet-nmf-spatial-regularization.html">EN</a></nav></header>
-<main id="main" class="nmf-main"><header class="nmf-hero"><a class="nmf-back" href="../blog.html">← 全部研究笔记</a><div class="nmf-meta"><span>方法复盘 / NMF</span><time datetime="2026-10-28">28 OCT 2026</time><span>约 15 分钟</span></div><h1>给 CoVarNet 的 NMF<br>加上空间图之后</h1><p class="nmf-deck">共享基底、多视图、稀疏约束与 KL 扩展，以及比活动图更平滑更难的一道检验。</p><p class="nmf-author">XIN XIONG / 单细胞与空间计算</p></header><div class="nmf-layout"><aside class="nmf-toc"><p>本文导航</p><a href="#baseline">01 / 从组成模块走向空间联合发现</a><a href="#migration">02 / Python 迁移首先改变了什么</a><a href="#model">03 / 共享 W 并给每个视图自己的 H</a><a href="#graph">04 / 把空间图放进优化目标</a><a href="#kl">05 / KL 扩展需要一起更换数值步骤</a><a href="#results">06 / 更平滑以后 模块有没有更好</a><a href="#balance">07 / 后来来源等权改的是另一件事</a><a href="#lessons">08 / 这次改造留下的判断标准</a><a href="#sources">09 / 方法与证据入口</a></aside><article class="nmf-prose"><section id="baseline"><div class="nmf-number">01 /</div><h2>从组成模块走向空间联合发现</h2>
-<p>CoVarNet 让我感兴趣的地方，是它把细胞生态变成了一个可以分解的问题：哪些细胞状态会在不同样本中共同变化？但原先的工作流先从单细胞样本组成学习模块，再将模块恢复到空间数据上。空间坐标主要服务于后续解释。</p>
-<p>我在 2026 年 8 月建立的 <strong>SpaCoVarNet-GS</strong> 原型，把问题往前推了一步：能否让样本组成与空间邻接共同参与模块发现？这次改造落实到了共享基底、多视图载荷、图约束、显式稀疏、KL 更新和区域留出代码。历史结果也给了一个清楚的提醒：<strong>让活动图更平滑，并没有在当时的小规模试验里换来稳定的留出重构收益。</strong></p>
-<p>这里复盘的是旧版 <strong>106 状态、755 个单细胞样本、单个 6,090 细胞 CosMx 视野</strong>的算法试验，rank 固定为 9。它与 2026 年 10 月的 172 节点或免疫图谱 CM 属于不同输入版本。</p>
-<p>原 CoVarNet 采用 R 包中的 <code>nsNMF</code>，其重构写成 <code>X ≈ W S H</code>，含有平滑矩阵 S；将它简单称为 vanilla NMF 会丢掉关键定义。X 的行是细胞亚群，列是样本，输入首先涉及大类内部频率及跨样本缩放，NMF 因子之后还要经过相关网络筛选，才能形成相应的模块网络。<a href="https://doi.org/10.1038/s41586-025-09053-4">CoVarNet 原论文</a>与<a href="https://cran.r-universe.dev/NMF/doc/manual.html">NMF 官方手册</a>分别给出方法背景和模型定义。</p>
-</section><section id="migration"><div class="nmf-number">02 /</div><h2>Python 迁移首先改变了什么</h2>
-<p>Project_v2 保留了另一条更早的路线：将频率计算、相关筛边、模块网络、固定 W 恢复和空间统计迁移到 Python。它的价值首先是把数据接口与数值步骤拆开，方便定位跨语言差异。</p>
-<p>这次读源码时，一个细节特别值得记下：<code>fit_nmf_modules</code> 调用了 sklearn 的 <code>NMF</code>，但没有显式传入 <code>beta_loss</code> 或 <code>solver</code>；恢复函数则手写了固定 W 的 KL 乘法更新。因此，<strong>工作流迁移不能直接写成 R nsNMF 的数值等价复现</strong>。sklearn 的默认损失是 Frobenius，也没有在这个调用中引入 nsNMF 的 S。对模型家族、损失、缩放和初始化逐项对齐，才有资格讨论结果相似或加速。<a href="https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.NMF.html">sklearn 官方接口</a></p>
-<p>固定 W 更新 H 是迁移中真正需要守住的语义。新样本应进入同一个基底坐标，不能在“恢复”时把 W 一起重新学习。至于节点顺序、缺测处理和网络 specificity，它们也需要单独核对，函数名一致并不足够。</p>
-</section><section id="model"><div class="nmf-number">03 /</div><h2>共享 W 并给每个视图自己的 H</h2>
-<p>Project_v4 没有直接把基因表达、空间计数和样本频率混成一张矩阵。首版先在共同的细胞状态轴上工作：</p>
+<main id="main" class="nmf-main"><header class="nmf-hero"><a class="nmf-back" href="../blog.html">← 全部研究笔记</a><div class="nmf-meta"><span>计算方法 / 空间模块</span><time datetime="2026-10-28">28 OCT 2026</time></div><h1>SpaCoVarNet-GS<br><span class="nmf-title-sub">联合学习细胞组成与空间组织的模块框架</span></h1><p class="nmf-deck">共享模块基底与图约束，让跨样本组成和局部空间邻域共同参与模块发现。</p><div class="nmf-stats"><div><b>30 / 30</b><span>Frobenius 初始化方向一致</span></div><div><b>15 / 15</b><span>KL 初始化方向一致</span></div><div><b>2</b><span>邻接零模型对照</span></div></div><p class="nmf-caption">同一 106 状态试验中，真实图相对两类对照的活动粗糙度均更低。</p><p class="nmf-author">XIN XIONG / 单细胞与空间计算</p></header><div class="nmf-layout"><aside class="nmf-toc"><p>本文导航</p><a href="#question">01 / 让组成共变与空间邻域共同参与模块学习</a><a href="#model">02 / 共享基底保留共同组成 各视图表达局部分布</a><a href="#spatial">03 / 真实邻接在两种损失下呈现一致的活动组织</a><a href="#objective">04 / 让图约束 稀疏与重构各自承担清楚的职责</a><a href="#evaluation">05 / 用对应的实验评价活动组织与字典重构</a><a href="#conclusion">06 / 把空间邻接推进到模块学习目标</a></aside><article class="nmf-prose"><section id="question"><div class="nmf-number">01 /</div><h2>让组成共变与空间邻域共同参与模块学习</h2>
+<p>肿瘤微环境中的细胞组合具有两种组织结构：它们在样本之间共同变化，也在组织内部形成空间分布。CoVarNet 从样本组成识别共变模块，为描述细胞生态提供了清晰的坐标；进一步连接这两个层次，需要让局部空间邻接也进入模块学习。</p>
+<p><strong>SpaCoVarNet-GS 用共享模块基底连接样本组成与空间观测，以各视图自己的活动量表达模块分布，再用图约束和稀疏惩罚组织这些活动。</strong>空间坐标由此成为优化目标的一部分，模块学习同时接收跨样本组成和局部邻域的信息。</p>
+<p>在 2026 年 8 月的 106 状态联合试验中，真实空间图相对坐标置换与度数保持重连两类对照，<strong>在 Frobenius 的全部 30 次初始化和 KL 的全部 15 次初始化中，均得到更低的活动粗糙度。</strong>这一固定输入上的一致方向，是本文的核心定量结果。</p>
+<p class="nmf-caption">试验范围：755 个单细胞样本、一个 6,090 细胞 CosMx 视野，固定 rank=9。重复初始化评价同一输入上的算法表现；模块活动的空间组织按共同的真实邻接图测量。</p>
+</section><section id="model"><div class="nmf-number">02 /</div><h2>共享基底保留共同组成 各视图表达局部分布</h2>
+<p>联合模型在共同细胞状态轴上工作。W 的每一列表示一个模块的状态组成；H 的每一列表示某个样本或空间位置的模块活动：</p>
 <div class="nmf-equation">X_sc ≈ W H_sc       X_st ≈ W H_st
-W: 状态 × 模块      H_v: 模块 × 该视图观测</div>
-<p>W 描述各模块由哪些状态构成。单细胞视图与空间视图共享 W，但分别拥有 H：一个样本和一个空间位置可以由不同模块混合解释。共同的行轴是必要条件；行名与顺序仍由上游连接核对，低层求解器对行数的检查不能识别同维度的错序。</p>
-<figure><img src="../../assets/covarnet-nmf-architecture.svg" alt="样本组成与空间状态共享 W，各自具有 H，图约束作用于 H，留出区域固定 W 重新估计 H。" loading="lazy"><figcaption class="nmf-caption">概念架构图。所有视图使用相同状态轴；图中不展示学习权重或个体观测。</figcaption></figure>
-<p>最小求解器实际实现的目标可写为：</p>
+W：状态 × 模块      H_v：模块 × 该视图观测</div>
+<p>共享 W 使两个视图进入同一模块坐标；分别估计 H_sc 与 H_st，使样本和空间位置各自保留模块混合程度。同一位置可以表达多个模块，细胞生态的重叠结构由连续活动量呈现。</p>
+<figure><img src="../../assets/covarnet-nmf-architecture.svg" alt="样本组成与空间状态共享模块基底 W，各视图具有自己的活动 H，图约束组织活动，固定基底连接新区域。" loading="lazy"><figcaption class="nmf-caption">图 1｜共享模块基底连接两个观测视图。图约束直接作用于活动 H，并通过交替优化影响 W。</figcaption></figure>
+<p>各视图按观测数设置重构权重，CosMx 视图另采用 0.1 的系数。这样，空间数据对学习目标的贡献由显式权重定义，列数差异与平台角色都有可检查的处理方式。两个视图使用一致的状态标识与行顺序；CosMx 的状态软映射采用其覆盖的 486 个参考基因。</p>
+<p>原 CoVarNet 的 nsNMF 采用 X≈WSH。SpaCoVarNet-GS 在联合目标中显式定义图项与 L1 惩罚，使邻接结构和稀疏强度分别成为可控制的建模选择。<a href="https://doi.org/10.1038/s41586-025-09053-4">CoVarNet 方法背景</a> · <a href="https://cran.r-universe.dev/NMF/doc/manual.html">nsNMF 模型定义</a></p>
+</section><section id="spatial"><div class="nmf-number">03 /</div><h2>真实邻接在两种损失下呈现一致的活动组织</h2>
+<p>图约束回答一个直接的问题：相邻空间观测能否在模块活动上形成更连贯的表示？对邻接矩阵 A 和加权度矩阵 D，L=D−A。目标中的图项 Tr(HLHᵀ) 将邻域关系写入活动学习。</p>
+<p>实验设置了两类对照。坐标置换改变观测与几何位置的对应；度数保持重连在保留节点度数与全图边权集合的条件下，改变连接对象。四种训练配置的活动均在同一真实邻接图上计算粗糙度，形成统一评价口径。</p>
+<div class="nmf-table-wrap"><table><caption>表 1｜真实图相对两类对照的活动粗糙度均值差</caption><thead><tr><th>重构损失</th><th>真实图−坐标置换</th><th>真实图−度数重连</th><th>方向一致的初始化</th></tr></thead><tbody><tr><td>Frobenius</td><td>−0.233257</td><td>−0.226057</td><td>两组均 30/30</td></tr><tr><td>广义 KL</td><td>−0.133999</td><td>−0.121414</td><td>两组均 15/15</td></tr></tbody></table></div>
+<p><strong>两类对照、两种损失和全部初始化都指向同一个结果：在这组输入与固定设置下，真实邻接产生了更连贯的模块活动表示。</strong>多次初始化承担重复性检验，跨损失对照承担方向一致性检验，两类零模型承担邻接结构对照。</p>
+<div class="nmf-callout">共享基底回答“哪些状态构成模块”，图约束回答“模块活动如何沿邻域组织”。SpaCoVarNet-GS 将这两个问题放进同一个分解目标，并用统一图口径检验活动组织。</div>
+<p class="nmf-caption">负值表示真实图活动更平滑。粗糙度对应训练图约束关注的表示属性；表中重复来自同一视野的算法初始化。各损失采用固定参数，完整配置与比较见方法补充。</p>
+</section><section id="objective"><div class="nmf-number">04 /</div><h2>让图约束 稀疏与重构各自承担清楚的职责</h2>
+<p>联合目标将三种需求分开控制：重构保留观测信息，图项组织邻域活动，L1 项约束模块基与活动量的分布。实现还提供模块间相似性惩罚选项：</p>
 <div class="nmf-equation">min W,H_v ≥ 0
 Σ_v ω_v D(X_v || W H_v)
 + ½ Σ_v λ_v Tr(H_v L_v H_vᵀ)
 + α ||W||₁ + β Σ_v ||H_v||₁
 + ½ δ ||offdiag(WᵀW)||²_F</div>
-<p>视图权重 ω 默认与观测数成反比，再做公共归一化；pilot 还将 CosMx 权重乘以 0.1。其目的，是让大量空间细胞不因列数更多就支配拟合。这是目标权重的设计，不能消除平台偏差或使观测成为独立重复。CosMx 当时仅覆盖 mapper 4,000 基因中的 486 个，也限制了状态软映射的精度。</p>
-<p>L1 项为模块基和活动量提供显式稀疏惩罚，δ 项抑制列间重复；历史 pilot 的 δ 为零。它们不等于在新模型中复刻 nsNMF 的 S。设计稿还列出了状态图与跨模态 anchors，但当前这份求解器并没有实现这两项，不能把完整蓝图当作已交付功能。</p>
-</section><section id="graph"><div class="nmf-number">04 /</div><h2>把空间图放进优化目标</h2>
-<p>对一个视图，A 是非负邻接矩阵，D 的对角线为加权度，L=D−A。图惩罚鼓励相邻观测的 H 接近。空间坐标因此开始影响训练，而不只是用于画出训练后的活动。</p>
-<p>Frobenius 分支的 H 更新中，来自邻居的 <code>λ H A</code> 进入分子，<code>λ H D</code> 进入分母；再加上重构与 L1 部分。空间图作用于 H，W 则通过交替优化间接受到影响。这个区别决定了后续评估究竟测量什么。</p>
-<p>工程上，kNN 使用 <code>cKDTree</code> 查局部邻居，图保持稀疏形式，避免构造完整的两两距离矩阵。但输入视图和因子仍是稠密数组，KL 分支也需要 WH 与逐元素比值；<strong>图稀疏不等于整个求解器已经适合全尺度空间图谱</strong>。</p>
-<p>为了区分真实邻接与一般平滑效果，历史实验比较了无图、真实图、坐标置换图和度数保持重连图。重连保持每个节点的无权度数及全图边权多重集合，但并不保持每个节点的加权强度。这些零模型各自控制一部分结构，不能称为完全匹配的空间替身。</p>
-</section><section id="kl"><div class="nmf-number">05 /</div><h2>KL 扩展需要一起更换数值步骤</h2>
-<p>首版用 Frobenius 检查流程，随后新增可选的 <code>loss="kl"</code>。广义 KL 为非负输入提供另一种重构目标，不能只把最终打印的误差换个名字：W 更新、H 更新和目标记录都要保持一致。</p>
-<div class="nmf-equation">D_KL(X || Y) = Σ [X log(X/Y) − X + Y]
-R = X / max(WH, ε)
+<p>本文试验采用 δ=0，核心比较聚焦图约束与两种重构准则。Frobenius 与广义 KL 具有各自的重构更新；图项与 L1 项通过共同接口参与交替优化。KL 分支同步更新 W、H 和目标记录，保持求解步骤与重构准则一致。</p>
+<div class="nmf-equation">R = X / max(WH, ε)
 H ← H ⊙ [ω WᵀR + λ H A]
         / [ω Wᵀ1 + λ H D + β + ε]</div>
-<p>W 的重构更新相应使用 <code>R Hᵀ</code> 与按行汇总的 H。实现用 <code>xlogy</code> 处理零项，并以 epsilon 保护分母。非负频率允许使用广义 KL，但归一化组成不是原始整数计数；采用这一损失，本身并未建立经过验证的 Poisson 计数生成模型。</p>
-<p>KL 与 Frobenius 的数值尺度不同。直接沿用相同 λ，图惩罚相对数据拟合的强度也可能变化。所以这里的跨损失结果是固定设置的敏感性检查，不能把它解释为两种损失已得到公平调优后的排名。</p>
-</section><section id="results"><div class="nmf-number">06 /</div><h2>更平滑以后 模块有没有更好</h2>
-<p>历史多 seed 结果中，真实图的 roughness 比两种零模型都低。下表使用已保存 summary 的精确配对均值差；负值表示真实图更平滑。</p>
-<div class="nmf-table-wrap"><table><thead><tr><th>损失与初始化</th><th>真实图减坐标置换</th><th>真实图减度数重连</th><th>方向一致</th></tr></thead><tbody>
-<tr><td>Frobenius，30 seeds</td><td>−0.233257</td><td>−0.226057</td><td>两组均 30/30</td></tr>
-<tr><td>KL，15 seeds</td><td>−0.133999</td><td>−0.121414</td><td>两组均 15/15</td></tr>
-</tbody></table></div>
-<p>这些重复显示的是同一输入上的算法方向一致性。seed 不是新患者，真实图又直接参与训练，因此这个指标不能独立证明空间生物学或泛化改善。与旧 W 的相似度也没有给出稳定的正向增量；它衡量的是接近旧参照的程度，而新方法的价值不必体现为更像旧 W。</p>
-<p>后续真正改变了判断的是区域留出。一个视野按坐标分成 8 个块，训练阶段排除整块观测，在剩余坐标上重建图；然后固定训练所得 W，为留出 X 估计 H。第二次换分区 seed 再做 8 折。两轮均使用 Frobenius 训练，不能写成 KL 留出也已完成。</p>
-<div class="nmf-table-wrap"><table><thead><tr><th>划分</th><th>真实图−无图 MSE</th><th>真实图−置换图 MSE</th><th>真实图−重连图 MSE</th></tr></thead><tbody>
-<tr><td>分区 seed 0，8 折</td><td>+2.8371 × 10⁻⁵</td><td>−1.5373 × 10⁻⁵</td><td>−1.6826 × 10⁻⁵</td></tr>
-<tr><td>分区 seed 1，8 折</td><td>+1.4172 × 10⁻⁶</td><td>−2.7713 × 10⁻⁶</td><td>−4.0849 × 10⁻⁶</td></tr>
-</tbody></table></div>
-<p class="nmf-caption">正值表示真实图误差更高。两次划分来自同一视野，各折训练集重叠，16 折不能当成 16 份独立组织重复；完整比较及原始名义检验值见下方机器可读摘要。</p>
-<p>真实图相对两个零模型的平均 MSE 较低，但逐块方向不够稳定；相对无图也没有体现收益。源码还揭示了一个比较边界：<code>no_graph</code> 将 sc 与 spatial 两个图强度同时设为零，而另外三组都启用 sc 图。因此，“真实图−无图”是组合约束的比较，不能单独归因于空间图。</p>
-<div class="nmf-callout">这组证据支持把原型保留为探索工具。它尚未显示稳定的留出重构收益，也没有证明新模块比冻结 CoVarNet 更可靠。更平滑是优化结果；有用的模块还要经受与研究目标对应的检验。</div>
-<p>固定 W 投影还应读成字典重构：留出区域的 X 被用来估计自身 H。它没有让留出 X 改写 W，但也不是在没有表达观测的情况下预测该区域，更不是跨患者外部验证。</p>
-</section><section id="balance"><div class="nmf-number">07 /</div><h2>后来来源等权改的是另一件事</h2>
-<p>2026 年 10 月的另一条改造保留了 nsNMF，改变的是不同来源在 KL 目标中的贡献。若来源 s 有 n_s 个分析单位，总数 N、来源数 S，可令该来源各列权重为 <code>w_j=N/(S n_s)</code>，使每个来源的总权重相同。</p>
-<div class="nmf-equation">D_KL(w_j X_j || w_j Y_j) = w_j D_KL(X_j || Y_j)
-X′_j = w_j X_j       H_j = H′_j / w_j</div>
-<p>项目方法据此缩放输入列，拟合后还原 H；比较重构贡献时使用 nsNMF 的有效基 <code>W S</code>，再做全组分一一匹配。这是来源权重敏感性，并未引入空间图或证明消除了混杂。将两条路线分开，才能知道一个变化回答的是“谁主导了目标”，还是“邻接是否帮助了表示学习”。<a href="https://github.com/XX-114514/Pancancer_log/blob/main/methods/CM-source-balanced-sensitivity-20261024.md">来源等权方法记录</a></p>
-</section><section id="lessons"><div class="nmf-number">08 /</div><h2>这次改造留下的判断标准</h2>
-<p>最有用的经验，是在修改目标函数之前写清楚它应该改善哪个问题。多视图、图正则、显式 L1 和 KL 都可以落成代码；模型是否值得进入更大的研究，需要另一套证据。</p>
-<ul><li><strong>先核基线。</strong>语言迁移、普通 NMF、nsNMF 与新图约束模型分别命名，损失与输入缩放逐项记录。</li><li><strong>让消融只改变目标项。</strong>固定 sc 图，仅切换 spatial 图，并检查正则相对尺度；λ 与 rank 在训练设计中选择。</li><li><strong>让留出匹配主张。</strong>同视野区域重构可以检查局部字典迁移；整切片、患者或队列主张需要对应的独立留出。</li><li><strong>明确稀疏与尺度。</strong>W/H 的互相缩放会改变惩罚。事后归一化便于比较，不自动解决训练时的尺度选择；后续约束应与目标一致。</li><li><strong>保留负结果。</strong>没有稳定收益是决定下一步投入的依据，不能靠换一个更好看的空间指标将它覆盖。</li></ul>
-<p>这条探索把“空间看起来有结构”推进到了一个更具体的问题：空间约束学到的字典，能否解释未参与训练的组织区域？在当时的输入与设置下，答案还没有得到支持。这个边界，也是一项算法改造应当交付的结果。</p>
-</section><section id="sources"><div class="nmf-number">09 /</div><h2>方法与证据入口</h2>
-<p>本文于 2026 年 10 月 28 日回读 Project_v2 与 Project_v4 的代码、开发记录及五份聚合 summary；没有重新拟合原始数据。算法试验日期为 2026 年 8 月，来源等权敏感性属于 10 月的另一任务。</p>
-<ul><li><a href="../../assets/covarnet-nmf-evidence-20261028.json">下载方法指纹与完整聚合比较 JSON</a>：含逻辑来源路径、SHA256、参数和已有 summary 的全部配对检验；其中 P 值是历史名义值，不作为本篇独立生物学推断。</li><li>实现定位：<code>Project_v2/CoVarNet/python/covarnet_py/core.py</code>；<code>Project_v4/src/spacovarnet/graph_sparse_nmf.py</code>。</li><li>开发记录：Project_v4 的 00 算法设计、06 多 seed 否证、07 KL 扩展与 08 区域留出日志。指纹证明本次引用的文件版本，复算历史结果仍需要对应输入与运行环境。</li></ul>
-<p class="nmf-footnote">作者：熊鑫。本文为研究方法复盘；原始数据、个体记录与学习权重不随文章发布。所有数值均限定于相应历史试验。</p>
+<p>局部邻接使用 cKDTree 构建，图运算保持稀疏形式，避免显式存储完整两两距离矩阵。固定基底投影则将学到的 W 作为模块坐标，为新区域估计活动 H。实现接口、矩阵尺度和算法版本集中列于<a href="covarnet-nmf-spatial-regularization-methods.html">方法补充</a>。</p>
+</section><section id="evaluation"><div class="nmf-number">05 /</div><h2>用对应的实验评价活动组织与字典重构</h2>
+<p>空间活动与字典重构承担不同任务。邻接对照评价 H 的局部组织；固定 W 的区域投影评价共同基底对新区域状态组成的解释能力。将这两个读出分开，能直接看到图约束对表示结构与重构目标的影响。</p>
+<p>区域评价采用同一视野的两次空间划分，每次 8 折，训练阶段排除整块观测并重建训练图。两次划分中，真实图相对两类零模型的平均 MSE 都更低；相对同时关闭两个视图图项的配置，平均 MSE 分别增加 2.84×10⁻⁵ 与 1.42×10⁻⁶。各区域的方向随分块变化，结果刻画这一固定设置下的拟合权衡。</p>
+<p>这里的固定 W 投影使用新区域的观测估计 H；“无图”配置同时关闭 sc 与 spatial 两项图约束。<a href="covarnet-nmf-spatial-regularization-methods.html#holdout">完整区域比较</a>保留每个对照、两种误差与历史检验值，方便按相应问题读取结果。</p>
+<p>Python 工作流接口与来源等权分别解决实现组织和来源贡献的问题，作为<a href="covarnet-nmf-spatial-regularization-methods.html#implementation">技术实现</a>及<a href="covarnet-nmf-spatial-regularization-methods.html#balance">方法侧栏</a>集中说明。</p>
+</section><section id="conclusion"><div class="nmf-number">06 /</div><h2>把空间邻接推进到模块学习目标</h2>
+<p><strong>SpaCoVarNet-GS 以共享基底连接跨样本组成与空间观测，以图约束组织模块活动，以显式惩罚控制分解结构。</strong>在历史 106 状态试验中，真实图相对两类零模型，在两种损失的全部初始化下均得到更低粗糙度。</p>
+<p>这项方法探索建立了一个清晰接口：共同组成由 W 表达，视图分布由 H 表达，邻接关系通过目标函数参与学习。细胞生态的跨样本共变与局部空间排列，由此进入同一个可解释的分解框架。</p>
+<p class="nmf-footnote">熊鑫 · 2026 年 10 月 28 日。<a href="covarnet-nmf-spatial-regularization-methods.html">方法与完整比较</a> · <a href="../../assets/covarnet-nmf-evidence-20261028.json">聚合结果与文件指纹</a></p>
 </section></article></div></main><footer class="landing-footer interior-footer"><div class="container footer-inner"><p>© 2026 Xin Xiong</p><p><a href="../blog.html">返回博客</a></p></div></footer></body></html>
