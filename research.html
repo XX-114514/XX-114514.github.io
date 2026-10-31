@@ -35,7 +35,7 @@
             <h1>Representative Projects <span>From computational inference to experimental validation and engineering implementation</span></h1>
             <p class="lead">
               My recent work spans pan-cancer tumor microenvironment communication networks, KRAS-independent pancreatic cancer recurrence,
-              the functional mode of TP53RK, and a synthetic biology platform for whole-cell immobilization, building on earlier work in microbial genetics.
+              the functional mode of TP53RK, and synthetic biology through iGEM (TasAnchor in 2025; DunaTerp in 2026, as team captain), building on earlier work in microbial genetics.
             </p>
           </div>
           <div class="page-hero-side">
@@ -65,12 +65,10 @@
               This project systematically dissects cell-cell communication structures across cancer types to identify
               conserved regulatory circuits, cancer-specific signaling axes, and communication hub populations with important topological roles.
             </p>
-            <ul class="list-clean">
-              <li>Built standardized single-cell RNA-seq analysis pipelines covering about 4.7 million cells from more than 30 cancer types to characterize tumor microenvironment composition and communication networks.</li>
-              <li>Combined CellChat and NicheNet to identify conserved and cancer-specific ligand-receptor regulatory circuits.</li>
-              <li>Reimplemented CoVarnet in Python and identified five modules associated with cancer development.</li>
-              <li>Integrated spatial transcriptomics with scRNA-seq to localize high-confidence signaling niches and validate spatial co-localization among sender cells, receiver cells, and pathway activity.</li>
-              <li>Identified communication hub populations using centrality and network-topology metrics, and linked hub-driven pathways to tumor-associated phenotypic programs.</li>
+                        <ul class="list-clean">
+              <li>Integrated about 4.7 million single-cell transcriptomes across more than 30 cancer types to characterize recurrent tumor-microenvironment cell states and multicellular communication programs.</li>
+              <li>Combined ligand–receptor inference (CellChat, NicheNet) with NMF-based module discovery, including a Python reimplementation of CoVarNet, to prioritize conserved immune- and stromal-associated regulatory niches across cancer cohorts.</li>
+              <li>Mapped selected communication programs onto spatial transcriptomic datasets to evaluate in situ sender–receiver colocalization and spatial niche organization.</li>
             </ul>
             <div class="cta-row project-links"><a class="btn btn-compact" href="./outputs.html#pan-cancer-umap">Interactive 3D atlas</a><a class="btn btn-compact" href="./blog/covarnet-nmf-spatial-regularization.html">Methods note: SpaCoVarNet-GS</a></div>
           </article>
@@ -80,19 +78,19 @@
             <div class="project-head">
               <div>
                 <p class="card-kicker">Jul 2026 - Aug 2026 · iSURE, University of Notre Dame</p>
-                <h3>Altered Inducibility in KRAS-Independent Pancreatic Cancer</h3>
+                <h3>EMT and Altered KRAS Inducibility in KRAS-Independent Pancreatic Cancer</h3>
               </div>
-              <p class="project-tag">Inducible KRAS Model / RNA-seq / RPPA / Immunoblotting / Public Datasets</p>
+              <p class="project-tag">Inducible KRAS Model / DESeq2 / GSEA / RPPA / Immunoblotting / Public Datasets</p>
             </div>
             <p>
               Using a doxycycline-regulated KRAS-mutant pancreatic cancer model, I compared parental cells with a recurrent derivative
               that grows after KRAS inactivation, asking which changes are specific to KRAS-independent growth rather than a general response to KRAS withdrawal.
             </p>
-            <ul class="list-clean">
-              <li>Compared parental and recurrent cells using transcriptomics, genotyping, and non-targeting controls, separating early KRAS withdrawal, residual survival, stable escape, and doxycycline re-exposure.</li>
-              <li>Checked EMT-associated programs against three public mouse PDAC datasets: they recurred after both withdrawal and relapse, so they did not by themselves explain KRAS-independent growth.</li>
-              <li>Found that EMT-factor perturbation strengthened doxycycline-induced KRAS protein responses in the recurrent line without a clear mesenchymal-to-epithelial transition.</li>
-              <li>Used immunoblotting and RPPA to prioritize elevated DNMT1 and selective PDK1/AKT-substrate changes as two testable hypotheses; methylation measurements and functional perturbations are still needed for causal claims.</li>
+                        <ul class="list-clean">
+              <li>Compared parental AK38 and recurrent 772 PDAC cells across Dox ON/OFF conditions using DESeq2, GSEA, and pathway inference, identifying EMT and E2F/G2M/MYC programs.</li>
+              <li>Reanalyzed three public KRAS-withdrawal and relapse datasets: EMT-associated transcription recurred after both withdrawal and relapse, so it did not by itself explain KRAS-independent growth.</li>
+              <li>Found that EMT-factor perturbation strengthened Dox-induced KRAS protein responses in the recurrent line without a clear mesenchymal-to-epithelial transition.</li>
+              <li>Integrated RPPA, immunoblotting, genotyping, and a non-targeting CRISPR control to assess KRAS inducibility and prioritize DNMT1 and selective PDK1/AKT-related signals; methylation measurements and functional perturbations are still needed for causal claims.</li>
             </ul>
             <div class="cta-row project-links"><a class="btn btn-compact" href="./blog/isure-notre-dame.html">Read the research summary</a><a class="btn btn-compact" href="./files/isure-nd-research-summary.pdf" target="_blank" rel="noopener noreferrer">PDF · 20 pages</a></div>
           </article>
@@ -116,6 +114,23 @@
             </ul>
           </article>
 
+          <article class="project-card" id="dunaterp">
+            <div class="project-head">
+              <div>
+                <p class="card-kicker">Jun 2026 - Oct 2026 · Team Captain</p>
+                <h3>iGEM SCU-China 2026: DunaTerp</h3>
+              </div>
+              <p class="project-tag">Synthetic Biology / Dunaliella salina / Terpenoids / Team Leadership</p>
+            </div>
+            <p>
+              DunaTerp is a <em>Dunaliella salina</em> terpenoid platform exploring TF2146 regulation of beta-carotene biosynthesis and downstream product designs.
+            </p>
+            <ul class="list-clean">
+              <li>Led an interdisciplinary iGEM team, coordinating research planning, wet lab, dry lab, hardware, Human Practices, and project delivery.</li>
+              <li>Directed the project's scientific strategy around TF2146 regulation of beta-carotene biosynthesis and downstream product designs.</li>
+            </ul>
+          </article>
+
           <article class="project-card" id="tasanchor">
             <div class="project-head">
               <div>
@@ -128,8 +143,8 @@
               TasAnchor is a modular whole-cell adhesion and immobilization platform built in Bacillus subtilis,
               integrating genetic engineering, protein-scaffold design, and bioreactor membrane immobilization.
             </p>
-            <ul class="list-clean">
-              <li>Served as the current team leader of SCU-China; the 2025 project received an iGEM Gold Medal and was named an Undergraduate Top 10 Project.</li>
+                        <ul class="list-clean">
+              <li>Contributed to the 2025 project, which received an iGEM Gold Medal, Undergraduate Top 10, and Best Bioremediation Project recognition.</li>
               <li>Knocked out endogenous tasA in Bacillus subtilis and constructed a pHT01-based SpyTag/SpyCatcher modular adhesion scaffold.</li>
               <li>Expressed and purified recombinant proteins in E. coli BL21(DE3) to validate the modular immobilization system.</li>
               <li>Immobilized engineered Bacillus subtilis biofilms on polystyrene bioreactor membranes to demonstrate whole-cell immobilization performance.</li>
@@ -165,6 +180,14 @@
 
         <div class="timeline">
           <article class="timeline-item">
+            <time>Sep 2026 - Present</time>
+            <div class="story">
+              <h3>University of Melbourne Visiting Honours Student · WEHI</h3>
+              <p>Visiting honours student at the Walter and Eliza Hall Institute of Medical Research (WEHI), University of Melbourne.</p>
+            </div>
+          </article>
+
+          <article class="timeline-item">
             <time>Jul 2026 - Aug 2026</time>
             <div class="story">
               <h3>University of Notre Dame Summer Visiting Student · Xin Lu Lab</h3>
@@ -178,13 +201,13 @@
           <article class="timeline-item">
             <time>Mar 2026 - Jun 2026</time>
             <div class="story">
-              <h3>Beutler Institute</h3>
+              <h3>Beutler Institute Exchange Student</h3>
               <p>Participated in a spring academic training program featuring English-language coursework and advanced topics in the life sciences.</p>
             </div>
           </article>
 
           <article class="timeline-item">
-            <time>Jan 2026</time>
+            <time>Jan 2026 - Feb 2026</time>
             <div class="story">
               <h3>Westlake University Visiting Student · Jin Xin Lab</h3>
               <p>

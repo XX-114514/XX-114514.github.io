@@ -35,7 +35,7 @@
             <h1>代表性项目<span>从计算推断到实验验证与工程实现</span></h1>
             <p class="lead">
               我近期的研究涵盖泛癌肿瘤微环境细胞通讯网络、KRAS 非依赖性胰腺癌复发、TP53RK 功能模式判定，
-              以及面向全细胞固定化的合成生物学平台；更早的工作在微生物遗传学方向。
+              以及 iGEM 合成生物学项目（2025 年 TasAnchor；2026 年 DunaTerp，担任队长）；更早的工作在微生物遗传学方向。
             </p>
           </div>
           <div class="page-hero-side">
@@ -65,12 +65,10 @@
               该项目旨在系统解析不同癌种肿瘤微环境中的细胞通讯结构，
               识别跨癌种保守的调控回路、癌种特异性信号轴及具有关键拓扑作用的通讯枢纽细胞。
             </p>
-            <ul class="list-clean">
-              <li>构建覆盖 30 余种癌症、约 470 万个细胞的标准化单细胞 RNA 测序分析流程，用于刻画肿瘤微环境组成与通讯网络。</li>
-              <li>结合 CellChat 与 NicheNet，识别跨癌种保守及癌种特异性的配体-受体调控回路。</li>
-              <li>使用 Python 复现 CoVarnet，并识别出五个与癌症发展相关的细胞协同变化模块。</li>
-              <li>整合空间转录组与 scRNA-seq 数据，定位高置信度信号生态位，并验证发送细胞、接收细胞及通路活性的空间共定位。</li>
-              <li>基于中心性与网络拓扑指标识别通讯枢纽细胞，并将枢纽驱动通路与肿瘤相关表型程序相联系。</li>
+                        <ul class="list-clean">
+              <li>整合 30 余个癌种、约 470 万个单细胞转录组，刻画肿瘤微环境中反复出现的细胞状态与多细胞通讯程序。</li>
+              <li>结合配体–受体推断（CellChat、NicheNet）与基于 NMF 的模块发现（包括用 Python 复现 CoVarNet），筛选跨癌种队列保守的免疫与基质相关调控生态位。</li>
+              <li>将筛选出的通讯程序映射到空间转录组数据上，评估发送–接收细胞的原位共定位与空间生态位结构。</li>
             </ul>
             <div class="cta-row project-links"><a class="btn btn-compact" href="./outputs.html#pan-cancer-umap">3D 交互图谱</a><a class="btn btn-compact" href="./blog/covarnet-nmf-spatial-regularization.html">方法笔记：SpaCoVarNet-GS</a></div>
           </article>
@@ -80,19 +78,19 @@
             <div class="project-head">
               <div>
                 <p class="card-kicker">2026年7月 - 2026年8月 · 圣母大学 iSURE</p>
-                <h3>KRAS 非依赖性胰腺癌中诱导响应的改变</h3>
+                <h3>KRAS 非依赖性胰腺癌中的 EMT 与 KRAS 诱导响应改变</h3>
               </div>
-              <p class="project-tag">KRAS 诱导模型 / RNA-seq / RPPA / 免疫印迹 / 公共数据集</p>
+              <p class="project-tag">KRAS 诱导模型 / DESeq2 / GSEA / RPPA / 免疫印迹 / 公共数据集</p>
             </div>
             <p>
               基于多西环素调控的 KRAS 突变胰腺癌模型，比较亲代细胞与 KRAS 失活后复发生长的衍生细胞，
               区分哪些变化是 KRAS 非依赖性生长所特有的，哪些只是对 KRAS 撤除的一般反应。
             </p>
-            <ul class="list-clean">
-              <li>结合转录组、基因分型和非靶向对照比较亲代与复发细胞，并区分早期 KRAS 撤除、残存存活、稳定逃逸和多西环素再暴露几种状态。</li>
-              <li>用三套公共小鼠 PDAC 数据集检验 EMT 相关程序：它们在撤除和复发后都会出现，因此不能单独解释 KRAS 非依赖性生长。</li>
-              <li>发现扰动 EMT 因子会增强复发细胞中多西环素诱导的 KRAS 蛋白响应，但没有出现明确的间充质–上皮转化。</li>
-              <li>借助免疫印迹和 RPPA，把 DNMT1 升高和部分 PDK1/AKT 底物变化列为两个可检验的假设；要得出因果结论，仍需甲基化测定和功能扰动实验。</li>
+                        <ul class="list-clean">
+              <li>在 Dox 开/关条件下比较亲代 AK38 与复发 772 PDAC 细胞，使用 DESeq2、GSEA 与通路推断，识别出 EMT 和 E2F/G2M/MYC 程序。</li>
+              <li>重新分析三套公共 KRAS 撤除与复发数据集：EMT 相关转录在撤除和复发后都会出现，因此不能单独解释 KRAS 非依赖性生长。</li>
+              <li>发现扰动 EMT 因子会增强复发细胞中 Dox 诱导的 KRAS 蛋白响应，但没有出现明确的间充质–上皮转化。</li>
+              <li>整合 RPPA、免疫印迹、基因分型和非靶向 CRISPR 对照，评估 KRAS 诱导响应，并锁定 DNMT1 与部分 PDK1/AKT 相关信号；要得出因果结论，仍需甲基化测定和功能扰动实验。</li>
             </ul>
             <div class="cta-row project-links"><a class="btn btn-compact" href="./blog/isure-notre-dame.html">阅读研究总结</a><a class="btn btn-compact" href="../files/isure-nd-research-summary.pdf" target="_blank" rel="noopener noreferrer">PDF · 20 页</a></div>
           </article>
@@ -117,6 +115,23 @@
             </ul>
           </article>
 
+          <article class="project-card" id="dunaterp">
+            <div class="project-head">
+              <div>
+                <p class="card-kicker">2026年6月 - 2026年10月 · 队长</p>
+                <h3>iGEM SCU-China 2026：DunaTerp</h3>
+              </div>
+              <p class="project-tag">合成生物学 / 杜氏盐藻 / 萜类 / 团队领导</p>
+            </div>
+            <p>
+              DunaTerp 是以杜氏盐藻（<em>Dunaliella salina</em>）为底盘的萜类平台，研究 TF2146 对 β-胡萝卜素生物合成的调控及下游产品设计。
+            </p>
+            <ul class="list-clean">
+              <li>带领跨学科 iGEM 团队，统筹研究规划、湿实验、干实验、硬件、Human Practices 与项目交付。</li>
+              <li>主导项目的科学方向：TF2146 对 β-胡萝卜素生物合成的调控及下游产品设计。</li>
+            </ul>
+          </article>
+
           <article class="project-card" id="tasanchor">
             <div class="project-head">
               <div>
@@ -130,7 +145,7 @@
               通过遗传改造、蛋白支架设计和反应器膜表面固定化实现工程菌生物膜的可控组装。
             </p>
             <ul class="list-clean">
-              <li>担任 SCU-China 团队负责人；项目获得 2025 iGEM 金奖，并入选本科生组全球 Top 10 项目。</li>
+              <li>参与完成的 2025 年项目获得 iGEM 金奖、本科组全球 Top 10 及最佳生物修复项目奖。</li>
               <li>敲除枯草芽孢杆菌内源 tasA，并构建基于 pHT01 的 SpyTag/SpyCatcher 模块化黏附支架。</li>
               <li>在 E. coli BL21(DE3) 中表达并纯化重组蛋白，用于验证模块化固定化体系。</li>
               <li>将工程化枯草芽孢杆菌生物膜固定于聚苯乙烯生物反应器膜表面，验证平台的全细胞固定化能力。</li>
@@ -166,6 +181,14 @@
 
         <div class="timeline">
           <article class="timeline-item">
+            <time>2026年9月 - 至今</time>
+            <div class="story">
+              <h3>墨尔本大学访问荣誉学生 · WEHI</h3>
+              <p>在墨尔本大学 Walter and Eliza Hall 医学研究所（WEHI）担任访问荣誉学生。</p>
+            </div>
+          </article>
+
+          <article class="timeline-item">
             <time>2026年7月 - 8月</time>
             <div class="story">
               <h3>圣母大学暑期访学生 · Xin Lu Lab</h3>
@@ -179,15 +202,15 @@
           <article class="timeline-item">
             <time>2026年3月 - 6月</time>
             <div class="story">
-              <h3>Beutler Institute</h3>
+              <h3>Beutler Institute 交换学生</h3>
               <p>参加春季学术训练项目，持续开展英文课程学习与生命科学前沿主题训练。</p>
             </div>
           </article>
 
           <article class="timeline-item">
-            <time>2026年1月</time>
+            <time>2026年1月 - 2月</time>
             <div class="story">
-              <h3>西湖大学访学生 · Jin Xin Lab</h3>
+              <h3>西湖大学访问学生 · Jin Xin Lab</h3>
               <p>
                 参与 TP53RK 功能模式研究，开展突变体构建、慢病毒转导、
                 dTAG 降解与 Incucyte 活细胞表型分析相关训练。
