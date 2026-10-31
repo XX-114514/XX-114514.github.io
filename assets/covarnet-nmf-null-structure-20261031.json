@@ -1,0 +1,62 @@
+{
+ "date": "2026-10-31",
+ "data": "synthetic only",
+ "results": {
+  "none": {
+   "real_lt_perm": 8,
+   "real_lt_degree": 8,
+   "moran_projected_mean": {
+    "real": -0.004,
+    "perm": -0.004,
+    "degree": -0.004,
+    "nograph": -0.005
+   },
+   "moran_projected_range": {
+    "real": [
+     -0.006,
+     0.002
+    ],
+    "perm": [
+     -0.006,
+     0.002
+    ],
+    "degree": [
+     -0.006,
+     0.002
+    ],
+    "nograph": [
+     -0.006,
+     0.002
+    ]
+   }
+  },
+  "structured": {
+   "real_lt_perm": 8,
+   "real_lt_degree": 8,
+   "moran_projected_mean": {
+    "real": 0.908,
+    "perm": 0.907,
+    "degree": 0.907,
+    "nograph": 0.908
+   },
+   "moran_projected_range": {
+    "real": [
+     0.894,
+     0.911
+    ],
+    "perm": [
+     0.89,
+     0.911
+    ],
+    "degree": [
+     0.89,
+     0.911
+    ],
+    "nograph": [
+     0.895,
+     0.911
+    ]
+   }
+  }
+ }
+}

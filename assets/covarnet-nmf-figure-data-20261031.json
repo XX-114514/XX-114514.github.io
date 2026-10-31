@@ -1,0 +1,112 @@
+{
+ "source_values": {
+  "pilot_seed17": {
+   "roughness": {
+    "no_graph": 4.047207806391127,
+    "permuted": 2.823819495994056,
+    "real": 2.577618006805753
+   },
+   "spatial_mse": {
+    "no_graph": 0.01805984975621214,
+    "real": 0.018116592294180583
+   },
+   "sample_mse": {
+    "no_graph": 0.022342420701008905,
+    "real": 0.02234322004596334
+   },
+   "reference_match": {
+    "no_graph": 0.8523945661893083,
+    "real": 0.8529499545218225
+   },
+   "w_sparsity": {
+    "no_graph": 0.6122292705590459,
+    "real": 0.6125311336702212
+   }
+  },
+  "paired": {
+   "Frobenius (n=30)": {
+    "permuted": [
+     -0.2332571803669203,
+     0.01768693181838697
+    ],
+    "rewired": [
+     -0.2260572216674465,
+     0.01847837580419218
+    ]
+   },
+   "KL (n=15)": {
+    "permuted": [
+     -0.133998903178914,
+     0.028261082665140942
+    ],
+    "rewired": [
+     -0.12141445550760513,
+     0.017436361489419613
+    ]
+   }
+  },
+  "match_paired_abs_max": 0.0015642452527710015,
+  "heldout_mse_vs_nograph": [
+   2.837105443323799e-05,
+   1.417182509565705e-06
+  ]
+ },
+ "synthetic": {
+  "none": {
+   "real_lt_perm": 8,
+   "real_lt_degree": 8,
+   "moran_projected_mean": {
+    "real": -0.004,
+    "perm": -0.004,
+    "degree": -0.004,
+    "nograph": -0.005
+   },
+   "moran_projected_range": {
+    "real": [
+     -0.006,
+     0.002
+    ],
+    "perm": [
+     -0.006,
+     0.002
+    ],
+    "degree": [
+     -0.006,
+     0.002
+    ],
+    "nograph": [
+     -0.006,
+     0.002
+    ]
+   }
+  },
+  "structured": {
+   "real_lt_perm": 8,
+   "real_lt_degree": 8,
+   "moran_projected_mean": {
+    "real": 0.908,
+    "perm": 0.907,
+    "degree": 0.907,
+    "nograph": 0.908
+   },
+   "moran_projected_range": {
+    "real": [
+     0.894,
+     0.911
+    ],
+    "perm": [
+     0.89,
+     0.911
+    ],
+    "degree": [
+     0.89,
+     0.911
+    ],
+    "nograph": [
+     0.895,
+     0.911
+    ]
+   }
+  }
+ }
+}
