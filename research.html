@@ -19,9 +19,9 @@
 <a data-page="about.html" href="./about.html">Profile</a>
 <a data-page="research.html" href="./research.html" aria-current="page">Research</a>
 <a data-page="outputs.html" href="./outputs.html">Archive</a>
-<a data-page="game.html" href="./game.html">Game</a>
 <a href="./blog.html">Blog</a>
 <a data-page="contact.html" href="./contact.html">Contact</a>
+<a data-page="game.html" href="./game.html">Game</a>
 <a class="nav-cv" href="./cv.html">Academic CV <span aria-hidden="true">↗</span></a>
 <a class="interior-language" href="./zh/research.html" aria-label="切换到中文">中文</a></nav>
   </header>
@@ -34,14 +34,14 @@
           <div>
             <h1>Representative Projects <span>From computational inference to experimental validation and engineering implementation</span></h1>
             <p class="lead">
-              My recent work spans four major directions: pan-cancer tumor microenvironment communication networks,
-              mechanisms of RAS-independent pancreatic cancer recurrence, functional-mode determination of TP53RK,
-              and synthetic biology engineering for whole-cell immobilization.
+              My recent work spans pan-cancer tumor microenvironment communication networks, KRAS-independent pancreatic cancer recurrence,
+              the functional mode of TP53RK, and a synthetic biology platform for whole-cell immobilization, building on earlier work in microbial genetics.
             </p>
           </div>
           <div class="page-hero-side">
             <p class="page-hero-note">Research Focus</p>
             <p>Single-cell and spatial omics, tumor signaling networks, transcriptomic mechanism discovery, and function-oriented molecular and cellular validation.</p>
+            <p>Data views, summaries, and notes for each project are collected in the <a href="./outputs.html#materials">Archive</a>.</p>
           </div>
         </div>
       </section>
@@ -53,7 +53,7 @@
         </div>
 
         <div class="project-stack">
-          <article class="project-card">
+          <article class="project-card" id="pan-cancer">
             <div class="project-head">
               <div>
                 <p class="card-kicker">Jun 2025 - Present</p>
@@ -66,34 +66,38 @@
               conserved regulatory circuits, cancer-specific signaling axes, and communication hub populations with important topological roles.
             </p>
             <ul class="list-clean">
-              <li>Built standardized single-cell RNA-seq analysis pipelines covering more than 10 cancer types to characterize tumor microenvironment composition and communication networks.</li>
+              <li>Built standardized single-cell RNA-seq analysis pipelines covering about 4.7 million cells from more than 30 cancer types to characterize tumor microenvironment composition and communication networks.</li>
               <li>Combined CellChat and NicheNet to identify conserved and cancer-specific ligand-receptor regulatory circuits.</li>
               <li>Reimplemented CoVarnet in Python and identified five modules associated with cancer development.</li>
               <li>Integrated spatial transcriptomics with scRNA-seq to localize high-confidence signaling niches and validate spatial co-localization among sender cells, receiver cells, and pathway activity.</li>
               <li>Identified communication hub populations using centrality and network-topology metrics, and linked hub-driven pathways to tumor-associated phenotypic programs.</li>
             </ul>
+            <div class="cta-row project-links"><a class="btn btn-compact" href="./outputs.html#pan-cancer-umap">Interactive 3D atlas</a><a class="btn btn-compact" href="./blog/covarnet-nmf-spatial-regularization.html">Methods note: SpaCoVarNet-GS</a></div>
           </article>
 
-          <article class="project-card" id="pdac-emt">
+          <article class="project-card" id="pdac">
+            <span id="pdac-emt" aria-hidden="true"></span>
             <div class="project-head">
               <div>
-                <p class="card-kicker">Jul 2026 - Aug 2026</p>
-                <h3>Deciphering the Upregulation of EMT-Related Genes in RAS-Independent Pancreatic Cancer</h3>
+                <p class="card-kicker">Jul 2026 - Aug 2026 · iSURE, University of Notre Dame</p>
+                <h3>Altered Inducibility in KRAS-Independent Pancreatic Cancer</h3>
               </div>
-              <p class="project-tag">Inducible KRAS Model / RNA-seq / EMT / Pancreatic Cancer</p>
+              <p class="project-tag">Inducible KRAS Model / RNA-seq / RPPA / Immunoblotting / Public Datasets</p>
             </div>
             <p>
-              This project uses a doxycycline-regulated KRAS-mutant pancreatic cancer model to investigate tumor recurrence
-              after KRAS inactivation and the molecular transition toward a RAS-independent disease state.
+              Using a doxycycline-regulated KRAS-mutant pancreatic cancer model, I compared parental cells with a recurrent derivative
+              that grows after KRAS inactivation, asking which changes are specific to KRAS-independent growth rather than a general response to KRAS withdrawal.
             </p>
             <ul class="list-clean">
-              <li>Investigated a doxycycline-inducible KRAS-mutant pancreatic cancer model and observed tumor recurrence after doxycycline withdrawal and KRAS inactivation.</li>
-              <li>Analyzed RNA-seq data from recurrent tumors and identified upregulation of EMT-related transcriptional programs.</li>
-              <li>Prioritized EMT-associated gene programs as a candidate mechanism of RAS-independent recurrence and as a basis for subsequent functional validation and therapeutic target discovery.</li>
+              <li>Compared parental and recurrent cells using transcriptomics, genotyping, and non-targeting controls, separating early KRAS withdrawal, residual survival, stable escape, and doxycycline re-exposure.</li>
+              <li>Checked EMT-associated programs against three public mouse PDAC datasets: they recurred after both withdrawal and relapse, so they did not by themselves explain KRAS-independent growth.</li>
+              <li>Found that EMT-factor perturbation strengthened doxycycline-induced KRAS protein responses in the recurrent line without a clear mesenchymal-to-epithelial transition.</li>
+              <li>Used immunoblotting and RPPA to prioritize elevated DNMT1 and selective PDK1/AKT-substrate changes as two testable hypotheses; methylation measurements and functional perturbations are still needed for causal claims.</li>
             </ul>
+            <div class="cta-row project-links"><a class="btn btn-compact" href="./blog/isure-notre-dame.html">Read the research summary</a><a class="btn btn-compact" href="./files/isure-nd-research-summary.pdf" target="_blank" rel="noopener noreferrer">PDF · 20 pages</a></div>
           </article>
 
-          <article class="project-card">
+          <article class="project-card" id="tp53rk">
             <div class="project-head">
               <div>
                 <p class="card-kicker">Jan 2026 - Feb 2026</p>
@@ -130,6 +134,25 @@
               <li>Expressed and purified recombinant proteins in E. coli BL21(DE3) to validate the modular immobilization system.</li>
               <li>Immobilized engineered Bacillus subtilis biofilms on polystyrene bioreactor membranes to demonstrate whole-cell immobilization performance.</li>
             </ul>
+            <div class="cta-row project-links"><a class="btn btn-compact" href="https://2025.igem.wiki/scu-china/" target="_blank" rel="noopener noreferrer">iGEM project wiki</a></div>
+          </article>
+
+          <article class="project-card" id="pici">
+            <div class="project-head">
+              <div>
+                <p class="card-kicker">Aug 2023 - Oct 2024</p>
+                <h3>PICI × ICE Co-transfer in <em>Staphylococcus aureus</em></h3>
+              </div>
+              <p class="project-tag">Microbial Genetics / Mobile Genetic Elements / Machine Learning</p>
+            </div>
+            <p>
+              This project asked how two classes of mobile genetic elements, phage-inducible chromosomal islands (PICIs)
+              and integrative and conjugative elements (ICEs), may cooperate in horizontal gene transfer across bacterial genomes.
+            </p>
+            <ul class="list-clean">
+              <li>Combined machine-learning-based computational prediction with assay design for lifecycle and transfer validation.</li>
+              <li>Carried out wet-lab validation of PICI × ICE co-transfer in <em>Staphylococcus aureus</em>.</li>
+            </ul>
           </article>
         </div>
       </section>
@@ -146,8 +169,8 @@
             <div class="story">
               <h3>University of Notre Dame Summer Visiting Student · Xin Lu Lab</h3>
               <p>
-                Participated in research on an inducible KRAS-mutant pancreatic cancer model and analyzed RNA-seq data
-                to investigate RAS-independent recurrence and EMT-associated transcriptional programs.
+                Studied recurrence after KRAS inactivation in an inducible KRAS-mutant pancreatic cancer model, weighing transcriptomic,
+                RPPA, and immunoblot evidence against public KRAS-withdrawal datasets. <a href="#pdac">Project record</a>
               </p>
             </div>
           </article>
@@ -194,7 +217,7 @@
   <footer class="landing-footer interior-footer">
     <div class="container footer-inner">
       <p>&copy; <span class="js-year"></span> Xin Xiong</p>
-      <p><a href="./outputs.html">Open archive and supporting materials</a></p>
+      <p><a href="./outputs.html#materials">Supporting materials in the Archive</a></p>
     </div>
   </footer>
 

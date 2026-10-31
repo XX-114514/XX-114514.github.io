@@ -187,3 +187,8 @@
   .pdf-toolbar-spacer { display: none; }
   .pdf-stage { min-height: 600px; padding: .75rem; }
 }
+
+/* Research ↔ Archive cross-links */
+.interior-page .project-links { margin-top: 1.1rem; flex-wrap: wrap; gap: .5rem; }
+.interior-page .resource-card .list-clean { margin: .6rem 0 .8rem; }
+.interior-page :target { scroll-margin-top: 6rem; }

@@ -19,9 +19,9 @@
 <a data-page="about.html" href="./about.html">Profile</a>
 <a data-page="research.html" href="./research.html">Research</a>
 <a data-page="outputs.html" href="./outputs.html" aria-current="page">Archive</a>
-<a data-page="game.html" href="./game.html">Game</a>
 <a href="./blog.html">Blog</a>
 <a data-page="contact.html" href="./contact.html">Contact</a>
+<a data-page="game.html" href="./game.html">Game</a>
 <a class="nav-cv" href="./cv.html">Academic CV <span aria-hidden="true">↗</span></a>
 <a class="interior-language" href="./zh/outputs.html" aria-label="切换到中文">中文</a></nav>
   </header>
@@ -32,73 +32,59 @@
         <p class="eyebrow">Academic Outputs</p>
         <div class="page-hero-grid">
           <div>
-            <h1>Outputs Archive <span>Coursework, documents, and visual records</span></h1>
-            <p class="lead">This page collects selected work in pan-cancer single-cell data integration, course posters, core documents, and project presentations.</p>
+            <h1>Archive <span>The evidence behind each project</span></h1>
+            <p class="lead">Data views, research summaries, and notes that support the projects on the Research page, followed by academic records, coursework, and presentations.</p>
           </div>
           <div class="page-hero-side">
-            <p class="page-hero-note">Current Focus</p>
-            <p>Overview of DC cell subset differentiation and function.</p>
-            <p>Literature presentation and review notes</p>
+            <p class="page-hero-note">How this page is organized</p>
+            <p>Start from a project below. Each card lists its materials and links back to the full record on the <a href="./research.html">Research</a> page.</p>
           </div>
         </div>
       </section>
 
-      <section class="section-shell reveal" id="summary">
-  <div class="section-head">
-    <h2>Summary</h2>
-    <p class="section-note">Academic Overview</p>
-  </div>
-
-  <article class="blog-feature">
-    <a class="blog-cover" href="./blog/isure-notre-dame.html" aria-label="Read the research summary">
-      <img src="./assets/isure-nd-summary-cover.png" alt="Research summary cover">
-    </a>
-
-    <div class="blog-feature-copy">
-      <p class="card-kicker">Research Summary / Academic Outputs</p>
-
-      <h3>Research, Coursework, and Scientific Communication</h3>
-
-      <p class="blog-subtitle">
-        A selected overview of my academic work and research interests
-      </p>
-
-      <p>
-        This archive brings together my work in single-cell data analysis,
-        cancer biology, synthetic biology, coursework, literature review,
-        and scientific presentation. It includes an integrated pan-cancer
-        tumor microenvironment UMAP, coursework posters, academic documents,
-        research notes, and project presentations.
-      </p>
-
-      <dl class="document-meta">
-        <div>
-          <dt>Author</dt>
-          <dd>Xin Xiong</dd>
+      <section class="section-shell reveal" id="materials">
+        <div class="section-head">
+          <h2>Materials by Project</h2>
+          <p class="section-note">Linked to Research</p>
         </div>
-        <div>
-          <dt>Focus</dt>
-          <dd>Single-cell biology</dd>
+        <div class="resource-grid">
+          <article class="resource-card" id="materials-pan-cancer">
+            <p class="card-kicker">Jun 2025 - Present</p>
+            <h3>Pan-cancer communication atlas</h3>
+            <p>About 4.7 million single cells across more than 30 cancer types, with an interactive view of 70,000 representative cells and a methods note on joint compositional and spatial module learning.</p>
+            <ul class="list-clean">
+              <li><a href="#pan-cancer-umap">Interactive 3D UMAP</a></li>
+              <li><a href="./blog/covarnet-nmf-spatial-regularization.html">Methods note: SpaCoVarNet-GS</a></li>
+            </ul>
+            <p class="meta"><a href="./research.html#pan-cancer">Project record ↗</a></p>
+          </article>
+          <article class="resource-card" id="materials-pdac">
+            <p class="card-kicker">Jul 2026 - Aug 2026 · iSURE</p>
+            <h3>KRAS-independent pancreatic cancer</h3>
+            <p>A 20-page research summary covering transcriptomics, RPPA, immunoblotting, and three public KRAS-withdrawal datasets, ending with DNMT1 and PDK1/AKT hypotheses.</p>
+            <ul class="list-clean">
+              <li><a href="./blog/isure-notre-dame.html">Research summary (reading page)</a></li>
+              <li><a href="./files/isure-nd-research-summary.pdf" target="_blank" rel="noopener noreferrer">PDF · 20 pages</a></li>
+            </ul>
+            <p class="meta"><a href="./research.html#pdac">Project record ↗</a></p>
+          </article>
+          <article class="resource-card" id="materials-tasanchor">
+            <p class="card-kicker">iGEM 2025 · Gold Medal</p>
+            <h3>TasAnchor whole-cell immobilization</h3>
+            <p>The SCU-China team wiki documents the design, protein engineering, and immobilization experiments.</p>
+            <ul class="list-clean">
+              <li><a href="https://2025.igem.wiki/scu-china/" target="_blank" rel="noopener noreferrer">iGEM project wiki</a></li>
+            </ul>
+            <p class="meta"><a href="./research.html#tasanchor">Project record ↗</a></p>
+          </article>
         </div>
-        <div>
-          <dt>Format</dt>
-          <dd>Academic archive</dd>
-        </div>
-      </dl>
-
-      <div class="cta-row">
-        <a class="btn" href="#pan-cancer-umap">Explore outputs</a>
-        <a class="btn" href="./blog.html">Read research blog</a>
-      </div>
-    </div>
-  </article>
-</section>
+      </section>
 
       <section class="section-shell reveal" id="pan-cancer-umap">
         <div class="section-head"><h2>Pan-cancer Data Integration</h2><p class="section-note">Interactive 3D UMAP</p></div>
         <div class="umap-output-intro">
-          <div><p class="card-kicker">Single-cell Atlas / Refined Annotation</p><h3>Integrated pan-cancer tumor microenvironment UMAP</h3><p>This interactive projection summarizes a large-scale pan-cancer single-cell integration project spanning more than two million cells across over ten cancer types. The browser view renders a representative 70,000-cell set with refined cell-subtype annotations.</p></div>
-          <dl class="umap-stats" aria-label="UMAP dataset summary"><div><dt>Integrated scale</dt><dd>5M+ cells</dd></div><div><dt>Cancer types</dt><dd>30+</dd></div><div><dt>Rendered points</dt><dd>70,000</dd></div></dl>
+          <div><p class="card-kicker">Single-cell Atlas / Refined Annotation</p><h3>Integrated pan-cancer tumor microenvironment UMAP</h3><p>This interactive projection summarizes a large-scale pan-cancer single-cell integration project spanning about 4.7 million cells across more than thirty cancer types. The browser view renders a representative 70,000-cell set with refined cell-subtype annotations. <a href="./research.html#pan-cancer">Project record ↗</a></p></div>
+          <dl class="umap-stats" aria-label="UMAP dataset summary"><div><dt>Integrated scale</dt><dd>4.7M cells</dd></div><div><dt>Cancer types</dt><dd>30+</dd></div><div><dt>Rendered points</dt><dd>70,000</dd></div></dl>
         </div>
         <div class="umap-viewer" data-umap-viewer>
           <div class="umap-toolbar"><span class="umap-status">Interactive view</span><div class="umap-actions"><button class="btn btn-compact js-umap-reset" type="button">Reset view</button><button class="btn btn-compact js-umap-legend" type="button" aria-pressed="false">Show legend</button><button class="btn btn-compact js-umap-fullscreen" type="button">Full screen</button></div></div>
@@ -186,7 +172,7 @@
   <footer class="landing-footer interior-footer">
     <div class="container footer-inner">
       <p>&copy; <span class="js-year"></span> Xin Xiong</p>
-      <p><a href="./contact.html">More materials</a></p>
+      <p><a href="./research.html">Back to Research</a></p>
     </div>
   </footer>
 
